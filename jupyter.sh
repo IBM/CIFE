@@ -1,0 +1,1 @@
+jupyter lab --no-browser --ip 9.47.193.83  --port 12345 

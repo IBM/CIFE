@@ -1,0 +1,11 @@
+{"filename":"granite-3.3-8b-instruct_results_correctness_metrics_extended.jsonl","ssr_easy":0.84702236,"ssr_hard":0.7942210074}
+{"filename":"mixtral-8x7B-instruct-v0.1_results_correctness_metrics_extended.jsonl","ssr_easy":0.6807615674,"ssr_hard":0.6427176884}
+{"filename":"Llama-3.1-8B-Instruct_results_correctness_metrics_extended.jsonl","ssr_easy":0.8598627408,"ssr_hard":0.8024209293}
+{"filename":"Mistral-Small-3.1-24B-Instruct-2503_results_correctness_metrics_extended.jsonl","ssr_easy":0.9245074164,"ssr_hard":0.8789535338}
+{"filename":"granite-3.1-8b-instruct_results_correctness_metrics_extended.jsonl","ssr_easy":0.8293114899,"ssr_hard":0.7746973838}
+{"filename":"Qwen3-8B_results_correctness_metrics_extended.jsonl","ssr_easy":0.9280655157,"ssr_hard":0.8852010933}
+{"filename":"llama-3-3-70b-instruct_results_correctness_metrics_extended.jsonl","ssr_easy":0.9207263065,"ssr_hard":0.8672393596}
+{"filename":"deepseek-coder-33b-instruct_results_correctness_metrics_extended.jsonl","ssr_easy":0.8208360982,"ssr_hard":0.7344787193}
+{"filename":"granite-3.1-2b-instruct_results_correctness_metrics_extended.jsonl","ssr_easy":0.7235502435,"ssr_hard":0.6837172979}
+{"filename":"phi-4_results_correctness_metrics_extended.jsonl","ssr_easy":0.9251218432,"ssr_hard":0.9042594764}
+{"filename":"mixtral-8x22B-instruct-v0.1_results_correctness_metrics_extended.jsonl","ssr_easy":0.8466135458,"ssr_hard":0.7879734479}

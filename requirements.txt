@@ -1,0 +1,8 @@
+pandas>=1.5
+tqdm>=4.64
+python-dotenv>=1.0
+ratelimit>=2.2
+openai
+transformers 
+vllm
+matplotlib

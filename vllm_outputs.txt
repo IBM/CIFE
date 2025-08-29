@@ -1,0 +1,112 @@
+Output started...................................................
+```python
+def fibonacci(n):
+    """
+    Generate the nth Fibonacci number using matrix exponentiation.
+
+    Args:
+    n (int): The position of the Fibonacci number to generate.
+
+    Returns:
+    int: The nth Fibonacci number.
+
+    Raises:
+    ValueError: If n is a negative integer.
+    """
+
+    # Check if n is a non-negative integer
+    if not isinstance(n, int) or n < 0:
+        raise ValueError("n must be a non-negative integer")
+
+    # Base cases
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+
+    # Initialize the base matrix
+    F = [[1, 1], [1, 0]]
+
+    # Compute the nth power of the base matrix
+    def matrix_power(F, n):
+        # Base case
+        if n == 1:
+            return F
+
+        # Recursive case
+        if n % 2 == 0:
+            half_pow = matrix_power(F, n // 2)
+            return matrix_multiply(half_pow, half_pow)
+        else:
+            half_pow = matrix_power(F, n // 2)
+            return matrix_multiply(matrix_multiply(half_pow, half_pow), F)
+
+    # Function to multiply two 2x2 matrices
+    def matrix_multiply(F, G):
+        result = [[0, 0], [0, 0]]
+        for i in range(2):
+            for j in range(2):
+                for k in range(2):
+                    result[i][j] += F[i][k] * G[k][j]
+        return result
+
+    # Compute the nth Fibonacci number
+    return matrix_power(F, n)[0][0]
+
+
+# Example usage:
+print(fibonacci(10))  # Output: 55
+```
+
+This solution uses matrix exponentiation to compute the nth Fibonacci number in O(log n) time complexity. It only uses
+output ended.....................................................
+Output started...................................................
+Here's a Python implementation of the sorting algorithm that meets the requirements. This algorithm uses the QuickSort technique, which has an average time complexity of O(n log n) but can be optimized to O(n^2) in the worst case. However, for large arrays, it's generally more efficient to use a different sorting algorithm like Merge Sort or Heap Sort.
+
+```python
+def quicksort(arr):
+    """
+    Sorts the array in descending order using the QuickSort algorithm.
+
+    Args:
+        arr (list): The input array to be sorted.
+
+    Returns:
+        list: The sorted array in descending order.
+
+    Raises:
+        TypeError: If the input array contains non-integer elements.
+    """
+
+    # Check if the input array contains non-integer elements
+    if not all(isinstance(x, int) for x in arr):
+        raise TypeError("The input array must only contain integers.")
+
+    # Base case: If the array has one or zero elements, it's already sorted
+    if len(arr) <= 1:
+        return arr
+
+    # Select the pivot element (in this case, the middle element)
+    pivot = arr[len(arr) // 2]
+
+    # Divide the array into three subarrays: elements less than the pivot, equal to the pivot, and greater than the pivot
+    left = [x for x in arr if x > pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x < pivot]
+
+    # Recursively sort the subarrays and combine the results
+    return quicksort(left) + middle + quicksort(right)
+
+
+import unittest
+
+class TestQuicksort(unittest.TestCase):
+    def test_empty_array(self):
+        self.assertEqual(quicksort([]), [])
+
+    def test_single_element_array(self):
+        self.assertEqual(quicksort([5]), [5])
+
+    def test_already_sorted_array(self):
+        self.assertEqual(quicksort([3, 
+output ended.....................................................

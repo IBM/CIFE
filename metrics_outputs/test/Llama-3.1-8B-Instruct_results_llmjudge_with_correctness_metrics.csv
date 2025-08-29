@@ -1,0 +1,1591 @@
+id,dataset,instruction,code,test,relevant_categories,simplified_instruction,extracted_constraints,final_comprehensive_constraints,filtered_relevant_constraints,quality_scores,relevance_score,objectivity_score,atomicity_score,unified_quality_score,combined_instruction,response,Constraint_adherence,correctness_level,correctness_reason,CSR_per_row,SSR_per_row
+955,bigcode/bigcodebench,"Generates and plots a complex wave with a specified amplitude and frequency over given time points, applying a Hann window to reduce edge effects. The wave is represented as a complex number where the real part is the cosine component, and the imaginary part is the sine component. It returns both the wave and the plot object.
+Note that: Notes: The plot title is ""Complex Wave with Hann Window"". The x-label of the plot is ""Time"". The y-label of the plot is ""Amplitude"". The plot displays both the real and imaginary parts of the complex wave.
+The function should output with:
+    numpy.ndarray: The generated complex wave as a numpy array of complex numbers.
+    matplotlib.figure.Figure: The figure object of the plot.
+    matplotlib.axes.Axes: The axes object of the plot.
+You should write self-contained code starting with:
+```
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+from scipy.signal import get_window
+def task_func(amplitude, frequency, time):
+```","wave = amplitude * np.exp(1j * 2 * math.pi * frequency * time)
+    window = get_window('hann', time.size)  # Apply a Hann window
+    wave *= window  # Apply the window to the wave
+
+    # Plot the wave
+    fig, ax = plt.subplots(figsize=(10, 4))
+    ax.plot(time, np.real(wave), label=""Real Part"")
+    ax.plot(time, np.imag(wave), label=""Imaginary Part"")
+    ax.set_title(""Complex Wave with Hann Window"")
+    ax.set_xlabel(""Time"")
+    ax.set_ylabel(""Amplitude"")
+    ax.legend()
+
+    return wave, fig, ax","import unittest
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+from scipy.signal import get_window
+class TestCases(unittest.TestCase):
+    def setUp(self):
+        """"""Set up common constants for the tests.""""""
+        self.amplitude = 1
+        self.frequency = 5
+        self.time = np.linspace(0, 1, 500, endpoint=False)
+    def test_return_types(self):
+        """"""Test that the function returns a numpy array, a matplotlib figure, and axes objects.""""""
+        wave, fig, ax = task_func(self.amplitude, self.frequency, self.time)
+        self.assertIsInstance(wave, np.ndarray)
+        self.assertIsInstance(fig, plt.Figure)
+        self.assertIsInstance(ax, plt.Axes)
+    def test_array_length(self):
+        """"""Test the length of the returned array matches the length of the time array.""""""
+        wave, _, _ = task_func(self.amplitude, self.frequency, self.time)
+        self.assertEqual(len(wave), len(self.time))
+    def test_wave_properties(self):
+        """"""Test that the wave properties conform to expected cosine and sine functions with Hann window applied.""""""
+        wave, _, _ = task_func(self.amplitude, self.frequency, self.time)
+        window = get_window('hann', self.time.size)  # Apply a Hann window
+        expected_wave = self.amplitude * np.exp(1j * 2 * math.pi * self.frequency * self.time) * window
+        np.testing.assert_array_almost_equal(wave, expected_wave)
+    def test_zero_amplitude(self):
+        """"""Test that the wave is zero throughout when amplitude is zero.""""""
+        wave, _, _ = task_func(0, self.frequency, self.time)
+        self.assertTrue(np.all(wave == 0))
+    def test_different_frequencies(self):
+        """"""Test the function with different frequencies to ensure the wave changes accordingly.""""""
+        wave_1, _, _ = task_func(self.amplitude, 1, self.time)
+        wave_2, _, _ = task_func(self.amplitude, 2, self.time)
+        self.assertFalse(np.array_equal(wave_1, wave_2))
+    def test_negative_frequency(self):
+        """"""Test that the function correctly handles negative frequencies with Hann window applied.""""""
+        wave, _, _ = task_func(self.amplitude, -1, self.time)
+        window = get_window('hann', self.time.size)  # Apply a Hann window
+        expected_wave = self.amplitude * np.exp(-1j * 2 * math.pi * self.time) * window
+        np.testing.assert_array_almost_equal(wave, expected_wave)
+    def test_plot_title(self):
+        """"""Test that the plot title is correctly set.""""""
+        _, fig, _ = task_func(self.amplitude, self.frequency, self.time)
+        self.assertEqual(fig.axes[0].get_title(), ""Complex Wave with Hann Window"")
+    def test_plot_x_label(self):
+        """"""Test that the x-axis label is correctly set to 'Time'.""""""
+        _, _, ax = task_func(self.amplitude, self.frequency, self.time)
+        self.assertEqual(ax.get_xlabel(), ""Time"")
+    def test_plot_y_label(self):
+        """"""Test that the y-axis label is correctly set to 'Amplitude'.""""""
+        _, _, ax = task_func(self.amplitude, self.frequency, self.time)
+        self.assertEqual(ax.get_ylabel(), ""Amplitude"")
+    def test_plot_lines(self):
+        """"""Test that the plot includes both real and imaginary parts of the complex wave.""""""
+        _, _, ax = task_func(self.amplitude, self.frequency, self.time)
+        lines = ax.get_lines()
+        # Assuming the first line is the real part and the second line is the imaginary part
+        self.assertEqual(len(lines), 2, ""Plot does not contain two lines for real and imaginary parts"")","['Code Structure and Modularity', 'Input and Output Handling', 'Error Handling and Robustness', 'Data Processing and Transformation', 'Performance and Optimization', 'Library and API Usage', 'Documentation and Readability', 'Mathematical Computation', 'Reproducibility and Consistency', 'UI and Interaction']","Generates and plots a complex wave with a specified amplitude and frequency over given time points, applying a Hann window to reduce edge effects. The wave is represented as a complex number where the real part is the cosine component, and the imaginary part is the sine component. It returns both the wave and the plot object. Note that: The plot title is ""Complex Wave with Hann Window"". The x-label of the plot is ""Time"". The y-label of the plot is ""Amplitude"". The plot displays both the real and imaginary parts of the complex wave. You should write self-contained code starting with:
+```
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+from scipy.signal import get_window
+def task_func(amplitude, frequency, time):
+```","[{'type': 'Input and Output Handling', 'constraint': 'The function should output a numpy.ndarray representing the generated complex wave.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function should output a matplotlib.figure.Figure representing the figure object of the plot.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function should output a matplotlib.axes.Axes representing the axes object of the plot.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Documentation and Readability', 'constraint': 'The plot title must be ""Complex Wave with Hann Window"".', 'instruction_part': 'Extracted from instruction'}, {'type': 'Documentation and Readability', 'constraint': 'The x-label of the plot must be ""Time"".', 'instruction_part': 'Extracted from instruction'}, {'type': 'Documentation and Readability', 'constraint': 'The y-label of the plot must be ""Amplitude"".', 'instruction_part': 'Extracted from instruction'}]","[{'type': 'Input and Output Handling', 'constraint': 'The function should output a numpy.ndarray representing the generated complex wave.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function should output a matplotlib.figure.Figure representing the figure object of the plot.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function should output a matplotlib.axes.Axes representing the axes object of the plot.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Documentation and Readability', 'constraint': 'The plot title must be ""Complex Wave with Hann Window"".', 'instruction_part': 'Extracted from instruction'}, {'type': 'Documentation and Readability', 'constraint': 'The x-label of the plot must be ""Time"".', 'instruction_part': 'Extracted from instruction'}, {'type': 'Documentation and Readability', 'constraint': 'The y-label of the plot must be ""Amplitude"".', 'instruction_part': 'Extracted from instruction'}, {'type': 'Mathematical Computation', 'constraint': 'The wave must be generated using the formula wave = amplitude * np.exp(1j * 2 * math.pi * frequency * time).', 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': 'A Hann window must be applied to the wave to reduce edge effects.', 'instruction_part': 'Newly Generated'}, {'type': 'Performance and Optimization', 'constraint': 'The function should efficiently handle large arrays of time points without significant performance degradation.', 'instruction_part': 'Newly Generated'}, {'type': 'Error Handling and Robustness', 'constraint': 'The function should validate input parameters to ensure amplitude and frequency are positive numbers.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Input and Output Handling', 'constraint': 'The function should output a numpy.ndarray representing the generated complex wave.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function should output a matplotlib.figure.Figure representing the figure object of the plot.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function should output a matplotlib.axes.Axes representing the axes object of the plot.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Documentation and Readability', 'constraint': 'The plot title must be ""Complex Wave with Hann Window"".', 'instruction_part': 'Extracted from instruction'}, {'type': 'Documentation and Readability', 'constraint': 'The x-label of the plot must be ""Time"".', 'instruction_part': 'Extracted from instruction'}, {'type': 'Documentation and Readability', 'constraint': 'The y-label of the plot must be ""Amplitude"".', 'instruction_part': 'Extracted from instruction'}, {'type': 'Mathematical Computation', 'constraint': 'The wave must be generated using the formula wave = amplitude * np.exp(1j * 2 * math.pi * frequency * time).', 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': 'A Hann window must be applied to the wave to reduce edge effects.', 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': 'The function should output a numpy.ndarray representing the generated complex wave.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single output type without any additional conditions. It is highly relevant to the task as it directly relates to the expected output of the function. The requirement is also objective, as it can be clearly verified whether the output is indeed a numpy.ndarray.'}, {'constraint_text': 'The function should output a matplotlib.figure.Figure representing the figure object of the plot.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, focusing solely on the output type of the figure object. It is relevant to the task since the function is required to generate a plot. The objectivity is high as it can be easily checked if the output is a matplotlib.figure.Figure.'}, {'constraint_text': 'The function should output a matplotlib.axes.Axes representing the axes object of the plot.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, specifying a single output type. It is relevant as it pertains to the plot generation aspect of the function. The objectivity is also high, as it can be verified whether the output is a matplotlib.axes.Axes.'}, {'constraint_text': ""The plot title must be 'Complex Wave with Hann Window'."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic, focusing on a single requirement regarding the plot title. It is relevant to the task as it directly relates to the plot's presentation. The objectivity is high, as it can be easily checked if the title matches the specified string.""}, {'constraint_text': ""The x-label of the plot must be 'Time'."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic, specifying a single requirement for the x-label. It is relevant to the task as it pertains to the plot's labeling. The objectivity is high, as it can be verified whether the x-label is set correctly.""}, {'constraint_text': ""The y-label of the plot must be 'Amplitude'."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic, focusing on a single requirement for the y-label. It is relevant to the task as it relates to the plot's labeling. The objectivity is high, as it can be easily checked if the y-label is set correctly.""}, {'constraint_text': 'The wave must be generated using the formula wave = amplitude * np.exp(1j * 2 * math.pi * frequency * time).', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, specifying a single formula for wave generation. It is highly relevant to the task as it directly describes how the wave should be computed. The objectivity is high, as the formula can be verified against the implementation.'}, {'constraint_text': 'A Hann window must be applied to the wave to reduce edge effects.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, focusing on a single requirement regarding the application of a Hann window. It is relevant to the task as it addresses a specific processing step necessary for the wave generation. The objectivity is high, as it can be verified whether the Hann window is applied correctly.'}], 'avg_atomicity': 5.0, 'avg_relevance': 5.0, 'avg_objectivity': 5.0, 'unified_quality_score': 5.0, 'overall_analysis': ""The overall quality of the constraint set is excellent, with all constraints scoring the maximum in atomicity, relevance, and objectivity. Each constraint is clear, specific, and directly tied to the requirements of the task, ensuring that they can be easily evaluated and implemented. There are no weaknesses identified in this set, making it a strong foundation for the function's implementation.""}",5.0,5.0,5.0,5.0,"Generates and plots a complex wave with a specified amplitude and frequency over given time points, applying a Hann window to reduce edge effects. The wave is represented as a complex number where the real part is the cosine component, and the imaginary part is the sine component. The wave must be generated using the formula wave = amplitude * np.exp(1j * 2 * math.pi * frequency * time). It returns both the wave and the plot object. A Hann window must be applied to the wave to reduce edge effects.
+
+Note that: Notes: The plot title must be ""Complex Wave with Hann Window"". The x-label of the plot must be ""Time"". The y-label of the plot must be ""Amplitude"". The plot displays both the real and imaginary parts of the complex wave.
+The function should output with:
+    numpy.ndarray: The generated complex wave as a numpy array of complex numbers.
+    matplotlib.figure.Figure: The figure object of the plot.
+    matplotlib.axes.Axes: The axes object of the plot.
+You should write self-contained code starting with:
+```
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+from scipy.signal import get_window
+def task_func(amplitude, frequency, time):
+```","```python
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+from scipy.signal import get_window
+
+def task_func(amplitude, frequency, time):
+    """"""
+    Generates and plots a complex wave with a specified amplitude and frequency over given time points,
+    applying a Hann window to reduce edge effects.
+
+    Args:
+        amplitude (float): The amplitude of the wave.
+        frequency (float): The frequency of the wave.
+        time (numpy.ndarray): The time points at which the wave is generated.
+
+    Returns:
+        numpy.ndarray: The generated complex wave as a numpy array of complex numbers.
+        matplotlib.figure.Figure: The figure object of the plot.
+        matplotlib.axes.Axes: The axes object of the plot.
+    """"""
+
+    # Generate the complex wave using the formula wave = amplitude * np.exp(1j * 2 * math.pi * frequency * time)
+    wave = amplitude * np.exp(1j * 2 * math.pi * frequency * time)
+
+    # Apply a Hann window to the wave to reduce edge effects
+    hann_window = get_window('hann', len(time))
+    wave_windowed = wave * hann_window[:, None]
+
+    # Create a new figure and axis object
+    fig, ax = plt.subplots()
+
+    # Plot the real and imaginary parts of the complex wave
+    ax.plot(time, np.real(wave_windowed), label='Real part')
+    ax.plot(time, np.imag(wave_windowed), label='Imaginary part')
+
+    # Set the plot title, x-label, and y-label
+    ax.set_title('Complex Wave with Hann Window')
+    ax.set_xlabel('Time')
+    ax.set_ylabel('Amplitude')
+
+    # Add a legend to the plot
+    ax.legend()
+
+    # Return the generated complex wave and the plot object
+    return wave_windowed, fig, ax
+
+# Example usage:
+time = np.linspace(0, 1, 1000","[1, 1, 1, 1, 1, 1, 1, 1]",Partially Correct,"The code is free of syntax errors and logically generates a complex wave with the specified amplitude and frequency over the given time points. It applies a Hann window to reduce edge effects and plots both the real and imaginary parts with the correct title and axis labels. However, the code incorrectly applies the Hann window by using hann_window[:, None], which adds an extra dimension and is unnecessary since wave is a 1D array. This does not cause a runtime error but is semantically incorrect. Also, the example usage is incomplete and cut off, but since the instruction does not require example usage, this is not penalized. The code returns the wave and plot objects as required. Overall, it satisfies the instruction constraints except for the unnecessary dimension expansion in window application, so it is partially correct.",1,1.0
+906,bigcode/bigcodebench,"Removes all jQuery files (JavaScript files containing 'jquery' in their name) from a specified directory.
+Note that: Removed files are logged in 'jquery_removal.log' file.
+The function should raise the exception for: If the specified directory does not exist the code would raise FileNotFoundError.
+The function should output with:
+    tuple: A tuple containing two elements:
+    int: The number of files removed.
+    list: The names of the removed files.
+You should write self-contained code starting with:
+```
+import os
+import logging
+def task_func(directory):
+```","# Configure logging
+    logging.basicConfig(filename='jquery_removal.log', level=logging.INFO,
+                        format='%(asctime)s - %(levelname)s - %(message)s')
+    
+    # Check if directory exists
+    if not os.path.exists(directory):
+        raise FileNotFoundError(f""Directory '{directory}' does not exist."")
+
+    # Get all files in the directory
+    files = os.listdir(directory)
+
+    # Remove jQuery files
+    removed_files = 0
+    removed_file_names = []
+    for file in files:
+        if 'jquery' in file and file.endswith('.js'):
+            try:
+                os.remove(os.path.join(directory, file))
+                removed_files += 1
+                removed_file_names.append(file)
+                logging.info(f""Removed jQuery file: {file}"")
+            except Exception as e:
+                logging.error(f""Error while removing file {file}: {e}"")
+
+    return removed_files, removed_file_names","import unittest
+from unittest.mock import MagicMock, patch
+class TestCases(unittest.TestCase):
+    @patch('os.path.exists')
+    @patch('os.listdir')
+    @patch('os.remove')
+    def test_remove_jquery_files(self, mock_remove, mock_listdir, mock_exists):
+        mock_exists.return_value = True
+        mock_listdir.return_value = ['jquery-1.js', 'jquery-2.js', 'jquery-ui.js', 'otherfile.txt', 'example.js']
+        removed_count, removed_files = task_func('/fake/directory')
+        self.assertEqual(removed_count, 3)
+        self.assertListEqual(removed_files, ['jquery-1.js', 'jquery-2.js', 'jquery-ui.js'])
+    @patch('os.path.exists')
+    @patch('os.listdir')
+    def test_empty_directory(self, mock_listdir, mock_exists):
+        mock_exists.return_value = True
+        mock_listdir.return_value = []
+        removed_count, removed_files = task_func('/fake/empty/directory')
+        self.assertEqual(removed_count, 0)
+        self.assertListEqual(removed_files, [])
+    @patch('os.path.exists')
+    def test_nonexistent_directory(self, mock_exists):
+        mock_exists.return_value = False
+        with self.assertRaises(FileNotFoundError):
+            task_func('/fake/nonexistent/directory')
+    @patch('os.path.exists', return_value=True)
+    @patch('os.listdir', return_value=['jquery-1.js', 'jquery-2.min.js', 'jquery-ui.css'])
+    @patch('os.remove')
+    def test_remove_jquery_files_not_js(self, mock_remove, mock_listdir, mock_exists):
+        removed_count, removed_files = task_func('/fake/directory')
+        self.assertEqual(removed_count, 2)
+        self.assertListEqual(removed_files, ['jquery-1.js', 'jquery-2.min.js'])
+    @patch('os.path.exists', return_value=True)
+    @patch('os.listdir', return_value=['subdir', 'jquery-1.js'])
+    @patch('os.remove')
+    def test_remove_jquery_files_subdirectory(self, mock_remove, mock_listdir, mock_exists):
+        removed_count, removed_files = task_func('/fake/directory')
+        self.assertEqual(removed_count, 1)
+        self.assertListEqual(removed_files, ['jquery-1.js'])
+    @patch('os.path.exists', return_value=True)
+    @patch('os.listdir', return_value=['jquery-1.js', 'jquery-2.js', 'jquery-ui.js'])
+    @patch('os.remove', side_effect=OSError(""Permission denied""))
+    def test_remove_jquery_files_error(self, mock_remove, mock_listdir, mock_exists):
+        removed_count, removed_files = task_func('/fake/directory')
+        self.assertEqual(removed_count, 0)
+        self.assertListEqual(removed_files, [])
+    @patch('os.path.exists', return_value=True)
+    @patch('os.listdir', return_value=['jquery-1.js', 'jquery-2.min.js', 'jquery-ui.css'])
+    @patch('os.remove')
+    def test_logging(self, mock_remove, mock_listdir, mock_exists):
+        """"""Test if logging works as expected.""""""
+        with patch('logging.info') as mock_info, \
+             patch('logging.error') as mock_error:
+            task_func('/fake/directory')
+            mock_info.assert_called()
+            mock_error.assert_not_called()  # Ensure that no error message is logged
+    def tearDown(self):
+        """"""Remove the generated log file after each test.""""""
+        log_file = 'jquery_removal.log'
+        if os.path.exists(log_file):
+            logging.shutdown()  # Manually close the logging file handler
+            os.remove(log_file)","['Code Structure and Modularity', 'Input and Output Handling', 'Error Handling and Robustness', 'File and Data Management', 'Logging and Monitoring', 'Documentation and Readability']","Removes all jQuery files (JavaScript files containing 'jquery' in their name) from a specified directory. The function should output with: tuple: A tuple containing two elements: int: The number of files removed. list: The names of the removed files. You should write self-contained code starting with:
+```
+import os
+import logging
+def task_func(directory):
+```","[{'type': 'File and Data Management', 'constraint': ""Remove all jQuery files (JavaScript files containing 'jquery' in their name) from a specified directory."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Logging and Monitoring', 'constraint': ""Removed files are logged in 'jquery_removal.log' file."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': 'Raise FileNotFoundError if the specified directory does not exist.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Output a tuple containing two elements: int: The number of files removed and list: The names of the removed files.', 'instruction_part': 'Extracted from instruction'}]","[{'type': 'File and Data Management', 'constraint': ""Remove all jQuery files (JavaScript files containing 'jquery' in their name) from a specified directory."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Logging and Monitoring', 'constraint': ""Removed files are logged in 'jquery_removal.log' file."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': 'Raise FileNotFoundError if the specified directory does not exist.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Output a tuple containing two elements: int: The number of files removed and list: The names of the removed files.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': ""The function should be self-contained and start with the line 'import os'."", 'instruction_part': 'Newly Generated'}, {'type': 'Error Handling and Robustness', 'constraint': 'Log an error message if an exception occurs while attempting to remove a file.', 'instruction_part': 'Newly Generated'}, {'type': 'Logging and Monitoring', 'constraint': 'Ensure that the logging configuration is set up before any logging calls are made.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'Include docstrings in the function to describe its purpose and parameters.', 'instruction_part': 'Newly Generated'}, {'type': 'File and Data Management', 'constraint': 'Ensure that the function handles directories with no jQuery files gracefully without raising unnecessary errors.', 'instruction_part': 'Newly Generated'}]","[{'type': 'File and Data Management', 'constraint': ""Remove all jQuery files (JavaScript files containing 'jquery' in their name) from a specified directory."", 'instruction_part': 'Extracted from instruction'}, {'type': 'File and Data Management', 'constraint': ""Removed files are logged in 'jquery_removal.log' file."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': 'Raise FileNotFoundError if the specified directory does not exist.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Output a tuple containing two elements: int: The number of files removed and list: The names of the removed files.', 'instruction_part': 'Extracted from instruction'}, {'type': 'File and Data Management', 'constraint': 'Ensure that the function handles directories with no jQuery files gracefully without raising unnecessary errors.', 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': ""Remove all jQuery files (JavaScript files containing 'jquery' in their name) from a specified directory."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single, clear action: removing jQuery files from a directory. It is highly relevant to the task as it directly describes the main functionality required. Additionally, it is objective because it can be measured by the successful removal of files that meet the criteria.'}, {'constraint_text': ""Removed files are logged in 'jquery_removal.log' file."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it focuses solely on the logging of removed files. It is relevant because logging is a critical aspect of the task for tracking removed files. The objectivity is high since the existence of log entries can be verified.'}, {'constraint_text': 'Raise FileNotFoundError if the specified directory does not exist.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single error handling requirement. It is relevant because it addresses a potential issue that could arise during execution. The objectivity is strong since the presence or absence of the directory can be checked programmatically.'}, {'constraint_text': 'Output a tuple containing two elements: int: The number of files removed and list: The names of the removed files.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic as it clearly defines the output format without ambiguity. It is relevant because it specifies the expected output of the function, which is crucial for understanding its behavior. The objectivity is high as the output can be easily verified against the function's execution.""}, {'constraint_text': 'Ensure that the function handles directories with no jQuery files gracefully without raising unnecessary errors.', 'atomicity_score': 4, 'relevance_score': 4, 'objectivity_score': 4, 'reasoning': ""This constraint is mostly atomic but could be seen as slightly less so because it implies a broader requirement (graceful handling) rather than a specific action. It is relevant as it addresses a potential scenario in the task. However, it is somewhat subjective as 'gracefully' can be interpreted in different ways. To improve, it could specify what constitutes 'graceful' handling, such as returning an empty list or a specific message.""}], 'avg_atomicity': 4.8, 'avg_relevance': 4.8, 'avg_objectivity': 4.6, 'unified_quality_score': 4.73, 'overall_analysis': 'The overall quality of the constraint set is strong, with high scores in atomicity, relevance, and objectivity. Most constraints are clear, specific, and directly related to the task at hand. The only area for improvement is the last constraint, which could benefit from more precise language to enhance its atomicity and objectivity. Overall, the constraints effectively guide the implementation of the function as described in the original instruction.'}",4.8,4.6,4.8,4.73,"Removes all jQuery files (JavaScript files containing 'jquery' in their name) from a specified directory. Ensure that the function handles directories with no jQuery files gracefully without raising unnecessary errors. Note that: Removed files are logged in 'jquery_removal.log' file. The function should raise FileNotFoundError if the specified directory does not exist. The function should output a tuple containing two elements: an int representing the number of files removed, and a list of the names of the removed files. You should write self-contained code starting with:
+```
+import os
+import logging
+def task_func(directory):
+```","```python
+import os
+import logging
+
+def task_func(directory):
+    """"""
+    Removes all jQuery files from a specified directory and logs the removed files.
+
+    Args:
+        directory (str): The path to the directory containing jQuery files.
+
+    Returns:
+        tuple: A tuple containing the number of files removed and a list of the names of the removed files.
+
+    Raises:
+        FileNotFoundError: If the specified directory does not exist.
+    """"""
+
+    # Set up logging to log the removed files
+    logging.basicConfig(filename='jquery_removal.log', level=logging.INFO, format='%(message)s')
+
+    # Check if the directory exists
+    if not os.path.exists(directory):
+        raise FileNotFoundError(f""The directory '{directory}' does not exist."")
+
+    # Initialize variables to keep track of the number of removed files and their names
+    removed_count = 0
+    removed_files = []
+
+    # Iterate over all files in the directory
+    for filename in os.listdir(directory):
+        # Construct the full path to the file
+        filepath = os.path.join(directory, filename)
+
+        # Check if the file is a jQuery file (contains 'jquery' in its name)
+        if 'jquery' in filename.lower():
+            try:
+                # Attempt to remove the file
+                os.remove(filepath)
+                # Log the removed file
+                logging.info(f""Removed file: {filename}"")
+                # Increment the removed count and add the file name to the list
+                removed_count += 1
+                removed_files.append(filename)
+            except Exception as e:
+                # Log any errors that occur during file removal
+                logging.error(f""Error removing file '{filename}': {str(e)}"")
+
+    # Return the number of removed files and their names
+    return removed_count, removed_files
+```
+
+Example usage:
+
+```python
+try:
+    removed_count, removed_files = task_func('/path/to/directory')
+    print(f""Removed {removed_count} files: {removed_files","[1, 1, 1, 1, 1]",Completely Correct,"The code is syntactically correct and logically removes all files containing 'jquery' in their names from the specified directory. It returns a tuple with the count and list of removed files as required. The code also handles the case where the directory does not exist by raising FileNotFoundError, which is acceptable and does not violate any constraints. The logging setup and error handling do not interfere with the required functionality. The example usage snippet is incomplete but does not affect the correctness of the main function as per instructions.",1,1.0
+1346,Multilingual-Multimodal-NLP/McEval-Instruct,"You are tasked with creating a Django application for managing a movie database. The application should allow users to view a list of movies, access detailed information about a specific movie, and create new entries for movies, studios, halls, and countries. The application should also handle media files correctly.
+
+Write a Python script that defines the URL patterns for the Django application. The script should include URL patterns for the following views:
+- `index`: A view that displays the list of movies.
+- `movie_detail`: A view that displays detailed information about a specific movie, accessed via a unique slug.
+- `movie_create`: A view that provides a form for creating a new movie entry.
+- `studio_create`: A view that provides a form for creating a new studio entry.
+- `hall_create`: A view that provides a form for creating a new hall entry.
+- `country_create`: A view that provides a form for creating a new country entry.
+
+Additionally, ensure that the application serves media files in development by appending the necessary static URL patterns.","```python
+# Import necessary Django modules
+from django.contrib import admin
+from django.conf.urls.static import static
+from django.urls import path
+from django.conf import settings
+
+# Import views from the films application
+from films.views import (
+    index,
+    movie_detail,
+    movie_create,
+    studio_create,
+    hall_create,
+    country_create
+)
+
+# Define the URL patterns for the movie database application
+urlpatterns = [
+    path('', index, name='index'),
+    path('film/<str:slug>/', movie_detail, name='movie_detail'),
+    path('create/movie/', movie_create, name='movie_create'),
+    path('create/studio/', studio_create, name='studio_create'),
+    path('create/hall/', hall_create, name='hall_create'),
+    path('create/country/', country_create, name='country_create'),
+    path('admin/', admin.site.urls),
+]
+
+# In development, use Django to serve media files through the MEDIA_URL
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Test cases to verify the correctness of the URL patterns
+if __name__ == ""__main__"":
+    # Assuming we have a test client to simulate requests
+    from django.test import Client
+    client = Client()
+
+    # Test the index view
+    response = client.get('/')
+    assert response.status_code == 200
+
+    # Test the movie_detail view with a sample slug
+    response = client.get('/film/sample-slug/')
+    assert response.status_code == 200
+
+    # Test the movie_create view
+    response = client.get('/create/movie/')
+    assert response.status_code == 200
+
+    # Test the studio_create view
+    response = client.get('/create/studio/')
+    assert response.status_code == 200
+
+    # Test the hall_create view
+    response = client.get('/create/hall/')
+    assert response.status_code == 200
+
+    # Test the country_create view
+    response = client.get('/create/country/')
+    assert response.status_code == 200
+
+    # Test the admin view
+    response = client.get('/admin/')
+    assert response.status_code == 200
+
+    print(""All test cases passed!"")
+```
+
+Note: The test cases provided assume that the views and settings are correctly configured and that the Django test client is available. In a real-world scenario, the views would need to be implemented, and the Django server would need to be running to serve the requests. The test cases are for demonstration purposes to show how one might verify the correctness of the URL patterns.",,"['Code Structure and Modularity', 'Input and Output Handling', 'Error Handling and Robustness', 'Testing and Debugging', 'Documentation and Readability', 'File and Data Management', 'Security and Privacy']","You are tasked with creating a Django application for managing a movie database. The application should allow users to view a list of movies, access detailed information about a specific movie, and create new entries for movies, studios, halls, and countries. The application should also handle media files correctly.
+
+Write a Python script that defines the URL patterns for the Django application. The script should include URL patterns for the following views:
+- `index`: A view that displays the list of movies.
+- `movie_detail`: A view that displays detailed information about a specific movie, accessed via a unique slug.
+- `movie_create`: A view that provides a form for creating a new movie entry.
+- `studio_create`: A view that provides a form for creating a new studio entry.
+- `hall_create`: A view that provides a form for creating a new hall entry.
+- `country_create`: A view that provides a form for creating a new country entry.
+
+Additionally, ensure that the application serves media files in development by appending the necessary static URL patterns.","[{'type': 'Code Structure and Modularity', 'constraint': 'Define the URL patterns for the Django application.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': 'Include URL patterns for the views: `index`, `movie_detail`, `movie_create`, `studio_create`, `hall_create`, and `country_create`.', 'instruction_part': 'Extracted from instruction'}, {'type': 'File and Data Management', 'constraint': 'Ensure that the application serves media files in development.', 'instruction_part': 'Extracted from instruction'}]","[{'type': 'Code Structure and Modularity', 'constraint': 'Define the URL patterns for the Django application.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': 'Include URL patterns for the views: `index`, `movie_detail`, `movie_create`, `studio_create`, `hall_create`, and `country_create`.', 'instruction_part': 'Extracted from instruction'}, {'type': 'File and Data Management', 'constraint': 'Ensure that the application serves media files in development.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Each view must return a valid HTTP response with a status code of 200 for successful requests.', 'instruction_part': 'Newly Generated'}, {'type': 'Testing and Debugging', 'constraint': 'Implement unit tests for each URL pattern to verify that they correctly route to the intended views.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'Include docstrings for each view function to describe its purpose and expected input/output.', 'instruction_part': 'Newly Generated'}, {'type': 'Error Handling and Robustness', 'constraint': 'Handle 404 errors gracefully by providing a custom error page for non-existent movie slugs.', 'instruction_part': 'Newly Generated'}, {'type': 'Security and Privacy', 'constraint': 'Ensure that all forms for creating new entries validate user input to prevent SQL injection and other security vulnerabilities.', 'instruction_part': 'Newly Generated'}, {'type': 'File and Data Management', 'constraint': 'Implement proper file handling for media uploads, ensuring files are stored securely and accessible only through the application.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Code Structure and Modularity', 'constraint': 'Define the URL patterns for the Django application.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': 'Include URL patterns for the views: `index`, `movie_detail`, `movie_create`, `studio_create`, `hall_create`, and `country_create`.', 'instruction_part': 'Extracted from instruction'}, {'type': 'File and Data Management', 'constraint': 'Ensure that the application serves media files in development.', 'instruction_part': 'Extracted from instruction'}, {'type': 'File and Data Management', 'constraint': 'Implement proper file handling for media uploads, ensuring files are stored securely and accessible only through the application.', 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': 'Define the URL patterns for the Django application.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single requirement: to define URL patterns. It is highly relevant to the task of creating a Django application for managing a movie database, as URL patterns are essential for routing requests. The constraint is also objective, as it can be clearly evaluated by checking if URL patterns are defined in the code.'}, {'constraint_text': 'Include URL patterns for the views: `index`, `movie_detail`, `movie_create`, `studio_create`, `hall_create`, and `country_create`.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic because it lists specific views that need to be included in the URL patterns, without combining multiple requirements. It is relevant as it directly pertains to the functionality of the Django application, ensuring that all necessary views are accessible. The objectivity is high since the presence of these URL patterns can be verified directly in the code.'}, {'constraint_text': 'Ensure that the application serves media files in development.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it focuses solely on the requirement to serve media files during development. It is relevant to the task since handling media files is a key aspect of the application. The objectivity is strong because it can be evaluated by checking if the media files are served correctly in the development environment.'}, {'constraint_text': 'Implement proper file handling for media uploads, ensuring files are stored securely and accessible only through the application.', 'atomicity_score': 4, 'relevance_score': 5, 'objectivity_score': 4, 'reasoning': ""This constraint is mostly atomic but could be considered slightly less so because it combines two aspects: secure storage and access control. It is highly relevant as proper file handling is crucial for the application. The objectivity score is moderate because while the requirement can be evaluated, the terms 'securely' and 'accessible only through the application' could be interpreted in various ways. To improve atomicity, the constraint could be split into two separate constraints: one for secure storage and another for access control.""}], 'avg_atomicity': 4.75, 'avg_relevance': 5.0, 'avg_objectivity': 4.5, 'unified_quality_score': 4.75, 'overall_analysis': 'The overall quality of the constraints is strong, with high scores in atomicity, relevance, and objectivity. The constraints effectively address the core requirements of the Django application for managing a movie database. The only area for improvement is the last constraint, which could benefit from being split into two distinct requirements to enhance atomicity and objectivity. Overall, the constraints provide a solid foundation for the development of the application.'}",5.0,4.5,4.75,4.75,"You are tasked with creating a Django application for managing a movie database. The application should allow users to view a list of movies, access detailed information about a specific movie, and create new entries for movies, studios, halls, and countries. The application should also handle media files correctly. Additionally, implement proper file handling for media uploads, ensuring files are stored securely and accessible only through the application.
+
+Write a Python script that defines the URL patterns for the Django application. Define the URL patterns for the Django application. The script should include URL patterns for the following views: Include URL patterns for the views: `index`, `movie_detail`, `movie_create`, `studio_create`, `hall_create`, and `country_create`.
+- `index`: A view that displays the list of movies.
+- `movie_detail`: A view that displays detailed information about a specific movie, accessed via a unique slug.
+- `movie_create`: A view that provides a form for creating a new movie entry.
+- `studio_create`: A view that provides a form for creating a new studio entry.
+- `hall_create`: A view that provides a form for creating a new hall entry.
+- `country_create`: A view that provides a form for creating a new country entry.
+
+Additionally, ensure that the application serves media files in development by appending the necessary static URL patterns.","Here's a Python script that defines the URL patterns for the Django application:
+
+```python
+# myproject/urls.py
+
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('movie_app.urls')),
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+```python
+# movie_app/urls.py
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('movie/<slug:slug>/', views.movie_detail, name='movie_detail'),
+    path('movie/create/', views.movie_create, name='movie_create'),
+    path('studio/create/', views.studio_create, name='studio_create'),
+    path('hall/create/', views.hall_create, name='hall_create'),
+    path('country/create/', views.country_create, name='country_create'),
+]
+```
+
+In the above code:
+
+- `myproject/urls.py` includes the main URL configuration for the project, which includes the `movie_app` URL configuration.
+- `movie_app/urls.py` defines the URL patterns for the `movie_app` application. It includes URL patterns for the views: `index`, `movie_detail`, `movie_create`, `studio_create`, `hall_create`, and `country_create`.
+
+To serve media files in development, we append the necessary static URL patterns to the `urlpatterns` list in `myproject/urls.py`. This is done using the `static` function from `django.conf.urls.static`, which takes the `MEDIA_URL` and `MEDIA_ROOT` settings as arguments.
+
+**Settings**
+
+In your `settings.py` file, you should have the following settings:
+
+```python
+# settings.py
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+``","[1, 1, 1, 0]",Completely Correct,"The code is free of syntax errors and logically defines the URL patterns as requested. It includes URL patterns for all specified views (index, movie_detail with slug, movie_create, studio_create, hall_create, country_create) within the movie_app/urls.py file. The main project urls.py correctly includes the movie_app URLs and appends static URL patterns for serving media files in development, satisfying the media handling constraint. All constraints in the instruction are met without errors.",0,0.75
+989,Multilingual-Multimodal-NLP/McEval-Instruct,"Design a system to automate the transition of tender statuses in an e-procurement platform. The system should handle different types of tenders, such as below-threshold, open UA, and open UA defense tenders. Each tender type has its own set of rules for transitioning between statuses based on the number of bids, complaints, and auction results.
+
+The system should be able to:
+- Transition a tender to 'unsuccessful' if there are no bids.
+- Set the auction period for tenders without bids.
+- Transition a tender to 'qualification' if there is at least one bid.
+- Handle complaints and transition tenders accordingly.
+- Transition a tender to 'auction' when it's ready for auction.
+- Handle tenders with lots, including setting auction periods and transitioning lot statuses.
+
+Write a set of unit tests to verify that the system correctly transitions tenders and lots between statuses under various conditions. Use the provided code snippet as a starting point for creating the test cases.","```python
+# -*- coding: utf-8 -*-
+import unittest
+
+# Assuming the necessary modules and functions are available as per the given code snippet
+from openprocurement.api.tests.base import snitch
+from openprocurement.tender.belowthreshold.tests.base import test_tender_below_lots, test_tender_below_author
+from openprocurement.tender.belowthreshold.tests.chronograph_blanks import (
+    switch_to_unsuccessful as switch_to_unsuccessful_belowthreshold,
+    switch_to_qualification as not_switch_to_unsuccessful,
+)
+# ... (other imports as per the given code snippet)
+
+# The test classes are already defined in the given code snippet.
+# We will assume that the snitch decorator and the test functions work as intended.
+# The test functions are assumed to be testing the transitions of the tender statuses.
+
+# Here is an example of how the test suite would be structured based on the given code snippet:
+class TenderStatusTransitionTestSuite(unittest.TestCase):
+    # This suite will contain all the test cases for tender status transitions
+
+    def test_tender_without_bids_becomes_unsuccessful(self):
+        # Test that a tender with 0 bids transitions to 'unsuccessful'
+        self.assertTrue(self.test_switch_to_unsuccessful())
+
+    def test_tender_without_bids_sets_auction_period(self):
+        # Test that a tender without bids sets the auction period correctly
+        self.assertTrue(self.test_set_auction_period())
+
+    def test_tender_with_one_bid_does_not_become_unsuccessful(self):
+        # Test that a tender with 1 bid does not transition to 'unsuccessful'
+        self.assertTrue(self.test_not_switch_to_unsuccessful())
+
+    def test_tender_with_complaint_transitions_correctly(self):
+        # Test that a tender with a complaint transitions correctly
+        self.assertTrue(self.test_switch_to_complaint())
+
+    def test_tender_ready_for_auction_transitions_to_auction(self):
+        # Test that a tender ready for auction transitions to 'auction'
+        self.assertTrue(self.test_switch_to_auction())
+
+    # ... (other test cases)
+
+# The suite function is already defined in the given code snippet.
+# We will assume that it correctly collects all the test cases into a test suite.
+
+if __name__ == ""__main__"":
+    unittest.main(defaultTest=""suite"")
+```
+
+This solution assumes that the actual implementation of the transition functions (`switch_to_unsuccessful`, `set_auction_period`, etc.) and the `snitch` decorator are provided elsewhere in the codebase, as they are referenced but not defined in the given code snippet. The test cases are designed to check the correctness of the status transitions under various conditions.",,"['Code Structure and Modularity', 'Input and Output Handling', 'Error Handling and Robustness', 'Data Processing and Transformation', 'Testing and Debugging', 'Documentation and Readability']","Design a system to automate the transition of tender statuses in an e-procurement platform. The system should handle different types of tenders, such as below-threshold, open UA, and open UA defense tenders. Each tender type has its own set of rules for transitioning between statuses based on the number of bids, complaints, and auction results.
+
+The system should be able to:
+- Transition a tender to 'unsuccessful' if there are no bids.
+- Set the auction period for tenders without bids.
+- Transition a tender to 'qualification' if there is at least one bid.
+- Handle complaints and transition tenders accordingly.
+- Transition a tender to 'auction' when it's ready for auction.
+- Handle tenders with lots, including setting auction periods and transitioning lot statuses.
+
+Write a set of unit tests to verify that the system correctly transitions tenders and lots between statuses under various conditions. Use the provided code snippet as a starting point for creating the test cases.","[{'type': 'Code Structure and Modularity', 'constraint': 'The system should handle different types of tenders, such as below-threshold, open UA, and open UA defense tenders.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Each tender type has its own set of rules for transitioning between statuses based on the number of bids, complaints, and auction results.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""Transition a tender to 'unsuccessful' if there are no bids."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Set the auction period for tenders without bids.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""Transition a tender to 'qualification' if there is at least one bid."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Handle complaints and transition tenders accordingly.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""Transition a tender to 'auction' when it's ready for auction."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Handle tenders with lots, including setting auction periods and transitioning lot statuses.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Testing and Debugging', 'constraint': 'Write a set of unit tests to verify that the system correctly transitions tenders and lots between statuses under various conditions.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': 'Use the provided code snippet as a starting point for creating the test cases.', 'instruction_part': 'Extracted from instruction'}]","[{'type': 'Code Structure and Modularity', 'constraint': 'The system should handle different types of tenders, such as below-threshold, open UA, and open UA defense tenders.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Each tender type has its own set of rules for transitioning between statuses based on the number of bids, complaints, and auction results.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""Transition a tender to 'unsuccessful' if there are no bids."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Set the auction period for tenders without bids.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""Transition a tender to 'qualification' if there is at least one bid."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Handle complaints and transition tenders accordingly.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""Transition a tender to 'auction' when it's ready for auction."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Handle tenders with lots, including setting auction periods and transitioning lot statuses.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Testing and Debugging', 'constraint': 'Write a set of unit tests to verify that the system correctly transitions tenders and lots between statuses under various conditions.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': 'Use the provided code snippet as a starting point for creating the test cases.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': 'Ensure the system can handle unexpected input gracefully, such as invalid tender data or missing required fields.', 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': 'The system should provide clear feedback to users when a tender status transition fails due to validation errors.', 'instruction_part': 'Newly Generated'}, {'type': 'Testing and Debugging', 'constraint': 'Include edge cases in the unit tests, such as tenders with maximum allowed bids and tenders with multiple complaints.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'Document the rules for each tender type and their status transitions clearly in the codebase.', 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': 'Implement logging for all status transitions to facilitate debugging and auditing.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Code Structure and Modularity', 'constraint': 'The system should handle different types of tenders, such as below-threshold, open UA, and open UA defense tenders.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Each tender type has its own set of rules for transitioning between statuses based on the number of bids, complaints, and auction results.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""Transition a tender to 'unsuccessful' if there are no bids."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Set the auction period for tenders without bids.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""Transition a tender to 'qualification' if there is at least one bid."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Handle complaints and transition tenders accordingly.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""Transition a tender to 'auction' when it's ready for auction."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Handle tenders with lots, including setting auction periods and transitioning lot statuses.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Testing and Debugging', 'constraint': 'Write a set of unit tests to verify that the system correctly transitions tenders and lots between statuses under various conditions.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': 'Use the provided code snippet as a starting point for creating the test cases.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': 'Ensure the system can handle unexpected input gracefully, such as invalid tender data or missing required fields.', 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': 'The system should provide clear feedback to users when a tender status transition fails due to validation errors.', 'instruction_part': 'Newly Generated'}, {'type': 'Testing and Debugging', 'constraint': 'Include edge cases in the unit tests, such as tenders with maximum allowed bids and tenders with multiple complaints.', 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': 'Implement logging for all status transitions to facilitate debugging and auditing.', 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': 'The system should handle different types of tenders, such as below-threshold, open UA, and open UA defense tenders.', 'atomicity_score': 4, 'relevance_score': 5, 'objectivity_score': 4, 'reasoning': 'This constraint is mostly atomic as it specifies a single requirement regarding the handling of different tender types. However, it could be considered slightly less atomic due to the inclusion of multiple tender types. It is highly relevant to the task of automating tender status transitions. The objectivity is good, but it could be improved by specifying measurable criteria for how these types are handled.'}, {'constraint_text': 'Each tender type has its own set of rules for transitioning between statuses based on the number of bids, complaints, and auction results.', 'atomicity_score': 4, 'relevance_score': 5, 'objectivity_score': 4, 'reasoning': ""This constraint is atomic as it describes a single requirement about rules for status transitions. It is relevant to the core task of the system. Objectivity is good, but it could be enhanced by specifying what constitutes a 'set of rules' or how they are defined.""}, {'constraint_text': ""Transition a tender to 'unsuccessful' if there are no bids."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is fully atomic, as it expresses a single, clear requirement. It is directly relevant to the task of transitioning tender statuses and is objective, as it can be easily evaluated based on the presence of bids.'}, {'constraint_text': 'Set the auction period for tenders without bids.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This is an atomic constraint that clearly states a single requirement. It is highly relevant to the task and can be objectively evaluated based on whether the auction period is set correctly.'}, {'constraint_text': ""Transition a tender to 'qualification' if there is at least one bid."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, relevant, and objective. It clearly defines a single action based on a measurable condition (the presence of bids).'}, {'constraint_text': 'Handle complaints and transition tenders accordingly.', 'atomicity_score': 4, 'relevance_score': 5, 'objectivity_score': 3, 'reasoning': ""While this constraint is relevant and mostly atomic, it lacks specificity regarding how complaints are handled and what 'accordingly' means. This could lead to subjective interpretations, reducing its objectivity.""}, {'constraint_text': ""Transition a tender to 'auction' when it's ready for auction."", 'atomicity_score': 4, 'relevance_score': 5, 'objectivity_score': 4, 'reasoning': ""This constraint is mostly atomic but could be more specific about what 'ready for auction' entails. It is relevant to the task and can be evaluated, but the lack of clarity affects its objectivity.""}, {'constraint_text': 'Handle tenders with lots, including setting auction periods and transitioning lot statuses.', 'atomicity_score': 3, 'relevance_score': 5, 'objectivity_score': 3, 'reasoning': 'This constraint is less atomic as it combines multiple actions (handling lots, setting auction periods, transitioning statuses). It is relevant but lacks clarity and specificity, which affects its objectivity.'}, {'constraint_text': 'Write a set of unit tests to verify that the system correctly transitions tenders and lots between statuses under various conditions.', 'atomicity_score': 4, 'relevance_score': 5, 'objectivity_score': 4, 'reasoning': ""This constraint is mostly atomic as it focuses on writing unit tests, but it could be more specific about what 'various conditions' entails. It is relevant and can be evaluated, but the vagueness affects objectivity.""}, {'constraint_text': 'Use the provided code snippet as a starting point for creating the test cases.', 'atomicity_score': 5, 'relevance_score': 4, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic and objective, as it clearly states a single requirement. Its relevance is slightly lower because it pertains more to the implementation process than the core functionality.'}, {'constraint_text': 'Ensure the system can handle unexpected input gracefully, such as invalid tender data or missing required fields.', 'atomicity_score': 4, 'relevance_score': 5, 'objectivity_score': 4, 'reasoning': ""This constraint is mostly atomic, focusing on error handling, but it could be more specific about what 'gracefully' means. It is relevant to the system's robustness and can be evaluated, but the lack of clarity affects objectivity.""}, {'constraint_text': 'The system should provide clear feedback to users when a tender status transition fails due to validation errors.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, relevant, and objective. It clearly defines a requirement that can be measured based on user feedback.'}, {'constraint_text': 'Include edge cases in the unit tests, such as tenders with maximum allowed bids and tenders with multiple complaints.', 'atomicity_score': 4, 'relevance_score': 5, 'objectivity_score': 4, 'reasoning': ""This constraint is mostly atomic as it focuses on unit tests but could be more specific about what constitutes 'edge cases.' It is relevant and can be evaluated, but the vagueness affects objectivity.""}, {'constraint_text': 'Implement logging for all status transitions to facilitate debugging and auditing.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, relevant, and objective. It clearly defines a requirement that can be measured based on the implementation of logging.'}], 'avg_atomicity': 4.23, 'avg_relevance': 4.85, 'avg_objectivity': 4.23, 'unified_quality_score': 4.44, 'overall_analysis': ""The constraints provided are generally of high quality, with strong relevance to the task of automating tender status transitions. Most constraints are atomic and objective, though some could benefit from increased specificity to enhance clarity and reduce subjectivity. The overall average scores indicate a solid foundation for the system's requirements, with room for improvement in certain areas to ensure all constraints are as clear and measurable as possible.""}",4.85,4.23,4.23,4.44,"Design a system to automate the transition of tender statuses in an e-procurement platform. The system should handle different types of tenders, such as below-threshold, open UA, and open UA defense tenders. Each tender type has its own set of rules for transitioning between statuses based on the number of bids, complaints, and auction results. Additionally, ensure the system can handle unexpected input gracefully, such as invalid tender data or missing required fields.
+
+The system should be able to:
+- Transition a tender to 'unsuccessful' if there are no bids. This should be implemented as part of the rules for transitioning between statuses based on the number of bids.
+- Set the auction period for tenders without bids, ensuring that this is handled correctly for all tender types.
+- Transition a tender to 'qualification' if there is at least one bid, following the specific rules for each tender type.
+- Handle complaints and transition tenders accordingly, ensuring that the system is robust against various complaint scenarios.
+- Transition a tender to 'auction' when it's ready for auction, adhering to the defined rules for each tender type.
+- Handle tenders with lots, including setting auction periods and transitioning lot statuses, as part of the overall tender management process.
+
+Write a set of unit tests to verify that the system correctly transitions tenders and lots between statuses under various conditions, including edge cases such as tenders with maximum allowed bids and tenders with multiple complaints. Use the provided code snippet as a starting point for creating the test cases, and ensure the system provides clear feedback to users when a tender status transition fails due to validation errors. Additionally, implement logging for all status transitions to facilitate debugging and auditing.","**System Design**
+
+We will design a system using Python classes to handle the transition of tender statuses. We will use a dictionary to store the rules for each tender type.
+
+```python
+import logging
+from dataclasses import dataclass
+from enum import Enum
+from typing import Dict, List
+
+# Define the tender status enum
+class TenderStatus(Enum):
+    PENDING = 1
+    QUALIFICATION = 2
+    AUCTION = 3
+    UNSUCCESSFUL = 4
+
+# Define the tender type enum
+class TenderType(Enum):
+    BELOW_THRESHOLD = 1
+    OPEN_UA = 2
+    OPEN_UA_DEFENSE = 3
+
+# Define the tender data class
+@dataclass
+class Tender:
+    id: int
+    type: TenderType
+    bids: int
+    complaints: int
+    auction_period: int
+    lots: List['Lot']
+
+# Define the lot data class
+@dataclass
+class Lot:
+    id: int
+    auction_period: int
+
+# Define the tender manager class
+class TenderManager:
+    def __init__(self):
+        self.rules = {
+            TenderType.BELOW_THRESHOLD: self._below_threshold_rules,
+            TenderType.OPEN_UA: self._open_ua_rules,
+            TenderType.OPEN_UA_DEFENSE: self._open_ua_defense_rules,
+        }
+        self.logger = logging.getLogger(__name__)
+
+    def transition_status(self, tender: Tender) -> bool:
+        if not tender:
+            self.logger.error(""Invalid tender"")
+            return False
+
+        if tender.type not in self.rules:
+            self.logger.error(""Invalid tender type"")
+            return False
+
+        rules = self.rules[tender.type]
+        if not rules(tender):
+            self.logger.error(""Failed to transition tender status"")
+            return False
+
+        return True
+
+    def _below_threshold_rules(self, tender: Tender) -> bool:
+        if tender.bids == 0","[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1]",Wrong,"The provided code snippet is incomplete and contains a syntax error (missing colon after 'if tender.bids == 0'). Additionally, the code does not include any unit tests as requested in the instruction. Therefore, it neither fully implements the system nor provides the required test cases to verify tender status transitions.",0,0.35714285714285715
+964,bigcode/bigcodebench,"Train a linear regression model on a given DataFrame.
+The function should raise the exception for: The function will raise a ValueError is input df is not a DataFrame.
+The function should output with:
+    LinearRegression: The trained linear regression model.
+You should write self-contained code starting with:
+```
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+# Constants
+FEATURES = ['feature '+str(i) for i in range(1, 11)]
+TARGET = 'target'
+def task_func(df):
+```","if not isinstance(df, pd.DataFrame):
+        raise ValueError(""The input df is not a DataFrame"")
+    
+    X = df[FEATURES]
+    y = df[TARGET]
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+
+    return model","import unittest
+import pandas as pd
+from io import StringIO
+import numpy as np
+class TestCases(unittest.TestCase):
+    def test_case_1(self):
+        # Testing with CSV data
+        TESTDATA = StringIO(""""""feature 1,feature 2,feature 3,feature 4,feature 5,feature 6,feature 7,feature 8,feature 9,feature 10,target
+                    0.42400509556218957,0.4556954476778564,0.5876033479070203,0.7372019791788254,0.631294770216076,0.4950266019166166,0.0638144062778504,0.7069802218693271,0.9005726909016923,0.6939292546038213,14.696123816111275
+                    0.7424296388887492,0.37759478623365395,0.6150348990404139,0.5245385173014507,0.34372354676823247,0.26734555024798334,0.25816065500447305,0.7593949490266066,0.28726200622586806,0.1389614032632609,11.314445952000693
+                    0.5542329648360879,0.8921257562394426,0.8642884839827235,0.15535175081891284,0.04765544199312799,0.6959587174128501,0.8750991336831166,0.9405740432480505,0.6080858349786378,0.20758024604975633,11.840952373242706
+                    0.3128080182238582,0.4306484443433306,0.13158163455824945,0.6124936004910966,0.3658172041589832,0.8865358950435007,0.6896354766071041,0.49374167962283977,0.09496096416410882,0.8635022149845224,9.881725132197595
+                    0.9918117132641856,0.34155948441867745,0.13825937535425548,0.2075606744217059,0.5024270600409457,0.4499385613253092,0.927332889017184,0.9226317268159956,0.7109355740305163,0.48498273400417413,7.67743979269295
+                    0.8487974650141276,0.5419882208385368,0.6219327392404139,0.607186072248796,0.5817917868937075,0.16757506758203844,0.513478962441245,0.5813924083375205,0.2999370992352748,0.8095241847125411,9.573604006544201
+                    0.8531765660138543,0.6230807384621613,0.121193482114335,0.40339655427645227,0.8252000772363516,0.7089362855980166,0.4399130776125867,0.5547381179483073,0.5271579371209105,0.4887721459504082,8.545564982333383
+                    0.7379434286935841,0.35388533243065834,0.28270164727057234,0.10937131252334209,0.7554490444282028,0.11627353503671667,0.29878795437943706,0.5272147239980629,0.6682257849027331,0.4506451053217232,5.300497868985032
+                    0.51734842472885,0.7300897961646883,0.8822236158906909,0.8223865310105216,0.14248094409880296,0.49409856103306826,0.9337165561571048,0.8043124404561036,0.912213630647814,0.41502961287020834,13.653900113057855
+                    0.4338281641525509,0.6559602318884544,0.62746801792774,0.5038739464689795,0.08921870715449975,0.7274382944105564,0.6152014156275979,0.2093703770326366,0.9052167270350973,0.4696339914768609,8.237209873174972
+                    """""")
+        df = pd.read_csv(TESTDATA)
+        model = task_func(df)
+        self.assertIsInstance(model, LinearRegression, ""Return type should be LinearRegression"")
+        self.assertEqual(len(model.coef_), 10, ""Model should have coefficients for all 10 features"")
+        
+    def test_case_2(self):
+        # Testing with JSON data
+        TESTDATA = StringIO(""""""[{""feature 1"":0.4240050956,""feature 2"":0.4556954477,""feature 3"":0.5876033479,
+                            ""feature 4"":0.7372019792,""feature 5"":0.6312947702,""feature 6"":0.4950266019,
+                            ""feature 7"":0.0638144063,""feature 8"":0.7069802219,""feature 9"":0.9005726909,
+                            ""feature 10"":0.6939292546,""target"":14.6961238161},{""feature 1"":0.7424296389,
+                            ""feature 2"":0.3775947862,""feature 3"":0.615034899,""feature 4"":0.5245385173,
+                            ""feature 5"":0.3437235468,""feature 6"":0.2673455502,""feature 7"":0.258160655,
+                            ""feature 8"":0.759394949,""feature 9"":0.2872620062,""feature 10"":0.1389614033,
+                            ""target"":11.314445952},{""feature 1"":0.5542329648,""feature 2"":0.8921257562,
+                            ""feature 3"":0.864288484,""feature 4"":0.1553517508,""feature 5"":0.047655442,
+                            ""feature 6"":0.6959587174,""feature 7"":0.8750991337,""feature 8"":0.9405740432,
+                            ""feature 9"":0.608085835,""feature 10"":0.207580246,""target"":11.8409523732}
+                            ] """""")
+        df = pd.read_json(TESTDATA)
+        model = task_func(df)
+        self.assertIsInstance(model, LinearRegression, ""Return type should be LinearRegression"")
+        self.assertEqual(len(model.coef_), 10, ""Model should have coefficients for all 10 features"")
+        
+    def test_case_3(self):
+        # Testing with random data
+        np.random.seed(0)
+        df = pd.DataFrame({
+            'feature ' + str(i): np.random.rand(100) for i in range(1, 11)
+        })
+        df['target'] = df.apply(lambda row: sum(row), axis=1)
+        model = task_func(df)
+        self.assertIsInstance(model, LinearRegression, ""Return type should be LinearRegression"")
+        self.assertEqual(len(model.coef_), 10, ""Model should have coefficients for all 10 features"")
+    def test_case_4(self):
+        # Testing with data where all features are zeros
+        df = pd.DataFrame({
+            'feature ' + str(i): [0]*100 for i in range(1, 11)
+        })
+        df['target'] = [0]*100
+        model = task_func(df)
+        self.assertIsInstance(model, LinearRegression, ""Return type should be LinearRegression"")
+        self.assertTrue(all(coef == 0 for coef in model.coef_), ""All coefficients should be zero"")
+    def test_case_5(self):
+        # Testing with data where target is a linear combination of features
+        np.random.seed(0)
+        df = pd.DataFrame({
+            'feature ' + str(i): np.random.rand(100) for i in range(1, 11)
+        })
+        df['target'] = df['feature 1'] + 2*df['feature 2'] + 3*df['feature 3']
+        model = task_func(df)
+        self.assertIsInstance(model, LinearRegression, ""Return type should be LinearRegression"")
+        self.assertAlmostEqual(model.coef_[0], 1, places=1, msg=""Coefficient for feature 1 should be close to 1"")
+        self.assertAlmostEqual(model.coef_[1], 2, places=1, msg=""Coefficient for feature 2 should be close to 2"")
+        self.assertAlmostEqual(model.coef_[2], 3, places=1, msg=""Coefficient for feature 3 should be close to 3"")","['Code Structure and Modularity', 'Input and Output Handling', 'Error Handling and Robustness', 'Data Processing and Transformation', 'Library and API Usage', 'Testing and Debugging', 'Documentation and Readability', 'Reproducibility and Consistency', 'Mathematical Computation']","Train a linear regression model on a given DataFrame. The function should output with: LinearRegression: The trained linear regression model. You should write self-contained code starting with:
+```
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+# Constants
+FEATURES = ['feature '+str(i) for i in range(1, 11)]
+TARGET = 'target'
+def task_func(df):
+```","[{'type': 'Error Handling and Robustness', 'constraint': 'The function will raise a ValueError if input df is not a DataFrame.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function should output with: LinearRegression: The trained linear regression model.', 'instruction_part': 'Extracted from instruction'}]","[{'type': 'Error Handling and Robustness', 'constraint': 'The function will raise a ValueError if input df is not a DataFrame.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function should output with: LinearRegression: The trained linear regression model.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': 'The function should be self-contained and include all necessary imports at the beginning.', 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': 'The function must handle missing values in the DataFrame before training the model.', 'instruction_part': 'Newly Generated'}, {'type': 'Testing and Debugging', 'constraint': 'The function should include unit tests to verify the correctness of the model training process.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'The function should include docstrings that explain the purpose, parameters, and return value.', 'instruction_part': 'Newly Generated'}, {'type': 'Reproducibility and Consistency', 'constraint': 'The function should set a random seed for reproducibility when splitting the dataset.', 'instruction_part': 'Newly Generated'}, {'type': 'Mathematical Computation', 'constraint': 'The function should ensure that the model is evaluated using appropriate metrics after training.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Error Handling and Robustness', 'constraint': 'The function will raise a ValueError if input df is not a DataFrame.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function should output with: LinearRegression: The trained linear regression model.', 'instruction_part': 'Extracted from instruction'}]","{'constraint_evaluations': [{'constraint_text': 'The function will raise a ValueError if input df is not a DataFrame.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it expresses a single requirement: raising a ValueError for a specific invalid input. It is highly relevant to the task of training a linear regression model, as input validation is crucial for ensuring the function operates correctly. The constraint is also objective because it can be clearly evaluated based on the behavior of the function when provided with invalid input.'}, {'constraint_text': 'The function should output with: LinearRegression: The trained linear regression model.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic as it specifies a single output requirement: the function must return a trained LinearRegression model. It is directly relevant to the task, as the output is the primary result of the function's execution. The constraint is objective because it can be verified by checking the type of the returned object.""}], 'avg_atomicity': 5.0, 'avg_relevance': 5.0, 'avg_objectivity': 5.0, 'unified_quality_score': 5.0, 'overall_analysis': 'The constraints provided are of excellent quality, scoring the maximum in atomicity, relevance, and objectivity. Each constraint is clear, specific, and directly tied to the functionality of the linear regression model training task. There are no weaknesses identified in this set, indicating a strong foundation for the implementation of the function.'}",5.0,5.0,5.0,5.0,"Train a linear regression model on a given DataFrame. The function should raise a ValueError if the input df is not a DataFrame to ensure robust error handling. The function should output with: LinearRegression: The trained linear regression model. You should write self-contained code starting with:
+```
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+# Constants
+FEATURES = ['feature '+str(i) for i in range(1, 11)]
+TARGET = 'target'
+def task_func(df):
+```","```python
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OneHotEncoder
+import numpy as np
+
+# Constants
+FEATURES = ['feature '+str(i) for i in range(1, 11)]
+TARGET = 'target'
+
+def task_func(df):
+    """"""
+    Train a linear regression model on a given DataFrame.
+
+    Args:
+        df (pd.DataFrame): Input DataFrame.
+
+    Returns:
+        LinearRegression: The trained linear regression model.
+
+    Raises:
+        ValueError: If the input df is not a DataFrame.
+    """"""
+    # Check if input is a DataFrame
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError(""Input must be a pandas DataFrame"")
+
+    # Check if DataFrame is empty
+    if df.empty:
+        raise ValueError(""Input DataFrame is empty"")
+
+    # Check if required columns exist in the DataFrame
+    if TARGET not in df.columns or not all(feature in df.columns for feature in FEATURES):
+        raise ValueError(""Required columns are missing from the DataFrame"")
+
+    # Split data into features and target
+    X = df[FEATURES]
+    y = df[TARGET]
+
+    # Split data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    # Define preprocessing pipeline
+    numeric_features = X.select_dtypes(include=['int64', 'float64']).columns
+    categorical_features = X.select_dtypes(include=['object']).columns
+
+    numeric_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='median')),
+        ('scaler', StandardScaler())])
+
+    categorical_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='constant","[1, 0]",Wrong,"The code has a syntax error due to an incomplete string in the categorical_transformer pipeline definition, causing a syntax error. Therefore, it is not even partially correct.",0,0.5
+567,xlangai/DS-1000,"Problem:
+Was trying to generate a pivot table with multiple ""values"" columns. I know I can use aggfunc to aggregate values the way I want to, but what if I don't want to sum or avg both columns but instead I want sum of one column while mean of the other one. So is it possible to do so using pandas?
+
+
+df = pd.DataFrame({
+'A' : ['abc', 'def', 'xyz', 'abc'] * 3,
+'B' : ['A', 'B', 'C'] * 4,
+'D' : np.random.arange(12),
+'E' : np.random.arange(12)
+})
+Now this will get a pivot table with sum:
+
+
+pd.pivot_table(df, values=['D','E'], rows=['B'], aggfunc=np.sum)
+And this for mean:
+
+
+pd.pivot_table(df, values=['D','E'], rows=['B'], aggfunc=np.mean)
+How can I get sum for D and mean for E?
+
+
+Hope my question is clear enough.
+
+
+
+
+A:
+<code>
+import pandas as pd
+import numpy as np
+
+
+np.random.seed(1)
+df = pd.DataFrame({
+'A' : ['abc', 'def', 'xyz', 'abc'] * 3,
+'B' : ['A', 'B', 'C'] * 4,
+'D' : np.random.randn(12),
+'E' : np.random.randn(12)
+})
+</code>
+result = ... # put solution in this variable
+BEGIN SOLUTION
+<code>","def g(df):
+    return pd.pivot_table(df, values=['D','E'], index=['B'], aggfunc={'D':np.sum, 'E':np.mean})
+
+result = g(df.copy())","import pandas as pd
+import numpy as np
+import copy
+
+
+def generate_test_case(test_case_id):
+    def generate_ans(data):
+        df = data
+        return pd.pivot_table(
+            df, values=[""D"", ""E""], index=[""B""], aggfunc={""D"": np.sum, ""E"": np.mean}
+        )
+
+    def define_test_input(test_case_id):
+        if test_case_id == 1:
+            np.random.seed(1)
+            df = pd.DataFrame(
+                {
+                    ""A"": [""abc"", ""def"", ""xyz"", ""abc""] * 3,
+                    ""B"": [""A"", ""B"", ""C""] * 4,
+                    ""D"": np.random.randn(12),
+                    ""E"": np.random.randn(12),
+                }
+            )
+        return df
+
+    test_input = define_test_input(test_case_id)
+    expected_result = generate_ans(copy.deepcopy(test_input))
+    return test_input, expected_result
+
+
+def exec_test(result, ans):
+    try:
+        pd.testing.assert_frame_equal(result, ans, check_dtype=False)
+        return 1
+    except:
+        return 0
+
+
+exec_context = r""""""
+import pandas as pd
+import numpy as np
+df = test_input
+[insert]
+""""""
+
+
+def test_execution(solution: str):
+    code = exec_context.replace(""[insert]"", solution)
+    for i in range(1):
+        test_input, expected_result = generate_test_case(i + 1)
+        test_env = {""test_input"": test_input}
+        exec(code, test_env)
+        assert exec_test(test_env[""result""], expected_result)","['Code Structure and Modularity', 'Input and Output Handling', 'Data Processing and Transformation', 'Library and API Usage', 'Documentation and Readability', 'Mathematical Computation']","Problem: Was trying to generate a pivot table with multiple ""values"" columns. I know I can use aggfunc to aggregate values the way I want to, but what if I don't want to sum or avg both columns but instead I want sum of one column while mean of the other one. So is it possible to do so using pandas?
+
+Now this will get a pivot table with sum:
+
+pd.pivot_table(df, values=['D','E'], rows=['B'], aggfunc=np.sum)
+And this for mean:
+pd.pivot_table(df, values=['D','E'], rows=['B'], aggfunc=np.mean)
+How can I get sum for D and mean for E?
+
+Hope my question is clear enough.
+
+A:
+<code>
+import pandas as pd
+import numpy as np
+
+
+np.random.seed(1)
+df = pd.DataFrame({
+'A' : ['abc', 'def', 'xyz', 'abc'] * 3,
+'B' : ['A', 'B', 'C'] * 4,
+'D' : np.random.randn(12),
+'E' : np.random.randn(12)
+})
+</code>
+result = ... # put solution in this variable",[],"[{'type': 'Data Processing and Transformation', 'constraint': ""The pivot table must aggregate column 'D' using the sum function and column 'E' using the mean function."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Library and API Usage', 'constraint': ""Utilize the pandas library's pivot_table function to create the pivot table."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': 'Encapsulate the pivot table generation logic within a function that accepts a DataFrame as an argument.', 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': 'Ensure the function returns the pivot table as a DataFrame object.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'Include docstrings in the function to explain its purpose, parameters, and return value.', 'instruction_part': 'Newly Generated'}, {'type': 'Mathematical Computation', 'constraint': ""Verify that the aggregation functions used (sum for 'D' and mean for 'E') are correctly applied to the respective columns in the pivot table."", 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': ""The DataFrame must contain at least three unique values in column 'B' to ensure meaningful aggregation."", 'instruction_part': 'Newly Generated'}, {'type': 'Library and API Usage', 'constraint': 'Ensure that the numpy library is imported and used for the aggregation functions.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'Use clear and descriptive variable names in the function to enhance code readability.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Data Processing and Transformation', 'constraint': ""The pivot table must aggregate column 'D' using the sum function and column 'E' using the mean function."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Library and API Usage', 'constraint': ""Utilize the pandas library's pivot_table function to create the pivot table."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Ensure the function returns the pivot table as a DataFrame object.', 'instruction_part': 'Newly Generated'}, {'type': 'Mathematical Computation', 'constraint': ""Verify that the aggregation functions used (sum for 'D' and mean for 'E') are correctly applied to the respective columns in the pivot table."", 'instruction_part': 'Newly Generated'}, {'type': 'Library and API Usage', 'constraint': 'Ensure that the numpy library is imported and used for the aggregation functions.', 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': ""The pivot table must aggregate column 'D' using the sum function and column 'E' using the mean function."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single requirement regarding the aggregation of two columns. It is highly relevant to the task of creating a pivot table with specific aggregation functions. The criteria for evaluation are clear and measurable, making it objective.'}, {'constraint_text': ""Utilize the pandas library's pivot_table function to create the pivot table."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it focuses solely on the requirement to use a specific function from the pandas library. It is directly relevant to the task of generating a pivot table and is objective since it can be verified by checking the code for the use of the pivot_table function.'}, {'constraint_text': 'Ensure the function returns the pivot table as a DataFrame object.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single requirement regarding the return type of the function. It is relevant to the task since the output must be a DataFrame, and it is objective because the return type can be easily checked.'}, {'constraint_text': ""Verify that the aggregation functions used (sum for 'D' and mean for 'E') are correctly applied to the respective columns in the pivot table."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it focuses on the verification of the application of specific aggregation functions. It is relevant to the task of ensuring the pivot table is constructed correctly, and it is objective since the correctness of the aggregation can be verified through testing.'}, {'constraint_text': 'Ensure that the numpy library is imported and used for the aggregation functions.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies the requirement for importing a library. It is relevant to the task since numpy is necessary for the aggregation functions, and it is objective because the presence of the import statement can be easily checked.'}], 'avg_atomicity': 5.0, 'avg_relevance': 5.0, 'avg_objectivity': 5.0, 'unified_quality_score': 5.0, 'overall_analysis': 'The set of constraints is of excellent quality, with all constraints scoring the maximum in atomicity, relevance, and objectivity. Each constraint is clear, specific, and directly related to the task of generating a pivot table with specified aggregation functions. There are no weaknesses identified, and the constraints collectively provide a comprehensive framework for the implementation.'}",5.0,5.0,5.0,5.0,"Problem:
+Was trying to generate a pivot table with multiple ""values"" columns. I know I can use aggfunc to aggregate values the way I want to, but what if I don't want to sum or avg both columns but instead I want sum of one column while mean of the other one. So is it possible to do so using pandas? 
+
+The pivot table must aggregate column 'D' using the sum function and column 'E' using the mean function.
+
+
+
+
+df = pd.DataFrame({
+'A' : ['abc', 'def', 'xyz', 'abc'] * 3,
+'B' : ['A', 'B', 'C'] * 4,
+'D' : np.random.arange(12),
+'E' : np.random.arange(12)
+})
+Now this will get a pivot table with sum:
+
+
+pd.pivot_table(df, values=['D','E'], rows=['B'], aggfunc=np.sum)
+And this for mean:
+
+
+pd.pivot_table(df, values=['D','E'], rows=['B'], aggfunc=np.mean)
+How can I get sum for D and mean for E?
+
+Hope my question is clear enough.
+
+
+
+A:
+<code>
+import pandas as pd
+import numpy as np
+
+
+np.random.seed(1)
+df = pd.DataFrame({
+'A' : ['abc', 'def', 'xyz', 'abc'] * 3,
+'B' : ['A', 'B', 'C'] * 4,
+'D' : np.random.randn(12),
+'E' : np.random.randn(12)
+})
+</code>
+result = ... # put solution in this variable
+BEGIN SOLUTION
+<code>
+    Utilize the pandas library's pivot_table function to create the pivot table.
+    Ensure the function returns the pivot table as a DataFrame object.
+    Verify that the aggregation functions used (sum for 'D' and mean for 'E') are correctly applied to the respective columns in the pivot table.
+    Ensure that the numpy library is imported and used for the aggregation functions.
+</code>","You can achieve this by passing a dictionary to the `aggfunc` parameter of the `pivot_table` function. This dictionary will map the column names to their respective aggregation functions.
+
+Here's the solution:
+
+```python
+import pandas as pd
+import numpy as np
+
+np.random.seed(1)
+df = pd.DataFrame({
+    'A' : ['abc', 'def', 'xyz', 'abc'] * 3,
+    'B' : ['A', 'B', 'C'] * 4,
+    'D' : np.random.randn(12),
+    'E' : np.random.randn(12)
+})
+
+result = pd.pivot_table(df, values=['D','E'], rows=['B'], aggfunc={'D': np.sum, 'E': np.mean})
+
+print(result)
+```
+
+In this code:
+
+- We create a dictionary `{'D': np.sum, 'E': np.mean}` that maps the column names 'D' and 'E' to their respective aggregation functions `np.sum` and `np.mean`.
+- We pass this dictionary to the `aggfunc` parameter of the `pivot_table` function.
+- The `pivot_table` function will apply the specified aggregation functions to the respective columns in the pivot table.
+
+This will produce a pivot table where the values in column 'D' are summed and the values in column 'E' are averaged.","[1, 1, 1, 1, 1]",Partially Correct,"The code is syntactically correct and logically applies different aggregation functions to different columns in the pivot table as requested. However, the parameter 'rows' used in pd.pivot_table is deprecated and should be replaced with 'index'. Despite this, the code will still run with a warning in recent pandas versions, so it is semantically correct. The code satisfies the constraint of producing a pivot table with sum for 'D' and mean for 'E'.",1,1.0
+483,xlangai/DS-1000,"Problem:
+Say I have two dataframes:
+df1:                          df2:
++-------------------+----+    +-------------------+-----+
+|  Timestamp        |data|    |  Timestamp        |stuff|
++-------------------+----+    +-------------------+-----+
+|2019/04/02 11:00:01| 111|    |2019/04/02 11:00:14|  101|
+|2019/04/02 11:00:15| 222|    |2019/04/02 11:00:15|  202|
+|2019/04/02 11:00:29| 333|    |2019/04/02 11:00:16|  303|
+|2019/04/02 11:00:30| 444|    |2019/04/02 11:00:30|  404|
++-------------------+----+    |2019/04/02 11:00:31|  505|
+                              +-------------------+-----+
+
+
+Without looping through every row of df2, I am trying to join the two dataframes based on the timestamp. So for every row in df2, it will ""add"" data from df1 that was at that particular time. In this example, the resulting dataframe would be:
+Adding df1 data to df2:
++-------------------+-----+----+
+|  Timestamp        |stuff|data|
++-------------------+-----+----+
+|2019/04/02 11:00:14|  101| 222|
+|2019/04/02 11:00:15|  202| 222|
+|2019/04/02 11:00:16|  303| 333|
+|2019/04/02 11:00:30|  404| 444|
+|2019/04/02 11:00:31|  505|None|
++-------------------+-----+----+
+
+
+Looping through each row of df2 then comparing to each df1 is very inefficient. Is there another way?
+
+
+
+
+A:
+<code>
+import pandas as pd
+
+
+df1 = pd.DataFrame({'Timestamp': ['2019/04/02 11:00:01', '2019/04/02 11:00:15', '2019/04/02 11:00:29', '2019/04/02 11:00:30'],
+                    'data': [111, 222, 333, 444]})
+df2 = pd.DataFrame({'Timestamp': ['2019/04/02 11:00:14', '2019/04/02 11:00:15', '2019/04/02 11:00:16', '2019/04/02 11:00:30', '2019/04/02 11:00:31'],
+                    'stuff': [101, 202, 303, 404, 505]})
+df1['Timestamp'] = pd.to_datetime(df1['Timestamp'])
+df2['Timestamp'] = pd.to_datetime(df2['Timestamp'])
+</code>
+result = ... # put solution in this variable
+BEGIN SOLUTION
+<code>","def g(df1, df2):
+    return pd.merge_asof(df2, df1, on='Timestamp', direction='forward')
+
+result = g(df1.copy(), df2.copy())","import pandas as pd
+import numpy as np
+import copy
+import tokenize, io
+
+
+def generate_test_case(test_case_id):
+    def generate_ans(data):
+        data = data
+        df1, df2 = data
+        return pd.merge_asof(df2, df1, on=""Timestamp"", direction=""forward"")
+
+    def define_test_input(test_case_id):
+        if test_case_id == 1:
+            df1 = pd.DataFrame(
+                {
+                    ""Timestamp"": [
+                        ""2019/04/02 11:00:01"",
+                        ""2019/04/02 11:00:15"",
+                        ""2019/04/02 11:00:29"",
+                        ""2019/04/02 11:00:30"",
+                    ],
+                    ""data"": [111, 222, 333, 444],
+                }
+            )
+            df2 = pd.DataFrame(
+                {
+                    ""Timestamp"": [
+                        ""2019/04/02 11:00:14"",
+                        ""2019/04/02 11:00:15"",
+                        ""2019/04/02 11:00:16"",
+                        ""2019/04/02 11:00:30"",
+                        ""2019/04/02 11:00:31"",
+                    ],
+                    ""stuff"": [101, 202, 303, 404, 505],
+                }
+            )
+            df1[""Timestamp""] = pd.to_datetime(df1[""Timestamp""])
+            df2[""Timestamp""] = pd.to_datetime(df2[""Timestamp""])
+        if test_case_id == 2:
+            df1 = pd.DataFrame(
+                {
+                    ""Timestamp"": [
+                        ""2019/04/02 11:00:01"",
+                        ""2019/04/02 11:00:15"",
+                        ""2019/04/02 11:00:29"",
+                        ""2019/04/02 11:00:30"",
+                    ],
+                    ""data"": [101, 202, 303, 404],
+                }
+            )
+            df2 = pd.DataFrame(
+                {
+                    ""Timestamp"": [
+                        ""2019/04/02 11:00:14"",
+                        ""2019/04/02 11:00:15"",
+                        ""2019/04/02 11:00:16"",
+                        ""2019/04/02 11:00:30"",
+                        ""2019/04/02 11:00:31"",
+                    ],
+                    ""stuff"": [111, 222, 333, 444, 555],
+                }
+            )
+            df1[""Timestamp""] = pd.to_datetime(df1[""Timestamp""])
+            df2[""Timestamp""] = pd.to_datetime(df2[""Timestamp""])
+        return df1, df2
+
+    test_input = define_test_input(test_case_id)
+    expected_result = generate_ans(copy.deepcopy(test_input))
+    return test_input, expected_result
+
+
+def exec_test(result, ans):
+    try:
+        pd.testing.assert_frame_equal(result, ans, check_dtype=False)
+        return 1
+    except:
+        return 0
+
+
+exec_context = r""""""
+import pandas as pd
+import numpy as np
+df1, df2 = test_input
+[insert]
+""""""
+
+
+def test_execution(solution: str):
+    code = exec_context.replace(""[insert]"", solution)
+    for i in range(2):
+        test_input, expected_result = generate_test_case(i + 1)
+        test_env = {""test_input"": test_input}
+        exec(code, test_env)
+        assert exec_test(test_env[""result""], expected_result)
+
+
+def test_string(solution: str):
+    tokens = []
+    for token in tokenize.tokenize(io.BytesIO(solution.encode(""utf-8"")).readline):
+        tokens.append(token.string)
+    assert ""for"" not in tokens and ""while"" not in tokens","['Code Structure and Modularity', 'Input and Output Handling', 'Data Processing and Transformation', 'Performance and Optimization', 'Library and API Usage', 'Documentation and Readability', 'Reproducibility and Consistency']","Problem:
+Say I have two dataframes:
+df1:                          df2:
++-------------------+----+    +-------------------+-----+
+|  Timestamp        |data|    |  Timestamp        |stuff|
++-------------------+----+    +-------------------+-----+
+|2019/04/02 11:00:01| 111|    |2019/04/02 11:00:14|  101|
+|2019/04/02 11:00:15| 222|    |2019/04/02 11:00:15|  202|
+|2019/04/02 11:00:29| 333|    |2019/04/02 11:00:16|  303|
+|2019/04/02 11:00:30| 444|    |2019/04/02 11:00:30|  404|
++-------------------+----+    |2019/04/02 11:00:31|  505|
+                              +-------------------+-----+
+
+Without looping through every row of df2, I am trying to join the two dataframes based on the timestamp. So for every row in df2, it will ""add"" data from df1 that was at that particular time. In this example, the resulting dataframe would be:
+Adding df1 data to df2:
++-------------------+-----+----+
+|  Timestamp        |stuff|data|
++-------------------+-----+----+
+|2019/04/02 11:00:14|  101| 222|
+|2019/04/02 11:00:15|  202| 222|
+|2019/04/02 11:00:16|  303| 333|
+|2019/04/02 11:00:30|  404| 444|
+|2019/04/02 11:00:31|  505|None|
++-------------------+-----+----+
+
+Looping through each row of df2 then comparing to each df1 is very inefficient. Is there another way?
+
+
+A:
+<code>
+import pandas as pd
+
+
+df1 = pd.DataFrame({'Timestamp': ['2019/04/02 11:00:01', '2019/04/02 11:00:15', '2019/04/02 11:00:29', '2019/04/02 11:00:30'],
+                    'data': [111, 222, 333, 444]})
+df2 = pd.DataFrame({'Timestamp': ['2019/04/02 11:00:14', '2019/04/02 11:00:15', '2019/04/02 11:00:16', '2019/04/02 11:00:30', '2019/04/02 11:00:31'],
+                    'stuff': [101, 202, 303, 404, 505]})
+df1['Timestamp'] = pd.to_datetime(df1['Timestamp'])
+df2['Timestamp'] = pd.to_datetime(df2['Timestamp'])
+</code>
+result = ... # put solution in this variable","[{'type': 'Performance and Optimization', 'constraint': 'Without looping through every row of df2, join the two dataframes based on the timestamp.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'For every row in df2, add data from df1 that was at that particular time.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Performance and Optimization', 'constraint': 'Avoid looping through each row of df2 then comparing to each df1.', 'instruction_part': 'Extracted from instruction'}]","[{'type': 'Performance and Optimization', 'constraint': 'Without looping through every row of df2, join the two dataframes based on the timestamp.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'For every row in df2, add data from df1 that was at that particular time.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Performance and Optimization', 'constraint': 'Avoid looping through each row of df2 then comparing to each df1.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Library and API Usage', 'constraint': ""Utilize the pandas 'merge_asof' function to efficiently combine the dataframes based on timestamps."", 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': 'Ensure that the resulting dataframe maintains the original order of df2 after merging.', 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': 'Handle cases where there is no matching timestamp in df1 for a timestamp in df2 by filling with None.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'Include comments in the code to explain the purpose of each step in the merging process.', 'instruction_part': 'Newly Generated'}, {'type': 'Reproducibility and Consistency', 'constraint': 'Ensure that the code can be executed multiple times without altering the output, given the same input data.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Performance and Optimization', 'constraint': 'Without looping through every row of df2, join the two dataframes based on the timestamp.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'For every row in df2, add data from df1 that was at that particular time.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Performance and Optimization', 'constraint': 'Avoid looping through each row of df2 then comparing to each df1.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Library and API Usage', 'constraint': ""Utilize the pandas 'merge_asof' function to efficiently combine the dataframes based on timestamps."", 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': 'Ensure that the resulting dataframe maintains the original order of df2 after merging.', 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': 'Handle cases where there is no matching timestamp in df1 for a timestamp in df2 by filling with None.', 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': 'Without looping through every row of df2, join the two dataframes based on the timestamp.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single requirement: to join the dataframes without looping. It is highly relevant to the task of optimizing the join operation and is objective, as it can be clearly evaluated based on the implementation of the join operation.'}, {'constraint_text': 'For every row in df2, add data from df1 that was at that particular time.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic because it focuses on a single action: adding data from df1 to df2 based on timestamps. It is relevant as it directly addresses the core task of merging data based on time. The objectivity is high since it can be measured by the resulting dataframe structure.'}, {'constraint_text': 'Avoid looping through each row of df2 then comparing to each df1.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it clearly states a single requirement to avoid inefficient looping. It is relevant to the optimization aspect of the task and objective, as it can be evaluated based on the performance of the implemented solution.'}, {'constraint_text': ""Utilize the pandas 'merge_asof' function to efficiently combine the dataframes based on timestamps."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic as it specifies a single method to be used for merging. It is highly relevant to the task of efficiently combining dataframes and is objective, as the use of 'merge_asof' can be directly verified in the code.""}, {'constraint_text': 'Ensure that the resulting dataframe maintains the original order of df2 after merging.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it focuses on a single requirement regarding the order of the resulting dataframe. It is relevant to the task since maintaining order is crucial for data integrity and is objective, as it can be checked by comparing the order of rows in the output.'}, {'constraint_text': 'Handle cases where there is no matching timestamp in df1 for a timestamp in df2 by filling with None.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single handling method for unmatched timestamps. It is relevant to the task as it addresses potential edge cases in the merging process and is objective, as it can be verified by checking the output for None values.'}], 'avg_atomicity': 5.0, 'avg_relevance': 5.0, 'avg_objectivity': 5.0, 'unified_quality_score': 5.0, 'overall_analysis': 'The constraints provided are of excellent quality, with all scoring the maximum in atomicity, relevance, and objectivity. Each constraint is clear, focused, and directly related to the task of merging dataframes based on timestamps while ensuring performance and handling edge cases. There are no weaknesses identified in this set, making it a strong foundation for implementing the required functionality.'}",5.0,5.0,5.0,5.0,"Problem:
+Say I have two dataframes:
+df1:                          df2:
++-------------------+----+    +-------------------+-----+
+|  Timestamp        |data|    |  Timestamp        |stuff|
++-------------------+----+    +-------------------+-----+
+|2019/04/02 11:00:01| 111|    |2019/04/02 11:00:14|  101|
+|2019/04/02 11:00:15| 222|    |2019/04/02 11:00:15|  202|
+|2019/04/02 11:00:29| 333|    |2019/04/02 11:00:16|  303|
+|2019/04/02 11:00:30| 444|    |2019/04/02 11:00:30|  404|
++-------------------+----+    |2019/04/02 11:00:31|  505|
+                              +-------------------+-----+
+
+Without looping through every row of df2, I am trying to join the two dataframes based on the timestamp. To achieve performance and optimization, utilize the pandas 'merge_asof' function to efficiently combine the dataframes based on timestamps. For every row in df2, add data from df1 that was at that particular time. In this example, the resulting dataframe would be:
+Adding df1 data to df2:
++-------------------+-----+----+
+|  Timestamp        |stuff|data|
++-------------------+-----+----+
+|2019/04/02 11:00:14|  101| 222|
+|2019/04/02 11:00:15|  202| 222|
+|2019/04/02 11:00:16|  303| 333|
+|2019/04/02 11:00:30|  404| 444|
+|2019/04/02 11:00:31|  505|None|
++-------------------+-----+----+
+
+Ensure that the resulting dataframe maintains the original order of df2 after merging. Handle cases where there is no matching timestamp in df1 for a timestamp in df2 by filling with None. Looping through each row of df2 then comparing to each df1 is very inefficient. Is there another way?
+
+
+
+A:
+<code>
+import pandas as pd
+
+
+df1 = pd.DataFrame({'Timestamp': ['2019/04/02 11:00:01', '2019/04/02 11:00:15', '2019/04/02 11:00:29', '2019/04/02 11:00:30'],
+                    'data': [111, 222, 333, 444]})
+df2 = pd.DataFrame({'Timestamp': ['2019/04/02 11:00:14', '2019/04/02 11:00:15', '2019/04/02 11:00:16', '2019/04/02 11:00:30', '2019/04/02 11:00:31'],
+                    'stuff': [101, 202, 303, 404, 505]})
+df1['Timestamp'] = pd.to_datetime(df1['Timestamp'])
+df2['Timestamp'] = pd.to_datetime(df2['Timestamp'])
+</code>
+result = ... # put solution in this variable
+BEGIN SOLUTION
+<code>
+    ""Conditions"": [{'type': 'Performance and Optimization', 'constraint': 'Without looping through every row of df2, join the two dataframes based on the timestamp.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'For every row in df2, add data from df1 that was at that particular time.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Performance and Optimization', 'constraint': 'Avoid looping through each row of df2 then comparing to each df1.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Library and API Usage', 'constraint': ""Utilize the pandas 'merge_asof' function to efficiently combine the dataframes based on timestamps."", 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': 'Ensure that the resulting dataframe maintains the original order of df2 after merging.', 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': 'Handle cases where there is no matching timestamp in df1 for a timestamp in df2 by filling with None.', 'instruction_part': 'Newly Generated'}] }
+</code>","To efficiently combine the dataframes based on timestamps without looping through every row of df2, you can utilize the pandas `merge_asof` function. Here's the solution:
+
+```python
+import pandas as pd
+
+# Create dataframes
+df1 = pd.DataFrame({'Timestamp': ['2019/04/02 11:00:01', '2019/04/02 11:00:15', '2019/04/02 11:00:29', '2019/04/02 11:00:30'],
+                    'data': [111, 222, 333, 444]})
+df2 = pd.DataFrame({'Timestamp': ['2019/04/02 11:00:14', '2019/04/02 11:00:15', '2019/04/02 11:00:16', '2019/04/02 11:00:30', '2019/04/02 11:00:31'],
+                    'stuff': [101, 202, 303, 404, 505]})
+
+# Convert Timestamp to datetime
+df1['Timestamp'] = pd.to_datetime(df1['Timestamp'])
+df2['Timestamp'] = pd.to_datetime(df2['Timestamp'])
+
+# Merge df1 and df2 using merge_asof
+result = pd.merge_asof(df2, df1, on='Timestamp', direction='forward')
+
+# Fill NaN values in 'data' column with None
+result['data'] = result['data'].fillna(None)
+
+# Reorder columns to match the original order of df2
+result = result[['Timestamp', 'stuff', 'data']]
+
+print(result)
+```
+
+This solution will output:
+
+```
+                  Timestamp  stuff    data
+0 2019-04-02 11:00:14      101   222.0
+1 2019-04-02 11:00:15","[1, 1, 1, 1, 1, 1]",Completely Correct,"The code is syntactically correct and uses pandas merge_asof to join df2 with df1 on Timestamp without looping, which is efficient. However, the merge_asof is used with direction='forward', which means it matches the next row in df1 with a Timestamp greater than or equal to df2's Timestamp. The problem requires for each df2 Timestamp to get the df1 data at that particular time or the closest previous time (as shown in the example). The example output shows that for Timestamp 2019/04/02 11:00:14 in df2, the data from df1 at 2019/04/02 11:00:15 (222) is used, which is a forward match, so direction='forward' is correct. But for 2019/04/02 11:00:16 in df2, the data from df1 at 2019/04/02 11:00:29 (333) is used, which is a forward match as well. So direction='forward' matches the example. The code fills NaN with None as requested. The code snippet is incomplete (cut off at the end), but the logic is correct and matches the instruction and example. Therefore, the code is Completely Correct.",1,1.0
+303,ajibawa-2023/Python-Code-23k-ShareGPT,"Write a recursive function that takes a string as an argument and removes all lowercase and uppercase vowels (a, e, i, o, u, A, E, I, O, U) from it. The function should handle special characters and symbols in the input string and return the new string in reverse order.","Here is a recursive function in Python that removes all lowercase and uppercase vowels from a given string and returns the new string in reverse order:
+
+```python
+def remove_vowels(string):
+    vowels = 'aeiouAEIOU'
+    
+    # Base case: if the string is empty, return it
+    if string == '':
+        return string
+    
+    # Recursive case
+    else:
+        # Check if the first character is a vowel
+        if string[0] in vowels:
+            # Remove the vowel and call the function recursively on the remaining substring
+            return remove_vowels(string[1:])
+        else:
+            # Keep the current character and call the function recursively on the remaining substring
+            return string[0] + remove_vowels(string[1:])
+
+# Test the function
+input_string = ""Hello! How are you today?""
+output_string = remove_vowels(input_string)
+reversed_output = output_string[::-1]
+print(reversed_output)
+```
+
+Output:
+```
+ydH wrH! llH
+```
+
+In the example above, the function `remove_vowels` recursively removes all vowels from the input string and returns the new string without vowels. Then, we reverse the output string using `[::-1]` to get the final result.",,"['Code Structure and Modularity', 'Input and Output Handling', 'Error Handling and Robustness', 'Data Processing and Transformation', 'Performance and Optimization', 'Testing and Debugging', 'Documentation and Readability']","Write a recursive function that takes a string as an argument and removes all lowercase and uppercase vowels (a, e, i, o, u, A, E, I, O, U) from it. The function should handle special characters and symbols in the input string and return the new string in reverse order.","[{'type': 'Code Structure and Modularity', 'constraint': 'The function should be recursive.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function takes a string as an argument.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Remove all lowercase and uppercase vowels (a, e, i, o, u, A, E, I, O, U) from the string.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'The function should handle special characters and symbols in the input string.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Return the new string in reverse order.', 'instruction_part': 'Extracted from instruction'}]","[{'type': 'Code Structure and Modularity', 'constraint': 'The function should be recursive.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function takes a string as an argument.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Remove all lowercase and uppercase vowels (a, e, i, o, u, A, E, I, O, U) from the string.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'The function should handle special characters and symbols in the input string.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Return the new string in reverse order.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': 'The function should return an empty string if the input is an empty string.', 'instruction_part': 'Newly Generated'}, {'type': 'Performance and Optimization', 'constraint': 'The function should efficiently handle strings of up to 10,000 characters without significant performance degradation.', 'instruction_part': 'Newly Generated'}, {'type': 'Testing and Debugging', 'constraint': 'Include unit tests that cover various cases, including strings with no vowels, strings with only vowels, and strings with special characters.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'The function should include a docstring that explains its purpose, parameters, and return value.', 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': 'The function should handle both single-line and multi-line strings correctly.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Code Structure and Modularity', 'constraint': 'The function should be recursive.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function takes a string as an argument.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Remove all lowercase and uppercase vowels (a, e, i, o, u, A, E, I, O, U) from the string.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'The function should handle special characters and symbols in the input string.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Return the new string in reverse order.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': 'The function should return an empty string if the input is an empty string.', 'instruction_part': 'Newly Generated'}, {'type': 'Performance and Optimization', 'constraint': 'The function should efficiently handle strings of up to 10,000 characters without significant performance degradation.', 'instruction_part': 'Newly Generated'}, {'type': 'Testing and Debugging', 'constraint': 'Include unit tests that cover various cases, including strings with no vowels, strings with only vowels, and strings with special characters.', 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': 'The function should handle both single-line and multi-line strings correctly.', 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': 'The function should be recursive.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic as it specifies a single requirement: the function must be recursive. It is highly relevant to the task since the instruction explicitly asks for a recursive function. The constraint is also objective, as it can be clearly evaluated by checking the function's implementation.""}, {'constraint_text': 'The function takes a string as an argument.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic, focusing solely on the input type. It is relevant because the instruction specifies that the function should accept a string. The objectivity score is high as it can be verified by examining the function's signature.""}, {'constraint_text': 'Remove all lowercase and uppercase vowels (a, e, i, o, u, A, E, I, O, U) from the string.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, as it clearly states a single requirement regarding vowel removal. It is directly relevant to the task, as the instruction specifies this action. The objectivity score is high because it can be tested by running the function with various strings.'}, {'constraint_text': 'The function should handle special characters and symbols in the input string.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, focusing on a specific aspect of input handling. It is relevant to the task since the instruction implies that special characters should not be removed. The objectivity score is high as it can be verified through testing.'}, {'constraint_text': 'Return the new string in reverse order.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, specifying a single output requirement. It is highly relevant to the task, as the instruction explicitly states that the output should be reversed. The objectivity score is high because it can be easily checked by examining the output.'}, {'constraint_text': 'The function should return an empty string if the input is an empty string.', 'atomicity_score': 5, 'relevance_score': 4, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, as it specifies a single behavior for a specific input case. It is relevant, but slightly less so than others, as the instruction does not explicitly mention this behavior. However, it is a reasonable assumption for a function handling strings. The objectivity score is high as it can be tested.'}, {'constraint_text': 'The function should efficiently handle strings of up to 10,000 characters without significant performance degradation.', 'atomicity_score': 5, 'relevance_score': 4, 'objectivity_score': 4, 'reasoning': ""This constraint is atomic, focusing on performance for a specific input size. It is relevant, but the instruction does not specify performance requirements, making it somewhat less relevant. The objectivity score is lower because 'significant performance degradation' is subjective and may require specific benchmarks to evaluate.""}, {'constraint_text': 'Include unit tests that cover various cases, including strings with no vowels, strings with only vowels, and strings with special characters.', 'atomicity_score': 4, 'relevance_score': 5, 'objectivity_score': 4, 'reasoning': 'This constraint is not fully atomic as it combines multiple testing scenarios into one requirement. It is highly relevant to ensure the function works correctly across different cases. The objectivity score is moderate because while tests can be defined, the effectiveness of tests can vary based on implementation.'}, {'constraint_text': 'The function should handle both single-line and multi-line strings correctly.', 'atomicity_score': 5, 'relevance_score': 4, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, specifying a single requirement regarding input handling. It is relevant, but the instruction does not explicitly mention multi-line strings, making it slightly less relevant. The objectivity score is high as it can be tested through various input cases.'}], 'avg_atomicity': 4.78, 'avg_relevance': 4.56, 'avg_objectivity': 4.56, 'unified_quality_score': 4.63, 'overall_analysis': 'The constraints provided are generally of high quality, with strong atomicity and objectivity scores. Most constraints are directly relevant to the task, ensuring that the function meets the specified requirements. The main weaknesses lie in the performance constraint, which introduces subjectivity, and the testing constraint, which could be more atomic. Overall, the set of constraints effectively guides the implementation of the recursive function as described in the original instruction.'}",4.5600000000000005,4.5600000000000005,4.78,4.63,"Write a recursive function that takes a string as an argument and removes all lowercase and uppercase vowels (a, e, i, o, u, A, E, I, O, U) from it. The function should handle special characters and symbols in the input string and return the new string in reverse order. Additionally, the function should return an empty string if the input is an empty string. It should efficiently handle strings of up to 10,000 characters without significant performance degradation. Furthermore, include unit tests that cover various cases, including strings with no vowels, strings with only vowels, and strings with special characters. The function should also handle both single-line and multi-line strings correctly.","**Recursive Function to Remove Vowels and Reverse String**
+
+```python
+def remove_vowels_and_reverse(s):
+    """"""
+    Removes all lowercase and uppercase vowels from the input string and returns the new string in reverse order.
+
+    Args:
+        s (str): The input string.
+
+    Returns:
+        str: The new string with vowels removed and in reverse order.
+    """"""
+    # Base case: If the string is empty, return an empty string.
+    if not s:
+        return """"
+
+    # Check if the first character is a vowel.
+    if s[0].lower() in ""aeiou"":
+        # If it's a vowel, recursively call the function on the rest of the string.
+        return remove_vowels_and_reverse(s[1:])
+    else:
+        # If it's not a vowel, recursively call the function on the rest of the string and prepend the first character.
+        return s[0] + remove_vowels_and_reverse(s[1:])
+```
+
+**Unit Tests**
+
+```python
+import unittest
+
+class TestRemoveVowelsAndReverse(unittest.TestCase):
+    def test_no_vowels(self):
+        self.assertEqual(remove_vowels_and_reverse(""hello""), ""olleh"")
+
+    def test_only_vowels(self):
+        self.assertEqual(remove_vowels_and_reverse(""aeiou""), """")
+
+    def test_special_characters(self):
+        self.assertEqual(remove_vowels_and_reverse(""hello!@#$""), ""!@#$olleh"")
+
+    def test_multi_line_string(self):
+        self.assertEqual(remove_vowels_and_reverse(""hello\nworld""), ""dlrow\olleh"")
+
+    def test_empty_string(self):
+        self.assertEqual(remove_vowels_and_reverse(""""), """")
+
+    def test_single_character(self):
+        self.assertEqual(remove_vowels_and_reverse(""a""), """")
+
+    def test_long_string(self):
+        long_string = ""a"" * 10000
+        self.assertEqual(remove_vowels_and_reverse(long_string), """")
+
+if","[1, 1, 1, 1, 1, 1, 0, 1, 1]",Wrong,"The code has syntax errors due to improper markdown and incomplete code at the end. Semantically, the function removes vowels but returns the string in the original order, not reversed as required. The unit tests also expect reversed strings, but the function does not produce reversed output. Therefore, it fails the semantic and constraint correctness. Hence, the code is wrong.",0,0.8888888888888888
+342,ajibawa-2023/Python-Code-23k-ShareGPT,"Create a function to compute the area of a triangle when the length of its three sides are known. The sides of the triangle are represented by the variables a, b, and c.
+
+The function should first check if the given sides can form a valid triangle. If the sides cannot form a valid triangle, the function should raise a custom exception called `InvalidTriangleError` with the message ""Invalid triangle: the given sides cannot form a triangle.""
+
+To check if the sides can form a valid triangle, you should use the following conditions:
+- The sum of the lengths of any two sides of a triangle must be greater than the length of the third side.
+- The difference between the length of any two sides of a triangle must be smaller than the length of the third side.
+- Additionally, the sides of the triangle must be integers.
+
+If the given sides can form a valid triangle, your function should compute and return the area of the triangle using the same Heron's formula provided in the previous test.
+
+To summarize:
+- Write a function called `compute_triangle_area` that takes in three parameters: a, b, and c.
+- Check if the given sides can form a valid triangle using the conditions stated above. If not, raise an `InvalidTriangleError` with the message ""Invalid triangle: the given sides cannot form a triangle.""
+- If the sides can form a valid triangle, compute and return the area of the triangle using Heron's formula.
+
+Example Usage:
+```python
+try:
+    area = compute_triangle_area(6, 8, 10)
+    print(area)  # Output: 24
+except InvalidTriangleError as e:
+    print(e)  # Output: Invalid triangle: the given sides cannot form a triangle.
+```
+
+Hints:
+- You can use the math.sqrt() function from the math module to compute the square root.
+- Make sure to handle the case where the sides cannot form a valid triangle by raising the custom exception.
+- You may assume that the given side lengths are positive integers.
+- Remember to check if the sides are integers in addition to the existing conditions.","Here's the implementation of the `compute_triangle_area` function:
+
+```python
+import math
+
+class InvalidTriangleError(Exception):
+    pass
+
+def compute_triangle_area(a, b, c):
+    # Check if sides are integers
+    if not isinstance(a, int) or not isinstance(b, int) or not isinstance(c, int):
+        raise InvalidTriangleError(""Invalid triangle: the given sides are not integers."")
+    
+    # Check if the given sides can form a triangle
+    if a + b <= c or b + c <= a or a + c <= b:
+        raise InvalidTriangleError(""Invalid triangle: the given sides cannot form a triangle."")
+    
+    # Compute the area using Heron's formula
+    s = (a + b + c) / 2
+    area = math.sqrt(s * (s - a) * (s - b) * (s - c))
+    return area
+
+# Example usage
+try:
+    area = compute_triangle_area(6, 8, 10)
+    print(area)  # Output: 24.0
+except InvalidTriangleError as e:
+    print(e)  # Output: Invalid triangle: the given sides cannot form a triangle.
+```
+
+In this implementation, we first check if the given sides are integers using the `isinstance()` function. If any of the sides is not an integer, we raise the `InvalidTriangleError` with an appropriate message.
+
+Then, we check if the given sides can form a valid triangle by applying the conditions mentioned in the prompt. If the conditions are not satisfied, we raise the `InvalidTriangleError` with the corresponding message.
+
+If the sides can form a valid triangle, we compute the area using Heron's formula and return it.
+
+Note that we import the `math` module to use the `sqrt()` function for calculating the square root.",,"['Code Structure and Modularity', 'Input and Output Handling', 'Error Handling and Robustness', 'Mathematical Computation', 'Documentation and Readability']","Create a function to compute the area of a triangle when the length of its three sides are known. The sides of the triangle are represented by the variables a, b, and c.
+
+To check if the sides can form a valid triangle, you should use the following conditions:
+- The sum of the lengths of any two sides of a triangle must be greater than the length of the third side.
+- The difference between the length of any two sides of a triangle must be smaller than the length of the third side.
+
+If the given sides can form a valid triangle, your function should compute and return the area of the triangle using the same Heron's formula provided in the previous test.
+
+Example Usage:
+```python
+try:
+    area = compute_triangle_area(6, 8, 10)
+    print(area)  # Output: 24
+except InvalidTriangleError as e:
+    print(e)  # Output: Invalid triangle: the given sides cannot form a triangle.
+```
+
+Hints:
+- You can use the math.sqrt() function from the math module to compute the square root.","[{'type': 'Error Handling and Robustness', 'constraint': ""Raise InvalidTriangleError with the message 'Invalid triangle: the given sides cannot form a triangle.' if the sides cannot form a valid triangle."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Mathematical Computation', 'constraint': 'Check if the sum of the lengths of any two sides of a triangle must be greater than the length of the third side.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Mathematical Computation', 'constraint': 'Check if the difference between the length of any two sides of a triangle must be smaller than the length of the third side.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Constraint_Category_Name', 'constraint': 'The sides of the triangle must be integers.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': 'Write a function called compute_triangle_area that takes in three parameters: a, b, and c.', 'instruction_part': 'Extracted from instruction'}]","[{'type': 'Error Handling and Robustness', 'constraint': ""Raise InvalidTriangleError with the message 'Invalid triangle: the given sides cannot form a triangle.' if the sides cannot form a valid triangle."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Mathematical Computation', 'constraint': 'Check if the sum of the lengths of any two sides of a triangle must be greater than the length of the third side.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Mathematical Computation', 'constraint': 'Check if the difference between the length of any two sides of a triangle must be smaller than the length of the third side.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Constraint_Category_Name', 'constraint': 'The sides of the triangle must be integers.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': 'Write a function called compute_triangle_area that takes in three parameters: a, b, and c.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': 'The function must validate that all input parameters are positive integers before proceeding with calculations.', 'instruction_part': 'Newly Generated'}, {'type': 'Mathematical Computation', 'constraint': ""Implement Heron's formula correctly to compute the area of the triangle once the validity of the sides is confirmed."", 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'Include docstrings in the compute_triangle_area function to explain its purpose, parameters, and return value.', 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': 'Ensure that the function returns a float value representing the area of the triangle.', 'instruction_part': 'Newly Generated'}, {'type': 'Error Handling and Robustness', 'constraint': 'Provide clear error messages for invalid inputs, including non-integer values and negative integers.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Error Handling and Robustness', 'constraint': ""Raise InvalidTriangleError with the message 'Invalid triangle: the given sides cannot form a valid triangle.' if the sides cannot form a valid triangle."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Mathematical Computation', 'constraint': 'Check if the sum of the lengths of any two sides of a triangle must be greater than the length of the third side.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Mathematical Computation', 'constraint': 'Check if the difference between the length of any two sides of a triangle must be smaller than the length of the third side.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Mathematical Computation', 'constraint': 'The sides of the triangle must be integers.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': 'Write a function called compute_triangle_area that takes in three parameters: a, b, and c.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': 'The function must validate that all input parameters are positive integers before proceeding with calculations.', 'instruction_part': 'Newly Generated'}, {'type': 'Mathematical Computation', 'constraint': ""Implement Heron's formula correctly to compute the area of the triangle once the validity of the sides is confirmed."", 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': 'Ensure that the function returns a float value representing the area of the triangle.', 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': ""Raise InvalidTriangleError with the message 'Invalid triangle: the given sides cannot form a valid triangle.' if the sides cannot form a valid triangle."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single action to be taken when a condition is met. It is highly relevant to the task of validating triangle sides and is objective because it clearly defines the action to be taken without ambiguity.'}, {'constraint_text': 'Check if the sum of the lengths of any two sides of a triangle must be greater than the length of the third side.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, focusing solely on one specific condition for triangle validity. It is relevant as it directly pertains to the geometric properties of triangles and is objective, as it can be evaluated through straightforward arithmetic.'}, {'constraint_text': 'Check if the difference between the length of any two sides of a triangle must be smaller than the length of the third side.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, addressing a single condition necessary for triangle validity. It is relevant to the task and objective, as it can be evaluated through arithmetic operations.'}, {'constraint_text': 'The sides of the triangle must be integers.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, specifying a single requirement regarding the type of the sides. It is relevant to the task as it ensures the inputs meet the necessary criteria for triangle calculations and is objective, as it can be checked using type validation.'}, {'constraint_text': 'Write a function called compute_triangle_area that takes in three parameters: a, b, and c.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic, clearly defining the function's name and parameters. It is relevant as it directly relates to the task of creating the function and is objective, as it can be verified by checking the function definition.""}, {'constraint_text': 'The function must validate that all input parameters are positive integers before proceeding with calculations.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, focusing on a single validation requirement. It is relevant to the task as it ensures the inputs are appropriate for the calculations and is objective, as it can be evaluated through type and value checks.'}, {'constraint_text': ""Implement Heron's formula correctly to compute the area of the triangle once the validity of the sides is confirmed."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, specifying a single computational requirement. It is relevant as it directly pertains to the task of calculating the area of the triangle and is objective, as it can be evaluated through the implementation of the formula.'}, {'constraint_text': 'Ensure that the function returns a float value representing the area of the triangle.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic, focusing on the return type of the function. It is relevant to the task as it specifies the expected output and is objective, as it can be verified by checking the function's return type.""}], 'avg_atomicity': 5.0, 'avg_relevance': 5.0, 'avg_objectivity': 5.0, 'unified_quality_score': 5.0, 'overall_analysis': ""The set of constraints is of excellent quality, with all constraints scoring the maximum in atomicity, relevance, and objectivity. Each constraint is clear, specific, and directly related to the task of computing the area of a triangle based on its sides. There are no weaknesses identified, and the constraints collectively ensure robust error handling, mathematical correctness, and adherence to the function's requirements.""}",5.0,5.0,5.0,5.0,"Create a function to compute the area of a triangle when the length of its three sides are known. The sides of the triangle are represented by the variables a, b, and c.
+
+The function must validate that all input parameters are positive integers before proceeding with calculations. The function should first check if the given sides can form a valid triangle. If the sides cannot form a valid triangle, the function should raise a custom exception called `InvalidTriangleError` with the message ""Invalid triangle: the given sides cannot form a triangle.""
+
+To check if the sides can form a valid triangle, you should use the following conditions:
+- Check if the sum of the lengths of any two sides of a triangle must be greater than the length of the third side.
+- Check if the difference between the length of any two sides of a triangle must be smaller than the length of the third side.
+- Additionally, the sides of the triangle must be integers.
+
+If the given sides can form a valid triangle, your function should compute and return the area of the triangle using Heron's formula correctly to compute the area of the triangle once the validity of the sides is confirmed.
+
+To summarize:
+- Write a function called `compute_triangle_area` that takes in three parameters: a, b, and c.
+- Check if the given sides can form a valid triangle using the conditions stated above. If not, raise an `InvalidTriangleError` with the message ""Invalid triangle: the given sides cannot form a triangle.""
+- If the sides can form a valid triangle, ensure that the function returns a float value representing the area of the triangle using Heron's formula.
+
+Example Usage:
+```python
+try:
+    area = compute_triangle_area(6, 8, 10)
+    print(area)  # Output: 24
+except InvalidTriangleError as e:
+    print(e)  # Output: Invalid triangle: the given sides cannot form a triangle.
+```
+
+Hints:
+- You can use the math.sqrt() function from the math module to compute the square root.
+- Make sure to handle the case where the sides cannot form a valid triangle by raising the custom exception.
+- You may assume that the given side lengths are positive integers.
+- Remember to check if the sides are integers in addition to the existing conditions.","Here's a Python solution that meets the requirements:
+
+```python
+import math
+
+class InvalidTriangleError(Exception):
+    """"""Custom exception for invalid triangle.""""""
+    pass
+
+def compute_triangle_area(a, b, c):
+    """"""
+    Compute the area of a triangle given its three sides.
+
+    Args:
+    a (int): The length of the first side.
+    b (int): The length of the second side.
+    c (int): The length of the third side.
+
+    Returns:
+    float: The area of the triangle.
+
+    Raises:
+    InvalidTriangleError: If the given sides cannot form a valid triangle.
+    """"""
+    # Check if all input parameters are positive integers
+    if not (isinstance(a, int) and isinstance(b, int) and isinstance(c, int)):
+        raise TypeError(""All sides must be integers."")
+    if a <= 0 or b <= 0 or c <= 0:
+        raise ValueError(""All sides must be positive."")
+
+    # Check if the sides can form a valid triangle
+    if a + b <= c or a + c <= b or b + c <= a:
+        raise InvalidTriangleError(""Invalid triangle: the given sides cannot form a triangle."")
+
+    # Compute the semi-perimeter
+    s = (a + b + c) / 2
+
+    # Compute the area using Heron's formula
+    area = math.sqrt(s * (s - a) * (s - b) * (s - c))
+
+    return area
+
+# Example usage:
+try:
+    area = compute_triangle_area(6, 8, 10)
+    print(area)  # Output: 24.0
+except InvalidTriangleError as e:
+    print(e)  # Output: Invalid triangle: the given sides cannot form a triangle.
+```
+
+This solution defines a custom exception `InvalidTriangleError` to handle cases where the given sides cannot form a valid triangle. It then checks if the input","[1, 1, 1, 1, 1, 1, 1, 1]",Partially Correct,"The code is syntactically correct and logically computes the area of a triangle using Heron's formula. It raises an InvalidTriangleError if the sides do not satisfy the triangle inequality conditions that the sum of any two sides must be greater than the third side. However, it does not check the second constraint explicitly: that the difference between the length of any two sides must be smaller than the length of the third side. This constraint is necessary and not covered by the current validation. Therefore, the code misses one of the explicit constraints in the instruction.",1,1.0
+244,ajibawa-2023/Python-Code-23k-ShareGPT,"Given a string ``word``, write code to return the third character in the string using a single loop iteration and without using any built-in functions or libraries. Additionally, the code should handle cases where the input string has leading or trailing whitespace characters and should return the third character after removing any leading or trailing whitespace characters.
+
+Example:
+Input: word = ""   hello   ""
+Output: ""l""
+
+Note:
+- The input string will always have at least three characters.
+- The characters in the string can be uppercase or lowercase alphabets.
+- The input string may contain special characters or whitespace characters as well.
+- The code should handle cases where the input string has leading or trailing whitespace characters and should return the third character after removing any leading or trailing whitespace characters.","Here is one possible solution in Python:
+
+```python
+def get_third_character(word):
+    # Remove leading and trailing whitespace characters
+    word = word.strip()
+
+    # Initialize a counter variable
+    count = 0
+
+    # Iterate through each character in the word
+    for char in word:
+        # Increment the counter
+        count += 1
+
+        # Check if we have reached the third character
+        if count == 3:
+            # Return the third character
+            return char
+
+# Test the function
+word = ""   hello   ""
+print(get_third_character(word))  # Output: l
+```
+
+In this solution, we first remove any leading and trailing whitespace characters from the input string using the `strip()` function. Then, we initialize a counter variable `count` to keep track of the number of characters we have iterated through. We iterate through each character in the word using a for loop, incrementing the counter at each iteration. When the counter reaches 3, we return the corresponding character.",,"['Code Structure and Modularity', 'Input and Output Handling', 'Error Handling and Robustness', 'Data Processing and Transformation', 'Testing and Debugging', 'Documentation and Readability']","Given a string ``word``, write code to return the third character in the string using a single loop iteration and without using any built-in functions or libraries. Additionally, the code should handle cases where the input string has leading or trailing whitespace characters and should return the third character after removing any leading or trailing whitespace characters.
+
+Example:
+Input: word = ""   hello   ""
+Output: ""l""
+
+Note:
+- The input string will always have at least three characters.
+- The characters in the string can be uppercase or lowercase alphabets.
+- The input string may contain special characters or whitespace characters as well.","[{'type': 'Code Structure and Modularity', 'constraint': 'Use a single loop iteration to return the third character.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Do not use any built-in functions or libraries.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Handle cases where the input string has leading or trailing whitespace characters.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Return the third character after removing any leading or trailing whitespace characters.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The input string will always have at least three characters.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The characters in the string can be uppercase or lowercase alphabets.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The input string may contain special characters or whitespace characters as well.', 'instruction_part': 'Extracted from instruction'}]","[{'type': 'Code Structure and Modularity', 'constraint': 'Use a single loop iteration to return the third character.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Do not use any built-in functions or libraries.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Handle cases where the input string has leading or trailing whitespace characters.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Return the third character after removing any leading or trailing whitespace characters.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The input string will always have at least three characters.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The characters in the string can be uppercase or lowercase alphabets.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The input string may contain special characters or whitespace characters as well.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': 'Ensure the function can handle strings with only whitespace characters gracefully, returning an appropriate message or value.', 'instruction_part': 'Newly Generated'}, {'type': 'Testing and Debugging', 'constraint': 'Include unit tests that cover various cases, including strings with special characters and varying amounts of whitespace.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'Provide clear comments in the code explaining the purpose of each section and the logic behind the loop.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Code Structure and Modularity', 'constraint': 'Use a single loop iteration to return the third character.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Do not use any built-in functions or libraries.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Handle cases where the input string has leading or trailing whitespace characters.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Return the third character after removing any leading or trailing whitespace characters.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The input string will always have at least three characters.', 'instruction_part': 'Extracted from instruction'}]","{'constraint_evaluations': [{'constraint_text': 'Use a single loop iteration to return the third character.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single requirement: to use a single loop iteration. It is highly relevant to the task of returning the third character, as it directly addresses the method of achieving that goal. The constraint is also objective, as it can be clearly evaluated by checking if the implementation uses only one loop.'}, {'constraint_text': 'Do not use any built-in functions or libraries.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic because it expresses a single requirement regarding the use of built-in functions. It is relevant as it directly relates to the instruction to avoid built-in functions while implementing the solution. The objectivity is high since it can be easily verified by reviewing the code for any built-in function usage.'}, {'constraint_text': 'Handle cases where the input string has leading or trailing whitespace characters.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it focuses solely on handling whitespace characters. It is relevant because it addresses a specific requirement of the task, ensuring that the function behaves correctly with such inputs. The objectivity is also strong, as it can be tested by providing strings with leading or trailing whitespace.'}, {'constraint_text': 'Return the third character after removing any leading or trailing whitespace characters.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic because it specifies a clear action: returning the third character after whitespace removal. It is relevant as it directly relates to the expected output of the function. The objectivity is high since it can be verified by checking the output against the specified conditions.'}, {'constraint_text': 'The input string will always have at least three characters.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it states a single condition about the input string. It is relevant because it ensures that the function can safely access the third character without additional checks. The objectivity is strong, as it is a clear and measurable condition that can be validated.'}], 'avg_atomicity': 5.0, 'avg_relevance': 5.0, 'avg_objectivity': 5.0, 'unified_quality_score': 5.0, 'overall_analysis': 'The set of constraints is of excellent quality, with all constraints scoring the maximum in atomicity, relevance, and objectivity. Each constraint is clear, focused, and directly tied to the task at hand, making them easy to evaluate and implement. There are no weaknesses identified in this set, indicating a well-structured approach to defining the requirements for the programming task.'}",5.0,5.0,5.0,5.0,"Given a string ``word``, write code to return the third character in the string using a single loop iteration and without using any built-in functions or libraries. The input string will always have at least three characters. Additionally, the code should handle cases where the input string has leading or trailing whitespace characters and should return the third character after removing any leading or trailing whitespace characters. Ensure that you use a single loop iteration to return the third character. 
+
+Example:
+Input: word = ""   hello   ""
+Output: ""l""
+
+Note:
+- The characters in the string can be uppercase or lowercase alphabets.
+- The input string may contain special characters or whitespace characters as well.","Here's a Python function that uses a single loop iteration to return the third character in the string, ignoring leading and trailing whitespace characters:
+
+```python
+def get_third_char(word):
+    """"""
+    Returns the third character in the string, ignoring leading and trailing whitespace characters.
+
+    Args:
+        word (str): The input string.
+
+    Returns:
+        str: The third character in the string.
+    """"""
+    # Initialize an index to keep track of the current character position
+    index = 0
+    
+    # Iterate over each character in the string
+    for char in word:
+        # If the current character is not a whitespace, increment the index
+        if char != ' ':
+            index += 1
+            # If the index is 3, return the current character
+            if index == 3:
+                return char
+
+# Example usage:
+word = ""   hello   ""
+print(get_third_char(word))  # Output: ""l""
+```
+
+This function works by iterating over each character in the string. It keeps track of the current character position using an index variable. When it encounters a non-whitespace character, it increments the index. If the index reaches 3, it returns the current character. This approach ensures that the function uses a single loop iteration and handles cases where the input string has leading or trailing whitespace characters.","[1, 1, 1, 1, 1]",Partially Correct,"The code has no syntax errors and logically attempts to return the third non-whitespace character. However, it does not correctly remove leading and trailing whitespace before indexing; instead, it skips all spaces anywhere in the string, which is incorrect. The instruction requires removing leading and trailing whitespace first, then returning the third character of the trimmed string. Also, the code only skips spaces (' '), not all whitespace characters, which may violate the requirement. Therefore, it does not satisfy the constraint correctly.",1,1.0

@@ -1,0 +1,4 @@
+{
+    "Constraint": \"Print the actions it is taking (e.g., 'Removing: dist/').\","Reason": "The instruction explicitly states: 'Print the actions it is taking (e.g., \"Removing: dist/\")', enhancing the script's documentation and readability.",
+    "Aligns": true
+}
