@@ -1,0 +1,135 @@
+,Category,Frequency
+0,function,46
+1,variable,28
+2,interface,23
+3,structural,23
+4,error handling,18
+5,control,16
+6,global,12
+7,documentation,10
+8,file,9
+9,output,6
+10,data structure,6
+11,structural control,6
+12,class,5
+13,visualization,4
+14,control flow,4
+15,module,4
+16,testing,4
+17,security,4
+18,library,4
+19,performance,4
+20,database,3
+21,mathematical,3
+22,algorithm,3
+23,input/output,3
+24,data manipulation,3
+25,string manipulation,3
+26,execution,3
+27,loop,3
+28,array,3
+29,style,2
+30,email,2
+31,abstraction,2
+32,test,2
+33,modularity,2
+34,encapsulation,2
+35,regex,2
+36,conciseness,2
+37,assertion,2
+38,data,2
+39,readability,2
+40,educational,2
+41,plotting,2
+42,string,2
+43,data handling,2
+44,conditional,2
+45,functional,2
+46,environment,2
+47,input validation,2
+48,method,2
+49,browser control,1
+50,directory management,1
+51,constraint,1
+52,file I/O,1
+53,layout,1
+54,search algorithm,1
+55,commenting,1
+56,sorting,1
+57,session management,1
+58,reproducibility,1
+59,data visualization,1
+60,test case management,1
+61,output formatting,1
+62,arithmetic,1
+63,message_broker,1
+64,VARIABLE,1
+65,FUNCTION,1
+66,modular,1
+67,type consistency,1
+68,graph theory,1
+69,deterministic behavior,1
+70,caching,1
+71,optimization,1
+72,connection,1
+73,service,1
+74,communication,1
+75,type,1
+76,debugging,1
+77,code_quality,1
+78,data_structure,1
+79,output management,1
+80,authentication,1
+81,configuration,1
+82,versioning,1
+83,namespace,1
+84,compatibility,1
+85,multipart,1
+86,error_handling,1
+87,random number generation,1
+88,smtp,1
+89,functionality,1
+90,grouping,1
+91,mathematical operations,1
+92,functionality demonstration,1
+93,code clarity,1
+94,formatting,1
+95,validation,1
+96,complexity,1
+97,reporting,1
+98,modern syntax,1
+99,installation,1
+100,coverage,1
+101,mutation,1
+102,recursion,1
+103,example,1
+104,character,1
+105,random,1
+106,time complexity,1
+107,string formatting,1
+108,test cases,1
+109,attribute,1
+110,looping,1
+111,variable usage,1
+112,statistical testing,1
+113,HTML embedding,1
+114,function structure,1
+115,numerical operations,1
+116,self-containment,1
+117,library usage,1
+118,randomization,1
+119,list processing,1
+120,data generation,1
+121,backup management,1
+122,directory,1
+123,memory management,1
+124,condition,1
+125,boolean,1
+126,import,1
+127,broadcasting,1
+128,dimensionality,1
+129,vectorization,1
+130,slicing,1
+131,indexing,1
+132,parameter,1
+133,STRUCTURAL CONTROL,1

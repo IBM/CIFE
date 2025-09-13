@@ -1,0 +1,2 @@
+filename,Overall_CSR,Overall_SSR,Completely_Correct_CSR1,Completely_Correct_CSR0,Partially_Correct_CSR1,Partially_Correct_CSR0,Wrong_CSR1,Wrong_CSR0,Avg_SSR_Completely_Correct,Avg_SSR_Partially_Correct,Avg_SSR_Wrong
+Llama-3.1-8B-Instruct_results_llmjudge_with_correctness.jsonl,0.6,0.8496031746031747,2,1,4,0,0,3,0.9166666666666666,1.0,0.582010582010582

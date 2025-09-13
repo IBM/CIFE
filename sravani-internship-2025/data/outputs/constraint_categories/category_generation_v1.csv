@@ -1,0 +1,250 @@
+,Category,Frequency
+0,Error Handling,18
+1,Documentation,7
+2,Code Structure,6
+3,Input Handling,5
+4,Data Visualization,5
+5,Functionality,5
+6,Function Implementation,4
+7,Function Definition,4
+8,Code Efficiency,4
+9,String Manipulation,4
+10,Library Usage,4
+11,Input Validation,4
+12,Readability,4
+13,Security,3
+14,Testing,3
+15,Array Manipulation,3
+16,Backward Compatibility,3
+17,Performance Optimization,3
+18,Modularity,3
+19,Output Specification,3
+20,Data Structures,3
+21,User Interaction,3
+22,Output Formatting,3
+23,Method Implementation,3
+24,Simplicity,3
+25,Conciseness,3
+26,Separation of Concerns,2
+27,Data Processing,2
+28,Plotting Constraints,2
+29,Class Design,2
+30,Reproducibility,2
+31,Maintainability,2
+32,Vectorization,2
+33,Slicing,2
+34,Plotting,2
+35,File Handling,2
+36,Type Safety,2
+37,Data Generation,2
+38,Code Conciseness,2
+39,DataFrame Creation,2
+40,SMTP Connection,2
+41,Data Integrity,2
+42,Encapsulation,2
+43,Recursion,2
+44,Code Clarity,2
+45,Data Model Definition,1
+46,Mathematical Integrity,1
+47,Color Coding,1
+48,Example Usage,1
+49,Simplicity and Clarity,1
+50,Database Interaction,1
+51,Message Broker Integration,1
+52,Asynchronous Processing,1
+53,Logging and Monitoring,1
+54,Integer Division,1
+55,Technical Accuracy,1
+56,Data Filtering,1
+57,Collision Detection,1
+58,Simulation Mechanics,1
+59,External Module Integration,1
+60,Input/Output Configuration,1
+61,Event Handling,1
+62,Code Correction,1
+63,Bug Fixing,1
+64,Email Sending,1
+65,File Attachment,1
+66,MIME Handling,1
+67,Subplot Creation,1
+68,Logical Flow,1
+69,Data Parsing,1
+70,Cross-Version Compatibility,1
+71,SIMPLE TRANSFORMATION,1
+72,Session Management,1
+73,STRING MANIPULATION,1
+74,CODE STRUCTURE,1
+75,Assertions and Validations,1
+76,FUNCTIONALITY,1
+77,Initialization Constraints,1
+78,Method Implementation Constraints,1
+79,Data Retrieval Constraints,1
+80,Naming Constraints,1
+81,Getter Method Constraints,1
+82,Mocking Constraints,1
+83,Testing Constraints,1
+84,Data Structure Constraints,1
+85,Output Handling,1
+86,Linguistic Awareness,1
+87,Code Clarity and Modularity,1
+88,Character Processing,1
+89,Mathematical Operations,1
+90,Stateless Functions,1
+91,Testing and Validation,1
+92,Function Parameters,1
+93,Function Definition and Behavior,1
+94,Boundary Conditions,1
+95,Portability,1
+96,Documentation Standards,1
+97,Code Extensibility,1
+98,Type Flexibility,1
+99,Code Compatibility,1
+100,Graph Structure,1
+101,Message Handling,1
+102,Database Connection,1
+103,Graph Theory Concepts,1
+104,Data Structure Usage,1
+105,Algorithm Implementation,1
+106,Method Definition,1
+107,Method Addition,1
+108,Parameter Management,1
+109,Encapsulation Constraints,1
+110,Data Caching,1
+111,Functional Programming Constraints,1
+112,Algorithm Optimization,1
+113,Error Handling Constraints,1
+114,Iteration Constraints,1
+115,Self-Containment,1
+116,Code Readability,1
+117,Modular Design,1
+118,Naming Conventions,1
+119,Edge Relaxation,1
+120,Dynamic Code Execution,1
+121,Subprocess Execution,1
+122,Namespace Management,1
+123,Interface Compliance,1
+124,Error Handling and Safety,1
+125,Configuration Management,1
+126,Code Clarity and Readability,1
+127,Type Consistency,1
+128,Protocol Specification,1
+129,Template Usage,1
+130,Conciseness and Specificity,1
+131,File Management,1
+132,Temporary Files Management,1
+133,Cycle Detection,1
+134,Unit Testing,1
+135,Assertions,1
+136,Debugging,1
+137,Data Structure Integrity,1
+138,Logical Structure,1
+139,Function Verification,1
+140,Method Type,1
+141,Browser Automation,1
+142,Test Automation,1
+143,Sorting Logic,1
+144,Layout and Styling,1
+145,Key Generation,1
+146,Testing Framework,1
+147,Code Minimalism,1
+148,Code Snippets,1
+149,Reporting,1
+150,Complexity,1
+151,Condition Handling,1
+152,Fee Calculation,1
+153,Validation,1
+154,Performance Measurement,1
+155,List Operations,1
+156,Sorting Mechanism,1
+157,Educational Purpose,1
+158,Data Handling,1
+159,Step-by-Step Guide,1
+160,Visualization Standards,1
+161,Output Format,1
+162,Use of Libraries,1
+163,DataFrame Manipulation,1
+164,Mathematical Computations,1
+165,Iterative Processing,1
+166,Group-wise Operations,1
+167,Numpy Usage,1
+168,Plot Customization,1
+169,Indexing,1
+170,Installation Instructions,1
+171,Testing Frameworks,1
+172,Aesthetic Constraints,1
+173,String Formatting,1
+174,Vector Calculation,1
+175,3D Coordinate System,1
+176,Correctness,1
+177,HTML Integration,1
+178,Dynamic Content Generation,1
+179,Semantic HTML Usage,1
+180,Time Complexity,1
+181,Function Naming,1
+182,Attributes,1
+183,Methods,1
+184,Text Decryption,1
+185,Code Coverage,1
+186,Random Selection,1
+187,Character Handling,1
+188,Looping and Iteration,1
+189,Preservation of Non-Alphabetic Characters,1
+190,Explanation,1
+191,Code Example,1
+192,Output Demonstration,1
+193,Clarity and Accessibility,1
+194,Educational Value,1
+195,Mutation Testing,1
+196,Broadcasting,1
+197,Output Constraints,1
+198,Real-time Event Handling,1
+199,Rounding,1
+200,String Replacement Scope,1
+201,Data Structure Maintenance,1
+202,Data Manipulation,1
+203,Subplot Arrangement,1
+204,Axis Labeling,1
+205,Title Setting,1
+206,Layout Adjustment,1
+207,Statistical Assumptions,1
+208,Data Type Checking,1
+209,Contingency Table Construction,1
+210,Encryption,1
+211,Code Complexity,1
+212,Data Encoding,1
+213,Security Practices,1
+214,Random Number Generation,1
+215,Data Sorting,1
+216,Plot Initialization,1
+217,Function Output,1
+218,File I/O,1
+219,File Searching,1
+220,Regular Expressions,1
+221,Command-Line Interface,1
+222,Function Structure,1
+223,Empty String Handling,1
+224,Simplicity Constraints,1
+225,Sparse Matrix Handling,1
+226,Looping Constructs,1
+227,Boolean Logic,1
+228,Readability and Clarity,1
+229,Explicit Control Flow,1
+230,Function Usage Restrictions,1
+231,Customization,1
+232,Efficiency,1
+233,Reshaping,1
+234,Mean Calculation,1
+235,Matrix Operations,1
+236,Code Formatting,1
+237,Random String Generation,1
+238,Error Prevention,1
+239,Directory Management,1
+240,File Operations,1
+241,Backup and Restore,1
+242,Statistical Computation,1
+243,Data Transformation,1
+244,Code Simplicity,1
+245,Regex Usage,1
+246,Email Formatting,1
+247,Data Extraction,1
+248,INLINE OPERATION,1

@@ -1,0 +1,11 @@
+datasets:
+  - name: ajibawa-2023/Python-Code-23k-ShareGPT
+    split: train
+  - name: xlangai/DS-1000
+    split: test
+  - name: bigcode/bigcodebench
+    split: v0.1.4
+  - name: Multilingual-Multimodal-NLP/McEval-Instruct
+    split: train
+  - name: nuprl/CanItEdit
+    split: test

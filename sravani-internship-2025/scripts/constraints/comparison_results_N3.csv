@@ -1,0 +1,5 @@
+Metric,Method 1 Avg,Method 2 Avg,Difference (Method 2 - Method 1)
+Specificity,4.43,4.33,-0.1
+Objectivity,4.61,4.67,0.06
+Atomicity,4.28,4.56,0.28
+Unified Quality,4.44,4.52,0.08

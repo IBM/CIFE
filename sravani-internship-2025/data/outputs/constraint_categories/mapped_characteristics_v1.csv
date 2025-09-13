@@ -1,0 +1,452 @@
+,Category,Frequency,Examples
+0,Error Handling,13,"['The program checks for invalid input types (like floats or negative numbers) and prints an error message accordingly.', 'Error handling for input types is not enforced but assumed to be handled externally or via responsible use of setters.', 'Raises ValueError or TypeError when statistical assumptions are not met.']"
+1,Library Usage,7,"['Uses math.acos and math.sqrt from Python’s standard math library.', 'The implementation avoids external libraries and uses pure object-oriented features of Python.', 'Uses matplotlib.pyplot for plotting.']"
+2,Code Structure,6,"['Uses any() and comprehensions to check password properties.', 'The function does not mutate global state or rely on external files.', 'Fully self-contained with necessary import os and import shutil.']"
+3,Input Handling,5,"['Accepts two input lists as arguments.', ""Inputs a list of strings (data_list) and builds a pandas DataFrame with an 'Original String' column."", 'For each string in the list:']"
+4,Data Structure,5,"['Defines a 2D NumPy array data with shape (2, 5), representing time series data.', ""Constructs a Pandas DataFrame using specified COLUMNS = ['email', 'list']."", ""An empty DataFrame with required columns: ['email', 'list', 'sum', 'mean'].""]"
+5,Documentation,5,"['Readable and maintainable docstrings for each function.', 'Do not include detailed explanations of mathematical concepts and formulas in the code.', ""Include a detailed docstring explaining the function's purpose, parameters, and return value.""]"
+6,Testing,5,"['The program includes test cases that demonstrate both valid and invalid input handling.', 'Output values and error messages are displayed using standard print() statements in a clear, readable format.', 'Covers edge cases in its test suite.']"
+7,Function Definition,5,"['The function is named decryptJokes and accepts a list of encrypted jokes as input.', 'The function supports an additional argument (numJokes) to control how many jokes to decrypt.', 'Defines a function named combine_lists.']"
+8,Data Generation,4,"['Generates a 10×10 matrix of random values between 0 and 1 using np.random.random((10, 10)).', 'Generates a NumPy array of shape (length, 5) using np.random.randint() within the specified min_value and max_value range.', ""Initializes a pandas.DataFrame with columns named using the predefined constant COLUMNS = ['Column1', 'Column2', 'Column3', 'Column4', 'Column5'].""]"
+9,Code Quality,4,"['The code uses clear variable naming and inline comments to describe the logic, aiding readability and maintainability.', 'Follows PEP8 formatting and naming conventions.', 'Ensure the code remains readable and maintainable despite optimizations.']"
+10,Return Values,4,"['Returns a tuple consisting of:', 'The updated DataFrame with all four columns.', 'None for the plot axis if no data exists.']"
+11,Input Validation,4,"['Input validation is performed to ensure the argument is a non-negative integer.', 'The program checks for invalid input types (like floats or negative numbers) and prints an error message accordingly.', 'The function returns None for invalid input, avoiding further recursion.']"
+12,Efficiency,4,"['Efficiently handles batch predictions by applying the operation on the whole tensor at once.', 'Leverages NumPy functions (np.sum, np.mean) for efficient numerical operations.', 'Uses built-in set, sum, and len for efficiency.']"
+13,Performance Optimization,3,"['Efficiently performs binning and averaging without explicit loops.', 'Fully vectorized solution using broadcasting and axis manipulation.', 'Precomputes document frequencies and term frequencies during class initialization to avoid repeated calculations.']"
+14,Function Output,3,"['Returns either the restored directory path (on success) or a descriptive error message (on failure).', 'Provides a deterministic rollback path based on the latest available backup.', 'Returns the list of extracted names.']"
+15,Data Processing,3,"['Strips trailing spaces and filters out empty matches using list comprehension.', 'Sorts the list of random numbers before plotting.', 'Keeps the core functionality unchanged: reads a CSV, normalizes column names to lowercase, and loads the data into the pcawg_samples table.']"
+16,Error Explanation,3,"['The error is explained: enumerate(numbers) returns pairs, so the loop must unpack both elements, not just one.', 'Explain the error in the erroneous code in detail.', 'Provide a clear explanation of why the `erroneous_combine_lists` function fails to produce a sorted list, highlighting the importance of the sorting step.']"
+17,Plotting,3,"['Calls plt.plot(x, y) to create a line plot from the unzipped coordinates.', ""Adds marker='o' to plt.plot() for visual emphasis on each data point."", ""Plot the sum and mean values using pandas' built-in plot function.""]"
+18,Email Sending,3,"['Sends the email via SMTP:', 'Uses smtplib.SMTP() if no custom SMTP function is provided.', 'Initiates TLS using starttls().']"
+19,Reproducibility,3,"['Uses random.seed(seed) to ensure reproducibility of random choices across runs.', 'Set the random seed at the beginning of the function to ensure reproducibility.', 'Use random.seed and np.random.seed for reproducibility.']"
+20,Output Format,3,"['Returns output in LaTeX table format.', ""Labels password strength as 'Weak', 'Medium', or 'Strong' based on input."", 'Output tensor format matches required shape for classification predictions: one label per input instance.']"
+21,Directory Management,3,"['Removes the target directory using shutil.rmtree if it already exists.', 'Restores the backup using shutil.copytree to copy the latest backup to the original directory path.', 'Ensures full rollback behavior by cleaning existing contents before restoring.']"
+22,Data Handling,3,"['Reads email data from a JSON file using json.load() into a Python dictionary or list.', 'Checks for empty data and gracefully returns:', 'Handles malformed or missing data gracefully through early checking.']"
+23,Type Safety,3,"['Uses type-safe arithmetic operations (e.g., round, /, *) for conversions.', ""It remains fully type-safe under Python's type hinting system."", 'Ensures integer arithmetic throughout, avoiding type casting issues (== 1.0 remains but could be == 1).']"
+24,Functionality Requirements,3,"['The program must use recursion to calculate the factorial.', ""Handle errors for negative numbers and floating-point numbers by displaying 'Error: Input must be a non-negative integer.' and returning None."", ""Do not use Python's built-in factorial function or any external libraries.""]"
+25,Compatibility,3,"['Compatible with Python 3 standard libraries only.', 'Maintains compatibility with graphs that include both positive and negative edge weights.', 'Supports disconnected nodes by leaving their distance as infinity.']"
+26,Function Characteristics,3,"['Has no side effects; deterministic behavior based on input.', 'Includes a descriptive docstring.', 'Implements a pure function with no side effects; output depends only on input parameters.']"
+27,Function Implementation,3,"['Implement the distance calculation in a separate function.', 'Implement the angle calculation in a separate function.', 'Provide a complete Python function implementation for decrypting jokes.']"
+28,Initialization,2,"['Initializes UI prompt and chat metadata during class instantiation.', 'Initializes distances with infinity and sets the starting node’s distance to 0.']"
+29,Plot Customization,2,"[""Uses joint_kws={'color': 'green'} to color both the scatter points and regression line green."", ""Uses marginal_kws={'color': 'blue'} to retain blue color for the marginal histograms."", ""Must set joint_kws={'color': 'green'} to change regression line and scatter to green""]"
+30,Plotting Functionality,2,"['Uses sns.jointplot() to create a joint plot combining scatter/regression and marginal distributions.', ""Sets kind='reg' to draw a regression line along with scatter points."", ""Specifies x='total_bill' and y='tip' to plot tip amount against total bill.""]"
+31,Function Usage,2,"['Must use seaborn.jointplot()', ""Use 'sparse.hstack' for concatenating the matrices."", ""Use parentheses '()' instead of square brackets '[]' when passing matrices to the hstack function.""]"
+32,Method Addition,2,"['Introduces a new method update_vlan(self, vlan) to support flow updates for existing VLANs.', ""Add a new method 'update_vlan' with a docstring explaining its purpose.""]"
+33,Code Simplicity,2,"['Do not include comments or explanations within the code.', 'Do not implement error handling or consider edge cases beyond the provided data.', 'Avoid complex error handling or logging mechanisms.']"
+34,Subplot Creation,2,"['Create two vertically arranged subplots using plt.subplots(2).', ""Call 'plt.subplots' with a single integer argument representing the number of subplots."", 'Create a subplot for each mobility trend (workplaces, residential, retail and recreation, grocery and pharmacy, parks, transit stations) and share the x-axis (date) across all subplots.']"
+35,Implementation Details,2,"['This is a simple and deterministic rule.', 'The mock query format \'{values: [\'%s\']}\' % self.station_name simulates DSL-style API calls, though this string gets parsed in a non-robust way in the mock (via split(""\'"")[3]).', 'Use f-strings for dynamic content to modernize the solution.']"
+36,Case Handling,2,"['Separately processes lowercase and uppercase letters using str.islower() and str.isupper() to maintain original casing.', 'Ensure the function handles both uppercase and lowercase letters while preserving their case.']"
+37,Axis Labeling,2,"[""Labels the x-axis using plt.xlabel('X')."", ""Labels the y-axis to reflect its logarithmic nature using plt.ylabel('Y (log scale)'."", ""Label the x-axis of both subplots as 'x'.""]"
+38,Library Imports,2,"['Imports necessary libraries: numpy, pandas, and matplotlib.pyplot.', 'Imports required libraries: matplotlib.pyplot, numpy, pandas, and seaborn.']"
+39,Output Characteristics,2,"['Result is a single merged list with all elements in strict ascending order.', 'Output is deterministic for the same input.', 'Maintains a clear, minimal, and functional coding style.']"
+40,Assertions,2,"['Enables independent test verification by using assertEqual, assertRegex, assertNotIn, assertIn.', 'Assumes consistent element IDs (id_new_item, id_list_table) and CSS classes (.has-error).', ""Include specific assertions to verify the presence of key functions such as 'get_self', 'return_value', and 'long_func'.""]"
+41,Backward Compatibility,2,"['Maintains backward compatibility by only extending the existing configuration template.', 'Ensures backward compatibility by not modifying existing methods or priorities.']"
+42,Grid Customization,2,"[""Sets the grid color to blue with color='blue'."", ""Sets the grid line style to dashed with linestyle='dashed'."", 'Customize the grid to be blue and dashed.']"
+43,Import Statements,2,"['Imports NumPy to utilize np.nan and np.isnan() for NaN detection.', 'Ensure the import statement includes numpy as np.']"
+44,DataFrame Structure,2,"[""Create a pandas DataFrame with columns 'Original String' and 'Modified String'."", ""Use pandas for data manipulation and ensure the DataFrame includes columns ['email', 'list', 'sum', 'mean']."", ""Ensure the function initializes an empty DataFrame with columns ['email', 'list', 'sum', 'mean'] if no data is present.""]"
+45,Non-Alphabetic Character Handling,2,"['Leaves non-alphabetic characters (e.g. digits, punctuation) unchanged by checking character type.', 'Non-alphabetic characters should remain unchanged in the output.']"
+46,Command-Line Interface,2,"['Uses argparse to support a command-line interface with subcommands.', 'Includes helpful command-line flags (-m, --mark, -r, --read, -s, --sound).', ""Include argument parsers for handling command-line arguments with subparsers for 'read' and 'events' commands.""]"
+47,Function Documentation,2,"[""Include a docstring that describes the function's purpose, input, and output."", ""The docstring must describe the input as 'array of integers' and the output as 'Float representing the average of the unique elements'."", ""Include a detailed docstring describing the function's purpose and parameters.""]"
+48,Testing and Validation,2,"['Provides thorough test coverage for edge cases including wrapping, mixed casing, non-letters, and empty input.', 'Includes assert statements in test cases for automatic validation.', 'Demonstrates usage with a main() test driver.']"
+49,File Handling,2,"['Recursively searches all .txt files in the specified directory and its subdirectories.', 'Uses glob.glob(..., recursive=True) to gather matching files.', ""Reads each .txt file's content using standard file I/O.""]"
+50,Email Formatting,2,"[""Constructs an email message with a subject line followed by newline-separated extracted names: 'Subject: Extracted Names\\n\\n<name1>\\n<name2>'."", ""Format the email message with the subject line 'Subject: Extracted Names' followed by the extracted names each on a new line."", ""Construct the email message as a simple string with 'Subject: Extracted Names\\n\\n' followed by the extracted names joined by '\\n'.""]"
+51,Random Number Generation,2,"['Generates a deterministic list of integers in the range [1, range_limit].', 'Generate a list of random numbers within the specified range.']"
+52,String Manipulation,2,"['Splits the string on commas and trims each part to get substrings.', 'Randomly selects one substring to replace (replace_idx).', 'Generates a new random string (of equal length) using random.choices(string.ascii_lowercase, k=...).']"
+53,Database Interaction,2,"['Stores each received message into a MySQL database using SQLAlchemy ORM.', 'Defines a Monitor model with:', '- Auto-incrementing primary key (ID).']"
+54,List Operations,2,"['Combines the lists using the + operator.', 'Calls .sort() on the combined list to sort it in ascending order.', 'Use list concatenation to merge the two input lists into a single list.']"
+55,Calculations,2,"['Computes:', 'Sum of the numerical list associated with each email using np.sum.', 'Mean of the list using np.mean.']"
+56,Visualization,2,"[""Generates a bar plot using Pandas’ plot(kind='bar') method for visual comparison of sum and mean values."", 'Uses Seaborn’s histplot() for visualizing distribution.', 'Disables kernel density estimation (kde=False) for a pure histogram.']"
+57,Modular Design,2,"['Uses a modular design importing STEPS_MM from an external config module.', 'Keeps utility functions pure and reusable for integration into larger control systems.', 'Implements modular design by separating initialization, scoring, and ranking logic for clarity and reuse.']"
+58,Output Specifications,2,"['Returns the p-value, indicating the likelihood of the observed distribution under the null hypothesis of independence.', 'Measure and include the time taken to generate the password in the output.', 'Format the output as a LaTeX table displaying the password, its strength, and the generation time.']"
+59,Class Design,2,"['The class accepts an external sde_client, allowing separation of logic and external data source, which makes it testable and flexible.', 'The Station class encapsulates key information — name, shorthand, station ID, and region ID — as instance variables initialized in __init__.', 'Implement a `GroupDialogManager` class with methods for reading messages and subscribing to real-time events.']"
+60,Sorting Mechanism,2,"['Implements a custom two-level sorting mechanism using primary and tiebreaker comparators.', 'Applies the tiebreaker comparator within each group to resolve ties.', 'Maintains ordering consistency by sorting the primary keys before flattening the grouped results.']"
+61,Output Handling,2,"['Decrypted jokes are collected in a new list called decryptedJokes, which is returned by the function.', 'The function does not mutate the original list of jokes; it works on a new list of randomly sampled entries.', 'Uses IO from whaler.dataprep to handle output operations, writing a structured table (groundstates.csv) summarizing ground state energy comparisons.']"
+62,Error Handling Constraints,2,"['All methods return None safely when the students list is empty.', 'Design avoids exceptions like ZeroDivisionError and IndexError.', 'Check for user existence without adding additional error handling or validation.']"
+63,Structural Integrity,2,"['Preserves the structure and immutability of the original list by returning a new modified list.', 'Ensures type consistency by preserving the LinkedList structure in all branches.', 'Maintain the existing structure and functionality of the `sort` and `insert` methods.']"
+64,Method Implementation,2,"['Adds support for element removal by defining a remove method in both Cons and Empty classes.', 'Completes the full interface for a basic functional-style linked list (insert, sort, remove).', 'Implement the `remove` method to correctly remove the first occurrence of an element.']"
+65,Library Constraints,2,"['No external libraries other than mutmut, pytest, and pytest-cov are required, keeping the setup minimal and manageable.', 'Avoid using additional libraries beyond pandas, numpy, and json.']"
+66,Naming Conventions,2,"['The class uses proper naming conventions and encapsulates all behaviors relevant to an animal instance.', ""Use a simple function name 'factorial'.""]"
+67,Looping and Iteration,2,"['Use a loop to iterate over each letter in the joke.', 'Append each decrypted letter to a string within the loop.', 'Use an explicit for-loop to iterate over each array in the list.']"
+68,Random Selection,2,"['The function uses random.sample() to randomly select the desired number of jokes from the input list.', 'Modify the function to allow for the selection of a specified number of jokes randomly.', 'Use the `random.sample()` function to implement random selection.']"
+69,Functionality Enhancement,2,"['Introduces a powermod method using recursive successive squaring for efficient modular exponentiation.', 'powermod handles odd and even exponents recursively and reduces modulo c at the final step.', 'check_coprime_euler still verifies Euler’s theorem: a ϕ(b) modb=1 when a and b are coprime.']"
+70,Decryption Logic,2,"['Each joke is decrypted character by character using the ROT13 cipher, where letters are shifted by 13 positions in the alphabet.', 'The ROT13 logic is applied conditionally based on whether the character is an uppercase or lowercase alphabet letter.', 'Non-alphabetic characters (e.g., punctuation, spaces) are preserved as-is during decryption.']"
+71,Functionality,2,"['The function factorial is implemented recursively to compute the factorial of a number.', 'For positive integers, the function returns n * factorial(n - 1) to compute the factorial recursively.', 'A base case is included: factorial(0) returns 1, as defined mathematically.']"
+72,Corrected Code Example,2,"['A corrected version of the erroneous code is provided, using for index, number in enumerate(numbers) to fix the issue.', 'The corrected output properly displays both index and value, reinforcing the intended usage of enumerate.', 'Provide a corrected version of the erroneous code with an explanation.']"
+73,Mathematical Operations,2,"['Use arccos to calculate the angle and convert the result to degrees using (180 / math.pi).', 'Use numpy for mathematical operations such as exponentiation and minimum/maximum calculations.']"
+74,Correct Usage Example,2,"['A working example is given using a for loop to iterate over a list of fruits with index, fruit in enumerate(fruits).', 'The output of the correct example demonstrates both the index and the value being printed for each element.', ""Include a correct example code snippet demonstrating the usage of 'enumerate'.""]"
+75,Testing Requirements,2,"['Include a test case for n=0 to demonstrate the base case explicitly.', 'Demonstrate error handling through separate print statements in example usage.', 'The MockSDEClient must contain predefined station data for testing.']"
+76,Rounding,2,"['Both distance and angle values are rounded to two decimal places.', 'Ensure the `mm_to_steps` function includes rounding to the nearest whole number using the round function.', 'Implement the `frequency_to_delay` function using the round function for accurate conversion to microseconds.']"
+77,Deployment Flexibility,2,"['Enables compatibility with a service discovery environment such as Consul for improved portability and deployment flexibility.', 'Enables compatibility with a service discovery environment such as Consul for improved portability and deployment flexibility.']"
+78,Erroneous Usage Example,2,"['An erroneous usage example is included where only one variable (index) is used in the loop, which causes unexpected unpacking behavior.', ""Present an erroneous code example that attempts to use 'enumerate' incorrectly by not unpacking the tuple.""]"
+79,SMTP Connection,1,"['Establish the SMTP server connection using starttls for security.', 'Log in to the SMTP server using the provided email address and password.', 'Use smtplib.SMTP to send the email without additional error handling.']"
+80,Regex Pattern Usage,1,"['Use a regex pattern to capture names outside of square brackets, excluding trailing spaces or empty strings.', ""Ensure the regex pattern captures any text not enclosed in square brackets, such as '(.*?)(?:\\[.*?\\]|$)'""]"
+81,Code Conciseness,1,['Keep the code concise and avoid verbose error handling or complex data validation steps.']
+82,Educational Value,1,['Focus on educational value by ensuring the response is comprehensive and informative.']
+83,Empty String Handling,1,['Handle empty strings by appending them to the modified strings list without alteration.']
+84,Output Demonstrations,1,['Include output demonstrations for both the correct and corrected erroneous examples.']
+85,Mutation Testing Tools,1,"['Use `mutmut` and `pytest` for mutation testing.', 'Provide specific commands for installing `mutmut`, `pytest`, and `pytest-cov`.']"
+86,Clarity and Accessibility,1,"['Ensure the response is structured with clear separation between explanation, examples, and outputs.', 'Avoid overly technical jargon to maintain clarity and accessibility.']"
+87,Title Setting,1,"[""Set the title of the first subplot to 'Sine function' and the second to 'Cosine function'.""]"
+88,Function Plotting,1,['Plot the sine function on the first subplot and the cosine function on the second subplot.']
+89,Code Minimalism,1,"['Use minimal code to achieve the task.', 'Include only the essential commands for plotting.', 'Exclude axis labels, titles, and grid settings.']"
+90,Purpose Explanation,1,"[""Provide a clear and concise explanation of the purpose of the 'enumerate' keyword in Python.""]"
+91,Layout Adjustment,1,['Ensure the layout is adjusted using plt.tight_layout() to prevent overlapping elements.']
+92,AES Encryption,1,"['Use AES encryption in EAX mode for encrypting the private key.', 'Generate a random 16-byte password for AES encryption.', 'Include a random nonce in the AES encryption process.']"
+93,RSA Key Generation,1,"['Generate RSA keys with a size of 512 bits.', ""Use 'priv_key.save_pkcs1()' to serialize the private key before encryption.""]"
+94,Complexity Requirements,1,['Include a comment explaining the time complexity as O(n).']
+95,Methodology Constraints,1,['Avoid verbose statistical explanations or alternative methods.']
+96,Docstring Requirements,1,"['Include detailed docstrings for each method, specifying parameter types and return types.']"
+97,String Formatting,1,['Ensure all string formatting uses f-strings for consistency and readability.']
+98,Method and Attribute Constraints,1,"['Do not add any methods or attributes beyond those specified in the prompt.', 'Adhere strictly to the specified attributes and methods without deviation.']"
+99,Method Implementation Guidelines,1,"['Implement methods in a simple and direct manner, avoiding additional logic not requested.']"
+100,Contingency Table Construction,1,['Construct the contingency table directly and check for small counts using `(contingency_table < 5).any().any()`.']
+101,Method Specific Behavior,1,"['The `make_sound` method should print only the sound attribute without including the name attribute.', 'The `__str__` method should return a multi-line formatted string with each attribute on a new line.']"
+102,Category Checking,1,['Check for single category using `len(data[col1].unique()) < 2` and `len(data[col2].unique()) < 2`.']
+103,Data Type Checking,1,"['Use `np.issubdtype(data[col1].dtype, np.number)` or `np.issubdtype(data[col2].dtype, np.number)` to check for non-categorical data.']"
+104,Chi-Square Test Execution,1,['Perform the chi-square test and return only the p-value.']
+105,Character Checking,1,"['Check if the letter is an alphabet character using `letter.isalpha()`.', 'Separate handling for uppercase and lowercase letters using `letter.isupper()`.']"
+106,Constraints on Methods,1,['Do not use `str.maketrans()` or `str.translate()` for decryption.']
+107,Step-by-Step Guide,1,"['Provide a step-by-step guide with installation commands for `mutmut`, `pytest`, and `pytest-cov`.', 'Include a detailed step-by-step guide for setting up the test environment, including creating a `tests` directory and adding a test module with specific test cases.']"
+108,Customization Restrictions,1,"['Avoid additional plot customizations such as grid lines, legends, or alternative color schemes.', ""Do not specify the 'figsize' parameter in the 'plt.subplots' function.""]"
+109,Data Validation,1,"['Check if the DataFrame is empty and raise a ValueError if true.', 'Verify that the specified columns exist in the DataFrame and raise a ValueError if not.', 'Ensure the columns contain categorical data and raise a TypeError if they contain numerical data.']"
+110,CDF Calculation Constraints,1,"['Calculate the CDF using value_counts and sort_index within a lambda function applied to each column.', 'Do not normalize the CDF values.', 'Ensure the lambda function for CDF calculation does not include the `sort=False` parameter.']"
+111,Output Constraints,1,['Provide a direct return of the DataFrame without verbose explanations.']
+112,Plot Customization Restrictions,1,"['Do not include any customization of plot aesthetics such as color maps or axis labels.', 'Avoid adding any additional annotations, titles, or comments to the plot.', 'Do not use advanced plotting features such as subplots or interactive elements.']"
+113,Output Shape Requirement,1,"['Ensure the slicing operation results in a shape of (5,2,2).']"
+114,Array Reshaping,1,['Reshape the index arrays to align correctly with the dimensions of the numpy array.']
+115,Indexing Method,1,"['Use numpy arrays for indexing instead of lists.', 'Use `np.ix_` to create an open mesh from multiple sequences for indexing.']"
+116,Data Specification,1,"[""Must plot 'total_bill' vs 'tip' from the tips dataset""]"
+117,Constraints,1,"['Do not include error handling or additional comments in the code.', 'Do not use alternative encryption modes or key sizes.', 'Do not use libraries other than those specified for key generation and encryption.']"
+118,Surcharge Application,1,"[""Use the condition 'total > 500 and total < 1000' to add a 5% surcharge."", 'If the total is greater than $2000, add a handling fee of 2% of the total.']"
+119,DataFrame Copy,1,['Use a copy of the DataFrame to perform calculations to avoid modifying the original DataFrame.']
+120,Algorithm Explanation,1,['Provide a detailed explanation of the algorithm used for password generation.']
+121,Performance Metrics,1,['Define a function to measure the time taken to generate the password.']
+122,Group-Specific Computation,1,"[""Ensure the computation is done for each group separately based on column 'a'.""]"
+123,Validation Checks,1,"[""Include checks for sequences like 'qwerty' and 'poiuyt' in the password validation.""]"
+124,DataFrame Manipulation,1,"['Directly manipulate DataFrame columns to store results.', ""Directly update the DataFrame within the function to add 'softmax' and 'min-max' columns.""]"
+125,Avoid Vectorization,1,['Avoid using vectorized operations or pandas groupby for grouping.']
+126,Iterative Approach,1,"['Use an iterative approach to compute softmax and min-max normalization for each group.', 'Perform manual calculations for softmax and min-max normalization within a loop.', 'Use a single loop with conditions to compute softmax and min-max normalization for each group.']"
+127,Functionality Specifications,1,"['Use the torch.argmax function to find the class with the highest probability.', 'Reshape the result to match the required output format (n x 1 tensor).', 'Do not include any data loading or preprocessing steps.']"
+128,Demonstration,1,['Demonstrate the output of both `combine_and_sort_lists` and `erroneous_combine_lists` using the provided example lists.']
+129,Method Constraints,1,"['Avoid discussing alternative methods or optimizations.', 'Do not include unrelated topics or excessive detail.']"
+130,Code Requirements,1,"['Provide a direct and concise code solution without additional explanations.', 'Use PyTorch functions to achieve the task.', 'Focus solely on converting the softmax output to class labels.']"
+131,Plotting Specifications,1,"['Set the y-axis to a logarithmic scale.', 'Use `zip(*points)` to unpack the points for plotting.', 'Do not convert the list of points to a NumPy array.']"
+132,Logic Maintenance,1,['Maintain the existing logic and structure of the function.']
+133,Output Restrictions,1,"['Do not include commands to save the plot to a file.', 'Exclude any steps to explicitly display the plot.', 'Do not include the `plt.show()` command in the solution.']"
+134,Educational Perspective,1,"['Highlight common mistakes in list merging and sorting to provide an educational perspective.', 'Ensure the response is clear, concise, and educational, suitable for someone learning about list operations in Python.']"
+135,Error Handling Restrictions,1,['Refrain from adding error handling or data validation steps.']
+136,Data Generation Constraints,1,"['Use np.random.randint to generate random data within the specified range.', 'Create a DataFrame with columns defined by the COLUMNS constant.']"
+137,Logging and Error Handling,1,"['Avoid verbose logging or detailed error messages beyond the specified checks.', 'Do not include complex error recovery mechanisms or additional validation steps beyond the basic checks.']"
+138,Backup Handling,1,"[""List files in the backup directory using 'os.listdir'."", 'Sort the list of backups and select the latest one based on the sorted order.', 'Ensure the backup is not a tar.gz file before restoration.']"
+139,Backup Existence Checks,1,"['Check for the existence of the backup directory and return an error message if it does not exist.', 'Ensure there are backups available before proceeding with restoration.']"
+140,Response Characteristics,1,"['Ensure the response is concise and directly addresses the problem.', 'Include a code snippet format in the response.']"
+141,Code Snippets,1,"['Include code snippets for a function to calculate the area of a rectangle and its corresponding test cases.', 'Focus on a specific example, such as calculating the area of a rectangle.']"
+142,Reshaping and Calculation,1,"['Incorporate reshaping and mean calculation in a single line of code.', 'Maintain the original 2D structure across bins by reshaping into a 3D array.', 'Calculate the mean across the last axis of the reshaped 3D array to preserve row structure.']"
+143,Array Manipulation,1,"['Leverage numpy slicing to handle array dimensions without explicit loops.', 'Exclude incomplete bins by slicing the array to ensure only complete bins are considered.', ""Ensure the solution is compatible with numpy's array manipulation capabilities.""]"
+144,Plotting Constraints,1,"['Create a simple line plot without additional elements like titles or labels.', 'Invert the axes so that y is plotted over x.']"
+145,Restrictions on Methods,1,"['Avoid using compact or implicit methods like list comprehensions or numpy functions that combine checks in a single line.', 'Do not use numpy functions like `np.all()` or `np.any()` directly on the entire list of arrays.', 'Do not use any additional libraries or functions outside of numpy.']"
+146,Running Tests,1,"['Explain how to run mutation tests using `mutmut` and check results.', 'Include commands for running `mutmut` to generate mutated code and `pytest` to run the test suite against each mutation.']"
+147,Code Coverage Requirements,1,"['Ensure instructions for achieving a minimum code coverage of 90% using `pytest-cov`.', 'Explicitly mention the use of `pytest-cov` to measure code coverage and ensure it meets the minimum requirement of 90%.']"
+148,Code Style and Readability,1,"['Ensure the solution is clear and easy to understand, prioritizing readability over brevity.']"
+149,Control Flow,1,['Include a `break` statement to exit the loop early if a non-NaN array is found.']
+150,Result Initialization and Logic,1,"['Assign `result` to `True` initially, and set it to `False` if any array does not contain NaN.', 'Ensure the logic explicitly checks `if any(np.isnan(arr)) == False` for clarity.']"
+151,NaN Checking,1,"['Within the loop, apply `np.isnan()` to check for NaN values in each array.', 'Use the `any()` function to determine if there are any NaN values in the array.']"
+152,Performance Restrictions,1,['Avoid performance optimizations or integration with other libraries or data sources.']
+153,Coverage Reporting,1,"['Include details on generating an HTML report for code coverage using `pytest-cov`.', 'Include an example of an HTML report generated by `pytest-cov` to verify code coverage.']"
+154,Complexity Enhancement,1,"['Add a new condition to apply a handling fee if the total is greater than $2000.', 'Increase the complexity by adding a new feature or condition.']"
+155,Plot Type,1,"[""Must set kind='reg'""]"
+156,Modularization,1,['Logic is modularized using calculate_distance and calculate_angle.']
+157,Sorting,1,['Sort the list of random numbers before plotting.']
+158,Code Style,1,"['Keep the code concise without detailed inline comments.', 'Do not include plt.close() to avoid closing the plot.']"
+159,Boundary Checks,1,['Include boundary checks in the computation of alive neighbors to prevent out-of-bounds errors.']
+160,Single-Pass Calculation,1,['Use a single-pass approach to calculate document frequencies for the entire corpus.']
+161,Algorithm Integrity,1,['Maintain the original logic of the BM25 algorithm while optimizing for efficiency.']
+162,Scoring Efficiency,1,"['Avoid recalculating document frequencies and IDF values during the scoring process.', 'Use pre-computed values in the scoring function to simplify calculations.', 'Focus on reducing redundant calculations to improve performance.']"
+163,Initialization Optimization,1,"['Compute and store document frequencies for each term during initialization.', 'Compute and store inverse document frequencies (IDF) for each term during initialization.', 'Store term frequencies for each document during initialization.']"
+164,Method Calls,1,['Include an explicit call to the tabulate_data method with headers.']
+165,Data Writing,1,"['Utilize the IO class from whaler.dataprep for writing data.', ""Use 'IO' to write data with a method 'tabulate_data', passing 'columns', 'headers', and a string identifier for the data.""]"
+166,Method Parameters,1,"[""Define a default output file name for the groundstates_all method as 'groundstates.csv'."", ""The method 'groundstates_all' must accept an optional parameter 'outname' with a default value of 'groundstates.csv'.""]"
+167,Code Structure Preservation,1,"['Maintain the original code structure and formatting.', 'Retain the method of reading and processing the CSV file.', ""Ensure the database name 'germline_genotype_tracking' remains unchanged.""]"
+168,Connection String Modification,1,"[""Replace 'localhost' with 'run-tracking-db.service.consul' in the connection string."", ""Ensure the connection string uses 'run-tracking-db.service.consul' as the host."", ""Include the port number '5432' in the connection string.""]"
+169,Code Style Constraints,1,"['Exclude verbose comments, documentation, or logging to maintain conciseness.', 'Do not introduce alternative methods for user interaction or additional functionalities.']"
+170,Functionality Constraints,1,"['Include a direct call to the `send_message` method immediately after token creation.', 'Focus the response on the core functionality of sending a message without added complexity.', ""Ensure the message is sent using the user's `user_id`.""]"
+171,Type Modification,1,"[""Define Node as a Union of 'OrientedDNASegment' and 'str' to allow flexibility in the AssemblyGraph context while maintaining the original code structure.""]"
+172,Documentation Consistency,1,"[""Ensure consistent capitalization in all method descriptions, particularly for terms like 'VLAN'."", ""Limit the detail in the docstrings for 'add_vlan', 'add_port', 'del_vlan', and 'del_port' methods.""]"
+173,Debugging,1,"[""Do not include any debugging statements such as 'import ipdb; ipdb.set_trace()'.""]"
+174,Test Clarity,1,['Ensure the test is concise and directly checks for the presence of specific functions without unnecessary verbosity.']
+175,Data Structures,1,"['Use a dictionary to map parsed results for easier access and verification.', ""Use a dictionary comprehension to map parsed results by their 'name' attribute.""]"
+176,Temporary File Management,1,"['Do not use tempfile.NamedTemporaryFile() for creating temporary files.', 'Do not include os.unlink() or any cleanup steps for temporary files.']"
+177,Execution Path,1,"[""Use the fixed path 'tmp/import-optional-missing.neonx' for executing the compiled file in subsequent subprocess calls."", 'Avoid executing the original file directly; instead, use the temporary compiled file in subsequent subprocess calls.']"
+178,Output File Specification,1,"[""Include the '-o tmp/import-optional-missing.neonx' option in the neonc command to specify the output file."", ""Direct the compiled output to the temporary file path 'tmp/import-optional-missing.neonx'."", ""Use the fixed temporary file path 'tmp/import-optional-missing.neonx' for the compiled output.""]"
+179,Structure and Clarity,1,"['Focus on essential configuration directives without adding comments or default values.', 'Maintain a concise and specific structure in the configuration template.']"
+180,Configuration Directives,1,"[""Include 'AUTHN_PROTOCOL = http' in the [auth] section."", ""Place 'AUTHN_PROTOCOL = http' before 'AUTHN_URL = /v2.0/tokens' in the [auth] section.""]"
+181,Legacy Syntax,1,['Do not use modern syntax incompatible with Python 2 in the legacy execution block.']
+182,Logical Flow,1,"[""Ensure the logical flow of Conway's Game of Life rules is maintained in the neighbor count calculation.""]"
+183,Iteration Method,1,"['Use `functools.reduce` to iterate over students instead of `for`, `while`, or `map`.', 'Ensure `average_gpa` uses `functools.reduce` to sum GPAs and returns `None` if the students list is empty.', ""Ensure `raise_grade_all` uses `functools.reduce` to apply a method that increments each student's GPA by 1, and returns `None` if the students list is empty.""]"
+184,GPA Calculation,1,"['Utilize `numpy.argmax` to find the student with the highest GPA.', 'Ensure all methods return `None` if the students list is empty.']"
+185,Bucket Sorting,1,['The method should sort items into buckets based on the primary comparator and then sort each bucket using the tiebreaker comparator.']
+186,FUNCTION DESIGN MAINTENANCE,1,"[""Maintain the original function design and logic, focusing solely on modifying the 'name' variable's case."", ""Avoid introducing new variables or altering the function's parameters."", ""Do not modify the function's signature or its return type.""]"
+187,INLINE TRANSFORMATION,1,"[""Apply the .upper() method directly to the 'name' variable within the return statement."", 'Ensure the transformation to uppercase is performed inline within the return statement.']"
+188,Comparison Type,1,['Ensure that the check_coprime_euler function performs a floating-point comparison by returning `1.0`.']
+189,Function Replacement,1,['Replace the use of math.pow with the newly implemented powermod function in check_coprime_euler to avoid floating-point arithmetic and ensure the result is an integer.']
+190,Arithmetic Integrity,1,"['Ensure that the powermod function performs integer arithmetic, particularly in the modulus operation, to maintain the integrity of modular arithmetic.', 'The final return statement of the powermod function must include a modulus operation to ensure the result is within the range of 0 to c-1.']"
+191,Avoid Alternatives,1,['Avoid providing alternative solutions or additional context.']
+192,Technical Accuracy,1,"['Maintain technical accuracy while minimizing verbosity.', 'Ensure that the distance calculation in the _update_distance method uses integer division // to maintain integer results for distance in kilometers.']"
+193,Focus on Bug Fix,1,"['Focus solely on the specific bug fix without additional explanations.', ""Directly address the bug in the code without elaborating on the problem's background.""]"
+194,Response Clarity,1,"['Ensure the response is concise and to the point.', 'Ensure the response is clear and straightforward, avoiding unnecessary complexity.']"
+195,Type Hinting,1,['Use `LinkedList` without quotes in the type hint for the Cons class constructor.']
+196,Method Type,1,"['The `sort_with_tiebreaker` method should be an instance method, not a static method.']"
+197,Method Refactoring,1,['Refactor the GPA increment functionality into a method within the `Student` class.']
+198,Coding Style,1,"['Maintain a consistent coding style, using indentation and spacing to enhance readability.']"
+199,Complexity Management,1,"[""Avoid complex or convoluted logic that could obscure the function's purpose or operation."", 'Ensure the code is efficient and avoids unnecessary computations or data structures.']"
+200,Logical Structure,1,"['Maintain a logical structure with clear separation of steps, using nested loops and conditionals where appropriate.']"
+201,Sorting Logic,1,['Implement sorting logic that first sorts items by primary comparator and then applies tiebreaker sorting within each bucket.']
+202,Data Structure Efficiency,1,"['Use efficient data structures, such as dictionaries, to organize items by primary comparator.']"
+203,Commenting and Documentation,1,"['Include comments to explain the logic, especially for key steps like bucket creation and sorting.']"
+204,Function Clarity,1,"['Ensure the function definition is clear and concise, avoiding unnecessary verbosity.', 'Provide a straightforward implementation without excessive error handling, focusing on the core sorting logic.']"
+205,Edge Processing,1,"['Implement edge relaxation using a single loop over the list of edges.', 'Perform negative cycle detection after completing the relaxation process with a single loop over the list of edges.', 'Add edges using a method that appends a tuple (from_node, to_node, weight) to the edges list without adding bidirectional edges.']"
+206,Algorithm Implementation,1,"['Implement the Bellman-Ford algorithm to handle negative weights.', 'Iterate exactly len(nodes) - 1 times to relax edges.', 'After relaxation, check for negative weight cycles and raise a ValueError if found.']"
+207,Control Flow Restrictions,1,"['Avoid using `for`, `while`, or `map` in any part of the code.']"
+208,Dynamic Execution,1,"[""Use the 'exec' statement in a string form in Python 2 to allow dynamic evaluation of code."", 'Ensure backward compatibility for dynamically executed code using exec_ in mixed-version codebases.']"
+209,Frame Retrieval,1,"['In the Python 2 version of exec_, retrieve the caller frame if globals and locals are not provided.']"
+210,Built-in Assignment,1,"['In Python 3, assign exec_ using __builtins__[""exec""] to avoid direct use of exec keyword.', 'In Python 3, map raw_input to input to maintain compatibility with Python 2 code.']"
+211,Exclusions,1,"['Exclude detailed explanations of each component or assumptions about external dependencies.', 'Do not include error handling mechanisms and validation checks.', 'Exclude examples of usage beyond the provided CLI setup.']"
+212,Implementation Constraints,1,['The implementation must not rely on external services or actual databases; only the provided mock client is allowed.']
+213,Shorthand Generation,1,['The Station class must generate a shorthand name using the first word of the station_name.']
+214,Data Retrieval Specifications,1,"['The find_station_id and find_region_id methods must call sde_client.Station().getStations() with the correct stationName format.', ""The getStations method must return a list of dicts, each with 'stationID' and 'regionID' keys."", 'The getStations method in MockSDEClient must extract the station name and return the corresponding data.']"
+215,Method Requirements,1,"['The Station class must have methods to retrieve station ID and region ID using the mock SDE client.', 'The Station class must provide getter methods: get_station_name, get_station_id, get_region_id, get_station_shorthand.']"
+216,Initialization Requirements,1,['The Station class must be initialized with sde_client and station_name parameters.']
+217,Layout Verification,1,"[""Check input box centering using `location['x'] + size['width'] / 2` and compare with half the window width.""]"
+218,Solution Requirements,1,"[""Provide a concise solution using Python's string manipulation capabilities."", 'Include a specific example with a code snippet demonstrating the solution.', 'Ensure the response is easy to understand and implement.']"
+219,User Session Management,1,"['Handle browser sessions separately for multiple users to ensure list uniqueness.', 'Navigate to pages using `self.browser.get` and verify navigation results.', 'Use Firefox WebDriver for browser automation.']"
+220,Test Method Requirements,1,"['Use `check_for_row_in_list_table` to verify list items.', ""Assertions must confirm the page title contains 'To-Do' and the header contains 'To-Do lists'."", ""Validate unique URLs for each user's list using the regex pattern '/lists/.+'.""]"
+221,Test Class Structure,1,"['The test class must extend from `unittest.TestCase`.', 'Include `setUp` and `tearDown` methods for initializing and closing the browser.']"
+222,API Interaction,1,"['Use API methods `get_recent_messages` and `mark_message_as_read` for reading and marking messages.', 'Implement real-time event handling using a separate `EventListener` class.']"
+223,Character Wrapping,1,"[""Use the modulo operation to ensure proper wrapping of characters from 'z' to 'a' and 'Z' to 'A'.""]"
+224,UI Setup,1,['Implement a `setup_ui` method to initialize UI elements and use colored output for group names.']
+225,Method Documentation,1,['Provide docstrings for each method to describe its functionality and parameters.']
+226,Function Naming,1,"[""The function name must be 'calculate_distinct_average'."", ""The parameter name must be 'array'.""]"
+227,Edge Case Handling,1,['Handle edge cases such as lists with negative integers and single element lists.']
+228,Return Type,1,['Return the average as a float.']
+229,Unique Element Calculation,1,['Use a set to calculate the average of unique elements only.']
+230,Search Functionality,1,"[""Ensure the search for the word 'error' is case-insensitive.""]"
+231,Code Comments,1,"['Include a comment in the code explaining why files with zero matches are included in the result dictionary.', ""Include a comment about setting the file's count in the result dictionary, even if it's 0.""]"
+232,Variable Naming,1,"[""Use 'result' as the name for the dictionary storing file paths and error counts.""]"
+233,Directory and File Handling,1,"['Ensure the directory existence check uses os.path.isdir and raises a ValueError if the directory does not exist.', 'Use os.path.relpath to convert file paths to relative paths before storing them in the result dictionary.', ""Use 'glob.glob(f'{dir_path}/**/*.txt', recursive=True)' to search for text files.""]"
+234,Negative Rotation Handling,1,['Handle negative rotation values to allow rotation in the opposite direction.']
+235,Predefined Strings Usage,1,"[""Use predefined strings 'abcdefghijklmnopqrstuvwxyz' and 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' for handling lowercase and uppercase rotations respectively.""]"
+236,Context Management,1,['Use a context manager to open the attachment file.']
+237,Message Broker Interaction,1,"[""Connect to RabbitMQ using pika and set up a topic exchange with routing key '#'."", 'Include error handling for database and message broker connectivity issues.', 'Define a callback function for processing messages that includes JSON parsing and database storage.']"
+238,SMTP Connection Management,1,"['Connect to the SMTP server using the provided server address and port.', 'Log in to the SMTP server using the provided credentials and handle exceptions.', 'Close the SMTP server connection properly.']"
+239,File Attachment Handling,1,"['Attach the file using `MIMEBase` and handle exceptions during attachment.', 'Encode the attachment using base64.']"
+240,MIME Email Creation,1,['Implement MIME multipart email creation with subject and body attachment.']
+241,Simulation Mechanics,1,"['Focus on core simulation mechanics, avoiding detailed explanations of neural network architecture or genetic algorithms.', 'Limit the simulation setup to basic requirements, excluding extensive physics or graphics handling.', ""Maintain concise responses directly related to the simulation's core mechanics.""]"
+242,Module Dependencies,1,"['Use external modules such as pygame, math, and custom modules like utility, data, and neural_net.']"
+243,Neural Network Configuration,1,['Ensure the neural network has defined input and output configurations for steering decisions.']
+244,Collision Detection,1,"['Include methods for collision detection with checkpoints and walls, and manage car death and simulation restarts.']"
+245,Rendering and Event Handling,1,"['Integrate Pygame for rendering the car, sensors, and handling user events.']"
+246,Class Implementation,1,"['Implement a Car class with methods for movement, rotation, and sensor updates.', 'Develop a Sensor class with methods for updating positions and detecting wall collisions.']"
+247,Console Output,1,"['Provide console output indicating when a message is received and when it is stored in the database.', 'Use `os.path.basename(__file__)` in console output to indicate the script name.', 'Print a new line after receiving a message to match console output format.']"
+248,Functionality Focus,1,"['Focus on core functionality and clarity, avoiding complex error handling or customization options.']"
+249,Index Calculation,1,"[""Calculate the new character index by finding the character's position in the respective alphabet string and applying the rotation using modulo 26.""]"
+250,Figure Layout,1,"[""Set an appropriate title for the figure ('Google Mobility Reports') and each subplot.""]"
+251,Data Plotting,1,"[""Plot each region's data in a different color and include a legend only in the first subplot to avoid clutter.""]"
+252,Data Parsing,1,"['Parse the date column as datetime.', ""Filter data based on the specified regions and level of detail using 'country_region_code' for country level or 'sub_region_2' for subregion level.""]"
+253,Function Parameters,1,"[""Accept parameters for the CSV file path, level of detail ('country' or 'subregion'), and regions to include.""]"
+254,Visualization Library,1,['Use Plotly for creating subplots and visualizing data trends.']
+255,Conversion Logic,1,"['In `steps_to_mm`, use division by `STEPS_MM` to convert steps to millimeters.', 'In `mm_to_steps`, use multiplication by `STEPS_MM` to convert millimeters to steps.', 'In `frequency_to_delay`, use the formula `(1 / frequency) * (10**6)` to convert frequency to delay in microseconds.']"
+256,Functionality Demonstration,1,['Provide a main function with specific test cases to demonstrate the functionality of each utility function.']
+257,Generator Design,1,['Design the `chunks` function to yield chunks as a generator.']
+258,Modularity,1,['Use a configuration module to define constants like `STEPS_MM` for modularity.']
+259,Index-Based Logic,1,['Ensure that the rotation logic strictly uses the index-based approach from the alphabet strings rather than ASCII arithmetic.']
+260,Code Explanation,1,"['Explain the code briefly to ensure clarity and understanding.', 'Highlight the use of HTML tags in the context of Python string manipulation.']"
+261,Functionality Preservation,1,"['Keeps the core functionality unchanged: reads a CSV, normalizes column names to lowercase, and loads the data into the pcawg_samples table.']"
+262,Code Execution,1,['Ensure the code is executable and correctly calculates the distance and angle.']
+263,Index Definition,1,"['Defines two index lists: second = [1, 2] and third = [3, 4], corresponding to the 2nd and 3rd dimensions.']"
+264,Data Slicing,1,"[""Slices the array to discard elements that don't fit evenly into bins: data[:, :(data.shape[1] // bin_size) * bin_size].""]"
+265,Parameter Definition,1,['Specifies a bin size bin_size = 3.']
+266,Condition Checking,1,"['Checks for the presence of NaN values in each array using np.isnan(arr), which returns a boolean array.', 'Applies any() to check if at least one NaN exists in the array.', 'Ensures that all arrays in the list must contain at least one NaN for the final result to remain True.']"
+267,Control Structures,1,"['Iterates over each array arr in the list using a for loop.', 'If no NaN is found in an array, it sets result = False and exits the loop early using break.']"
+268,Data Initialization,1,"['Initializes a list a containing multiple NumPy arrays.', 'Initializes a boolean flag result = True to track the outcome.']"
+269,Color Mapping,1,"['The plot uses default color mapping (viridis by default in matplotlib).', 'Color intensity in the heatmap corresponds to the magnitude of the values in the matrix.', 'The colorbar provides a visual legend for interpreting the value-color mapping.']"
+270,Data Visualization,1,"['Visualizes the 2D matrix using plt.imshow(data), which displays the data as an image-like heatmap.', 'Applies a colorbar using plt.colorbar() to indicate the value scale of the heatmap.']"
+271,Indexing Techniques,1,"['Demonstrates correct use of multi-dimensional indexing over chained indexing (which fails).', 'Avoids a[:][second][third] since chained indexing breaks desired dimensional referencing.']"
+272,Advanced Indexing,1,"['Performs advanced indexing with broadcasting to extract elements.', 'Converts second into a column vector using .reshape(-1,1) to enable broadcasting with third.', 'Selects data from all elements in the first axis.']"
+273,Numpy Usage,1,"['Uses numpy to handle high-dimensional array manipulation.', 'Initializes a 3D array a of shape (5, 5, 5) with random values using np.random.rand.']"
+274,Mean Calculation,1,"['Computes the mean of each bin using .mean(axis=-1), resulting in a (num_rows, num_bins) array.']"
+275,Dataset Loading,1,"[""Loads the built-in 'tips' dataset using sns.load_dataset.""]"
+276,DataFrame Preservation,1,['Uses df.copy() to preserve the original DataFrame.']
+277,Min-Max Normalization Calculation,1,['Calculates the min-max normalized value as (b_i - Min) / (Max - Min) and appends to the min_max list.']
+278,Softmax Calculation,1,['Calculates the softmax value for row i as exp(b_i) / exp_Sum and appends it to the softmax list.']
+279,Softmax Accumulation,1,['Accumulates the exponential values exp(b_j) from the group to calculate the softmax denominator.']
+280,Min-Max Calculation,1,"[""Computes minimum and maximum values of column 'b' in the current group for min-max normalization.""]"
+281,Group Statistics Initialization,1,"[""For each i, initializes Min, Max, and exp_Sum to compute statistics within the same group (based on df['a']).""]"
+282,Outer Loop,1,['Iterates over each row index i using an outer for loop.']
+283,List Initialization,1,['Initializes two empty lists: softmax and min_max to store computed values for each row.']
+284,Data Reshaping,1,"['Reshapes the sliced array to (num_rows, num_bins, bin_size) using .reshape(data.shape[0], -1, bin_size).']"
+285,Partial Bin Handling,1,['Ensures that partial bins at the end are dropped if their size < bin_size.']
+286,Randomness Control,1,['Ensures reproducibility using random.seed() and np.random.seed().']
+287,Layout Management,1,['Applies plt.tight_layout() to ensure labels and titles do not overlap.']
+288,Data Encoding,1,['Base64-encodes the encrypted private key for safe text storage.']
+289,Key Serialization,1,['Serializes the private key using priv_key.save_pkcs1() before encryption.']
+290,Nonce Handling,1,['Extracts the nonce from the AES cipher object for later decryption.']
+291,Encryption Method,1,['Uses AES in EAX mode to encrypt the serialized private key for both confidentiality and integrity.']
+292,Password Generation,1,['Creates a random 16-byte password using Crypto.Random.get_random_bytes for AES encryption.']
+293,Key Generation,1,['Generates an RSA public/private key pair with 512-bit key length using rsa.newkeys.']
+294,Processing Steps,1,"['Constructs a contingency table using pd.crosstab(col1, col2).', 'Performs a chi-square test of independence using scipy.stats.chi2_contingency.']"
+295,Input Requirements,1,"['Accepts a Pandas DataFrame and two column names as input for statistical testing.', 'Validates inputs by checking:', 'If the DataFrame is empty.']"
+296,Return Structure,1,"['Returns a tuple:', 'A Figure object containing the plots.', 'A NumPy array of Axes objects, one for each subplot.']"
+297,Plotting Functions,1,"['Plots the sine function on the first subplot.', 'Plots the cosine function on the second subplot.']"
+298,Matrix Operations,1,"['Concatenates two csr_matrix objects horizontally.', 'Uses sparse.hstack to preserve sparse format during stacking.', 'Converts the result back to csr_matrix using .tocsr().']"
+299,Figure Initialization,1,['Initializes a Matplotlib figure with two subplots stacked vertically using plt.subplots.']
+300,Output Structure,1,"['The final DataFrame has:', ""Column 'Original String': the original input strings."", ""Column 'Modified String': the strings with one part randomly replaced.""]"
+301,Regex Operations,1,"[""Uses re.findall('(.*?)(?:\\[.*?\\]|$)', text) to extract all text outside square brackets, treating bracketed content as non-capturing.""]"
+302,CDF Calculation,1,"['Computes the cumulative distribution function (CDF) by applying a lambda function column-wise.', 'Uses value_counts() to count occurrences of each unique value.', 'Sorts values in ascending order with sort_index().']"
+303,Backup Retrieval,1,"['Uses os.listdir and sorted to retrieve and sort the list of available backups.', 'Selects the latest backup by choosing the last element from the sorted backup list.']"
+304,Backup Directory Checks,1,"['Uses os.path.exists to check for the existence of the backup directory and target directory.', 'Assumes backups are stored as subdirectories under /tmp/backup.']"
+305,Output Validity,1,['Produces a valid sparse matrix suitable for downstream ML pipelines.']
+306,Error Prevention,1,['Prevents type errors by avoiding Python list concatenation.']
+307,Performance Considerations,1,['Ensures efficient memory usage and performance for large sparse data.']
+308,DataFrame Initialization,1,"[""Initializes the DataFrame with columns 'a' (group identifier) and 'b' (values to normalize).""]"
+309,Differentiability,1,"['The approach is differentiable up to the argmax operation, which is non-differentiable (but suitable for inference).']"
+310,Tensor Operations,1,"['Uses torch.argmax() to find the index of the maximum value (i.e., the most probable class) per input row.', 'Specifies dim=1 in argmax to operate across columns (i.e., per row in the n x 3 tensor).', 'Returns a 1D tensor of predicted class indices for each row.']"
+311,Restrictions,1,['The built-in math.factorial() function or any external libraries are not used.']
+312,Flexibility and Reusability,1,"['The function can be reused for different joke sets and different desired output lengths, making it flexible and extensible.']"
+313,Type Expectations,1,"['All string attributes are expected to be of type str, age is expected to be int, and is_endangered is a bool.']"
+314,String Representation,1,"['The __str__ method provides a formatted string representation of the animal object, including all its attributes.']"
+315,Behavior Methods,1,"['The make_sound method prints the sound associated with the animal.', ""The method calculate_age_in_human_years multiplies the animal's age by 7 to simulate its age in human years.""]"
+316,Docstrings,1,"['All methods include detailed docstrings explaining their purpose, parameters, and expected behavior.']"
+317,Setter Methods,1,"['Each attribute has a corresponding setter method (set_species, set_name, etc.) to update its value.']"
+318,Getter Methods,1,"['Each attribute has a corresponding getter method (get_species, get_name, etc.) to retrieve its value.']"
+319,Constructor,1,['The constructor __init__ initializes all attributes using the provided arguments.']
+320,Attributes,1,"['The class defines six attributes: species, name, age, gender, is_endangered, and sound.']"
+321,Complexity,1,"['The time complexity of the recursive function is O(n), as each call reduces n by 1.']"
+322,Title Addition,1,"[""Adds a title to the plot using plt.title('Log-Scaled Line Plot').""]"
+323,Output Suitability,1,['Ensures the output is directly suitable for display in an HTML-rendered environment.']
+324,Variable Management,1,['Do not alter the original sentence directly; store the modified version in a new variable like new_sentence.']
+325,String Manipulation Techniques,1,"['Perform the substitution using Python’s .replace() method for string replacement.', ""Replace the specific word 'apples' with its tagged HTML version.""]"
+326,HTML Tagging Methodology,1,"['Embed the HTML tag using an f-string to dynamically insert the tag name around the target word.', ""Uses a minimal and semantic HTML structure: <span class='...'>...</span>.""]"
+327,Input Integrity,1,['Did not mutate the input points; ensure inputs remain untouched throughout the computation.']
+328,Variable Scope,1,['Did not use global variables and all inputs are explicitly passed.']
+329,Safety in Calculations,1,['Angle formula divides only after ensuring denominator (distance) is computed.']
+330,Input Assumptions,1,"['Assumes input is 3D and operates on x, y, z coordinates.']"
+331,Vector Calculation,1,"['Vector components are computed as point2 - point1, respecting directionality.']"
+332,Functionality Description,1,"['It specifies that enumerate() returns an enumerate object containing (index, item) pairs.', 'The code demonstrates that enumerate enhances readability and eliminates the need for manual index tracking using range(len(...)).']"
+333,Test Module Creation,1,"['A test module (test_calculate_area.py) is created using pytest, targeting the core function with multiple assertions to cover edge and typical cases.']"
+334,Test Suite Robustness,1,['The test suite is designed to ensure correct behavior and to be robust enough to detect any logical mutations in the implementation.']
+335,Mutation Testing Tool,1,['The mutmut tool is used to generate and test mutations of the source code against the defined test suite.']
+336,Axis Scaling,1,"[""Applies a logarithmic scale to the y-axis using plt.yscale('log').""]"
+337,Data Unzipping,1,['Uses zip(*points) to unzip the list of tuples into separate x and y sequences.']
+338,Data Structure Definition,1,['Defines a list of coordinate tuples called points.']
+339,Erroneous Code Characteristics,1,"['Results in a list where the second list is appended to the first, breaking global order.', 'Demonstrates a logical error, not a syntax error.', 'Used for illustration of what happens when sorting is omitted.']"
+340,Assumptions,1,['Assumes input lists are already sorted and contain unique elements.']
+341,Performance Measurement,1,"['Measures execution time using time.time().', 'Computes and reports time to 4 decimal places.']"
+342,Password Generation Logic,1,"['Uses random.choice() to select characters.', 'Uses a while loop to retry until a valid password is found.', 'Password is stored in a temporary variable before validation.']"
+343,Password Criteria,1,"['Ensures at least one uppercase letter is included.', 'Ensures at least one lowercase letter is included.', 'Ensures at least one digit is included.']"
+344,Character Set Definitions,1,"['Uses string.ascii_lowercase for weak complexity.', 'Uses string.ascii_letters + string.digits for medium complexity.', 'Uses string.ascii_letters + string.digits + string.punctuation for strong complexity.']"
+345,User Input Requirements,1,"['Accepts a user-specified password length.', ""Accepts a user-specified complexity level ('weak', 'medium', 'strong').""]"
+346,Calculation Logic,1,"['Each fee, discount, and surcharge is computed and applied based on the most recent version of total, not the original price.']"
+347,Total Adjustments,1,"['The total is rounded to two decimal places immediately after applying the discount.', 'A 5% surcharge is added only if the rounded total falls strictly between $500 and $1000.', 'If the post-surcharge total is still below $100, a $50 flat service fee is added.']"
+348,Tax Calculation,1,"['The function calculates the base tax at a fixed rate of 20% on the input price.', 'If the original price exceeds $1000, a 10% discount is applied based on the original price (not the taxed amount).']"
+349,Coverage Report,1,['An HTML coverage report is used to aid in identifying untested code paths and improving the test suite.']
+350,Coverage Requirement,1,['The solution emphasizes achieving at least 90% code coverage as part of mutation testing to validate test completeness.']
+351,Coverage Command,1,['The command pytest --cov=calculate_area --cov-report=html mutants/ ensures coverage data is collected and visualized.']
+352,Code Coverage Measurement,1,['Code coverage measurement is integrated using the pytest-cov plugin to quantify test effectiveness.']
+353,Test Runner,1,"['pytest is used as the test runner, ensuring that tests are executed in a familiar and widely used testing framework.']"
+354,Mutation Process,1,['The mutation testing process includes generating mutants (mutmut run) and reviewing killed vs. surviving mutants (mutmut results).']
+355,Filename Construction,1,"['Constructs the output filename using os.urandom(8).hex() to generate a unique 8-byte hex suffix.', ""Writes the encrypted private key to a .txt file named 'private_key_<hex>.txt'.""]"
+356,Output Specification,1,"[""Returns a tuple of the histogram plot's Axes object and the sorted random number list.""]"
+357,Output Formatting,1,"['Output the distance rounded to two decimal places.', 'Output the vector components clearly labeled.', 'Output the angle with the x-axis rounded to two decimal places.']"
+358,Node Type Modification,1,"['The Node type has been generalized from a specific alias (OrientedDNASegment) to a union type: Union[OrientedDNASegment, str].', 'This change allows Node to represent either a structured DNA segment or a simple string identifier, increasing flexibility.']"
+359,Data Structuring,1,"['Prepares headers for different spin possibilities: S (singlet), T (triplet), P (pentet), D (doublet), and Q (quartet).', 'Lays groundwork for extensibility (e.g., filling in spinstates) while ensuring the core table structure is already in place.']"
+360,Energy Evaluation,1,"['Processes each structure to evaluate energies of different spin states using the spinstates method.', 'Collects spin state energy data into a tabulated format suitable for CSV output.']"
+361,Database Connection Configuration,1,"['Replaces localhost with a service URL run-tracking-db.service.consul in the PostgreSQL connection string to support service-based database resolution.', 'Maintains secure credential embedding (pcawg_admin:pcawg) and specifies the same database name (germline_genotype_tracking).']"
+362,Database Configuration,1,"['Replaces localhost with a service URL run-tracking-db.service.consul in the PostgreSQL connection string to support service-based database resolution.', 'Maintains secure credential embedding (pcawg_admin:pcawg) and specifies the same database name (germline_genotype_tracking).']"
+363,Robustness and Reliability,1,['Improves robustness and reliability by validating each critical step in the measurement process.']
+364,Communication Validation,1,"['Uses the return value of sensor.measure() to verify successful communication with the sensor before accessing sensor.ppm.', 'Adds error handling to gracefully report sensor communication issues.']"
+365,Initialization Checks,1,"['Checks the return value of sensor.begin() to ensure sensor initialization succeeded before proceeding.', 'Exits the program with an error message if initialization fails.']"
+366,Use Case Expansion,1,"['The update supports broader graph construction use cases, such as temporary or placeholder node identifiers during processing or debugging.']"
+367,Compatibility Preservation,1,"['No other types were modified, preserving compatibility with existing code for Edge, Path, Bubble, and AlignmentsT.']"
+368,Code Extensibility,1,['Improves code extensibility for downstream classes that implement VLAN update logic.']
+369,Functionality and Design,1,"['Uses standard BM25 scoring formula with parameters `k1` and `b` to compute relevance scores.', 'Supports ranking documents by computing BM25 scores for a given query across the entire corpus.', 'Implements modular design by separating initialization, scoring, and ranking logic for clarity and reuse.']"
+370,Return Value Standardization,1,"['Keeps return values standardized (lists), ensuring compatibility with expected calling patterns.']"
+371,Dynamic Configuration Support,1,['Enhances the ValveManagerBase API to support dynamic VLAN reconfiguration without requiring deletion and re-addition.']
+372,Consistency in Naming,1,['Maintains consistent method naming and docstring style aligned with add_vlan and del_vlan.']
+373,Data Mapping,1,['Constructs a dictionary mapping function names to parsed objects for more granular checks.']
+374,Assertions and Validations,1,"['Verifies that the parsed function long_func contains exactly 8 lines in its body.', 'Confirms the presence of specific function names (get_self, return_value, long_func) in the parsed result.']"
+375,Test Structure Improvements,1,"['Replaces the debugging call (ipdb.set_trace()) with assertions for automated testability.', 'Improves test reliability and automation by eliminating manual inspection and focusing on structured assertions.']"
+376,Unit Test Characteristics,1,"['Adds a unit test for validating Groovy source parsing using the parse function.', 'Uses unittest.TestCase for integration into standard Python test runners.']"
+377,Execution Process,1,"['Updates the execution step to use the temporary compiled file (tmp/import-optional-missing.neonx) instead of the default path.', 'Leverages subprocess.check_output and subprocess.check_call for clear execution and error reporting.']"
+378,Output Management,1,"['Specifies an output path using -o tmp/import-optional-missing.neonx to direct the compiled file into a temporary directory.', 'Avoids polluting the source directory (t/) with compiled artifacts.', 'Supports clean separation between source and build artifacts, enabling better test hygiene and cleanup.']"
+379,Optimization Techniques,1,"['Precomputes document frequencies and term frequencies during class initialization to avoid repeated calculations.', 'Stores inverse document frequency (IDF) values once using a logarithmic formula with smoothing.', 'Caches term frequencies for each document in a list of dictionaries (`self.doc_freqs`).']"
+380,Caching Mechanism,1,"['Caches term frequencies for each document in a list of dictionaries (`self.doc_freqs`).', 'Stores inverse document frequency (IDF) values once using a logarithmic formula with smoothing.']"
+381,Search Mechanism,1,"[""Performs a case-insensitive regex search for the word 'error' using re.IGNORECASE."", 'Ensures whole-word matching using \\b word boundaries in the regex.']"
+382,Algorithmic Approach,1,['Uses recursion to traverse and rebuild the list during removal.']
+383,COMPATIBILITY,1,['Retains compatibility with all string inputs by using a built-in string method (upper) that is safe and non-destructive.']
+384,FORMAT,1,"['Keeps the original message format and string interpolation intact.', 'Introduces no changes to the structure or logic of the function beyond the case conversion.']"
+385,TRANSFORMATION,1,"['Applies a transformation using str.upper() to convert the input name to all uppercase characters.', ""Ensures the output string reflects an uppercase version of the user's name before the 'says, Hello World!' message.""]"
+386,Algorithm Design,1,"['Applies sequential passes for each combo pattern using index-based string traversal.', 'Safely mutates string copy for masking, ensuring original string integrity.', 'Maintains the core structure of vowel-based syllable estimation while adding phonetic nuance.']"
+387,Code Clarity and Modularity,1,"['Function signatures and behavior stay consistent with original intentions, enhancing clarity and modularity.', 'Makes the modular exponentiation step reusable across other cryptographic applications.']"
+388,Performance Improvement,1,"['Replaces math.pow with powermod to avoid floating-point inaccuracies and improve performance.', 'Optimized for large exponents via divide-and-conquer (recursive halving).', 'Avoids unnecessary recomputation by separating exponentiation logic from coprimality check.']"
+389,Code Consistency,1,"['Keeps consistent method naming and class structure with the original code.', 'Keeps interface unchanged for add_steps, get_steps, and get_distance methods.', 'Compatible with the FitnessTracker wrapper without any changes.']"
+390,Encapsulation,1,['Preserves encapsulation by keeping _update_distance() as a private method.']
+391,Bug Fixes,1,"['Fixes the off-by-one error in distance calculation by removing - 1 from the distance update formula.', 'Ensures the distance is correctly computed as the integer division of steps by steps_per_km.']"
+392,Behavioral Characteristics,1,"['Removes only the first occurrence of the target element.', 'Does not raise an error if the element is not found—returns the list unchanged.', 'In Cons, if the head (first) matches the element, the rest of the list is returned (effectively removing the match).']"
+393,Scoring Methodology,1,"['Uses standard BM25 scoring formula with parameters `k1` and `b` to compute relevance scores.', 'Supports ranking documents by computing BM25 scores for a given query across the entire corpus.']"
+394,Flexibility,1,"['Works with any callables passed as primary and tiebreaker, allowing flexible comparator logic.']"
+395,Determinism,1,['Provides deterministic ordering when both primary and tiebreaker comparators are deterministic.']
+396,Sorting Methodology,1,"['Does not rely on lambda chaining or tuple-based keys; instead, explicitly separates sorting phases.', ""Ensures stable sorting within primary equivalence classes using Python's built-in sorted.""]"
+397,Grouping Logic,1,"['Groups items by the value returned from the primary comparator.', 'Uses dictionary-based bucketing to organize items sharing the same primary key.']"
+398,Cycle Detection,1,"['After relaxation, performs one more pass to detect negative weight cycles.', 'Raises ValueError if a negative cycle is detected.']"
+399,Relaxation Process,1,['Relaxes all edges |V| - 1 times to compute shortest paths.']
+400,Algorithm Change,1,"['Replaces Dijkstra’s algorithm with the Bellman-Ford algorithm to support negative weights.', ""Eliminates heap usage since Bellman-Ford doesn't require a priority queue.""]"
+401,Functional Programming Characteristics,1,"['GPA updates are encapsulated within the Student class via raise_grade.', 'raise_grade_all returns a new list of updated students, avoiding in-place mutation.']"
+402,Code Structure Constraints,1,"['No for, while, or map keywords used.', 'Uses functools.reduce for functional iteration.', 'Uses np.argmax to identify the best student.']"
+403,Self-Contained Configuration,1,['Ensures that the authentication block is self-contained and ready for Keystone-based setups.']
+404,Readability and Consistency,1,['Keeps consistent commenting and formatting style for configuration readability.']
+405,Dynamic Variable Usage,1,['Uses string.Template to allow substitution of variables such as __contrail_openstack_ip__ dynamically.']
+406,Mocking and Testing,1,"['The MockSDEClient is a clean abstraction to simulate SDE calls.', 'It uses hardcoded data to return predictable results, allowing deterministic unit tests.', 'The tests use assert statements to validate the correctness of object behavior, ensuring methods return expected results for known input.']"
+407,Main Functionality,1,"['Demonstrates usage via main() with sample inputs and printed outputs.', ""Ensures utility through CLI compatibility by wrapping tests in if __name__ == '__main__'.""]"
+408,Data Chunking,1,"['Chunks a list into fixed-size sublists using a generator (chunks).', 'Supports flexible iteration patterns with generator-based chunks() function.']"
+409,Conversion Operations,1,"['Converts steps to millimeters using a configuration-based factor (steps_to_mm).', 'Converts millimeters to steps using round and a constant multiplier (mm_to_steps).', 'Transforms frequency in Hz to delay in microseconds for motor pulse timing (frequency_to_delay).']"
+410,Configuration Management,1,['Uses drawpi.config module to separate configuration (STEPS_MM) from logic.']
+411,Utility Functions,1,"['Includes a chunking function for breaking sequences into fixed-size blocks (chunks).', 'All utility functions are stateless and reusable.']"
+412,Conversion Functions,1,"['Converts between steps and millimeters using a configurable constant (STEPS_MM).', 'Supports bidirectional conversion: steps_to_mm and mm_to_steps.', 'Converts frequency (Hz) to delay (μs) to help regulate stepper motor pulse timing.']"
+413,Execution Structure,1,['Structured for direct execution with __main__ guard to run tests.']
+414,Output Construction,1,"['Builds the output string incrementally in a loop, appending each transformed character.']"
+415,Rotation Logic,1,"[""Uses modulo arithmetic (% 26) to wrap letters around the alphabet, ensuring correct rotation even at boundaries like 'z' → 'a'."", 'Performs character index lookup using str.find() on predefined lowercase and uppercase alphabet strings.']"
+416,Optimization Considerations,1,"['Both find_station_id() and find_region_id() call getStations() separately, leading to repeated lookups — could be optimized by caching the result once.']"
+417,Integration Improvement,1,"['Improves integration with services that may depend on protocol-specific behavior (e.g., switching from HTTP to HTTPS).']"
+418,Method Functionality,1,"['Implements generate_shorthand() to derive a shorthand name by splitting the full station name and using the first word.', 'find_station_id() and find_region_id() simulate querying structured data via a mock getStations() method, mimicking real-world API or DB responses.', 'Provides getter methods (get_station_name(), get_station_id(), etc.) for external access without exposing internal state directly — adheres to object-oriented principles.']"
+419,Layout and Styling,1,['Verifies layout and styling by asserting the input box is centered within a margin of ±10px.']
+420,Functional Requirements,1,"[""Validates page title and header content contain 'To-Do'."", 'Checks that users can input items, press Enter, and view them added to the list.', 'Ensures that each list is accessible via a unique URL using regex assertions.']"
+421,Browser Automation,1,"['Employs Selenium WebDriver for browser-based functional testing.', 'Uses quit() and re-initialization of the browser to simulate independent sessions.', 'Provides step-by-step flow mimicking realistic user interactions.']"
+422,Testing Framework,1,"['Uses the unittest testing framework with setUp and tearDown methods.', 'Tests are written to be idempotent, relying only on current browser state.']"
+423,Design Principles,1,"['Uses placeholders (MessagingAPI, EventListener) to decouple interface from implementation.', 'Encapsulates logic in clean class-based design (GroupDialogManager) with methods for each operation.', 'Maintains separation of concerns between CLI setup and core message/event handling.']"
+424,Core Functionality,1,"['Supports two core operations: reading messages and subscribing to real-time events.', 'Reads recent messages with configurable count and optional read marking.', 'Subscribes to real-time new message events with options to mark them as read and play sound.']"
+425,Return Behavior,1,"['Returns 0.0 if the input list is empty.', 'Always returns a float.']"
+426,Result Processing,1,"['Counts matches and maps them to the relative path of each file in the result dictionary.', 'Includes files even if their count is zero (for completeness).', 'Returns a dictionary: { relative_path: error_count }.']"
+427,Documentation and Clarity,1,['Maintains type annotations and docstrings for clarity and usability.']
+428,Configuration-Driven Logic,1,['Emphasizes configuration-driven logic for hardware adaptability via drawpi.config.']
+429,Flask Application Characteristics,1,['Implements a Flask-based service with no routes; used primarily for RabbitMQ background processing.']
+430,RabbitMQ Configuration,1,"['Uses RabbitMQ topic exchange (booking_topic) with a routing key of # to receive all events.', 'Asynchronously listens for messages using pika and basic_consume.']"
+431,Configuration Enhancement,1,"['Adds AUTHN_PROTOCOL = http under the [auth] section to explicitly specify the authentication protocol.', 'Enhances clarity and configurability for Keystone authentication by including protocol alongside server, port, and URL.']"
+432,Documentation and Usability,1,"['Includes a docstring explaining the purpose and usage of the custom exec_ function.', 'Provides utility wrappers without modifying global behavior, allowing safe import.']"
+433,Scope Management,1,"[""Uses sys._getframe(1) to extract the caller's global and local scope when not explicitly provided."", 'Avoids relying on __builtins__ being a dictionary, which can vary depending on context in Python 3.']"
+434,Functionality and Execution,1,"['Uses explicit function wrapping for exec to handle execution in both global and local namespaces.', 'Supports custom namespaces, improving flexibility and modular code execution.', ""Retains Python 2 behavior using exec 'exec code in globs, locs' syntax inside a string.""]"
+435,Cross-Version Compatibility,1,"['Ensures consistent behavior of exec and raw_input across Python 2 and 3.', 'Rebinds raw_input to input in Python 3 for consistent user input handling.', 'Follows conventions similar to the six library to support cross-version compatibility.']"
+436,Security Features,1,['Uses secure connection via starttls().']
+437,Recipient Flexibility,1,['Allows flexible recipient specification (to_emails as a list).']
+438,Key Modules Used,1,['Uses smtplib.SMTP and email.mime modules.']
+439,Deployment Requirements,1,['Intended to be deployed with RabbitMQ and MySQL services already running on the default host and port.']
+440,Logging Mechanism,1,['Includes basic console-based logging for both message reception and database insertion.']
+441,Application Execution,1,"['The application runs receive_booking_log() when executed directly, continuously consuming messages and recording them.']"
+442,Message Consumer Setup,1,"['Sets up a consumer with a callback function that:', 'Prints a log message to the console.', 'Converts the incoming byte payload into a JSON object.']"
+443,Message Queue Configuration,1,"['Connects to RabbitMQ on localhost:5672 using pika and declares a topic exchange named booking_topic.', 'Declares an exclusive queue and binds it with the routing key # to receive all messages from the booking_topic exchange.']"
+444,Database Table Definition,1,"['Defines a Monitor class representing the monitoring table with two columns: an auto-incrementing ID and a body column storing the JSON log as a string.', 'Ensures the database table is created at startup using db.create_all().']"
+445,Web Framework Initialization,1,['Initializes a Flask app configured to connect to a MySQL database using SQLAlchemy ORM.']
+446,Execution Context,1,['Designed to be executed as a standalone script that con.']
+447,Environment Assumptions,1,['Assumes RabbitMQ and MySQL are running locally (localhost).']
+448,Logging and Output,1,['Logs received messages and database storage success to the console.']
+449,Message Format,1,"[""Messages are expected to be in JSON format and are parsed using Python's json module.""]"
+450,SOLUTION CONCISENESS,1,['Ensure the solution is concise and directly addresses the requirement without additional logic or steps.']

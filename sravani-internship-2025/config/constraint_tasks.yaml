@@ -1,0 +1,34 @@
+preprocessing:
+  input_path:  data/raw/constraint_category.csv 
+  output_path: data/processed/instruction_dataset_with_characteristics_list.csv
+  prompt_path: scripts/constraints/prompts/constraint_prompts.yaml
+  column_name: Characteristics
+  model_name: gpt-4o-mini
+  temperature: 0.2
+  prompt_name: characteristics_to_list 
+
+
+constraint_category_generation:
+  input_path: data/processed/instruction_dataset_with_characteristics_list.csv
+  output_path: data/processed/constraint_categories.yaml
+  model1: gpt-4o-mini
+  model2: mistralai/Pixtral-Large-Instruct-2411
+  base_url: https://inference-3scale-apicast-production.apps.rits.fmaas.res.ibm.com/pixtral-large-instruct-2411/v1
+  prompt_path: scripts/constraints/prompts/constraint_prompts.yaml
+  prompt_log_path: data/outputs/constraint_category_prompt_log.txt
+  temperature: 0
+
+constraint_mapping:
+  input_path: data/processed/instruction_dataset_with_characteristics_list.csv
+  input_path2: data/outputs/constraint_category_data.csv
+  output_path1: data/processed/instruction_dataset_with_mapped_categories.csv
+  output_path2: data/outputs/constraint_category_data.csv
+  output_path3: data/outputs/method2_constraint_category_data.csv
+  model: gpt-4o-mini
+  temperature: 0
+
+constraint_category_tree_generation:
+  input_path: data/outputs/constraint_categories/mapped_characteristics_v1.csv
+  output_path: data/outputs/constraint_categories/constraint_category_hierarchy.txt
+  model: gpt-4o-mini
+  temperature: 0

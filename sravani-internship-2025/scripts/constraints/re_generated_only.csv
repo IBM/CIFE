@@ -1,0 +1,787 @@
+id,id.1,dataset,instruction,code,test,relevant_categories,simplified_instruction,extracted_constraints,final_comprehensive_constraints,filtered_relevant_constraints,quality_scores,relevance_score,objectivity_score,atomicity_score,unified_quality_score,combined_instruction
+454,454,xlangai/DS-1000,"Problem:
+I have a simple dataframe which I would like to bin for every 3 rows from back to front.
+
+
+It looks like this:
+
+
+    col1
+0      2
+1      1
+2      3
+3      1
+4      0
+and I would like to turn it into this:
+
+
+    col1
+0    1.5
+1    1.333
+I have already posted a similar question here but I have no Idea how to port the solution to my current use case.
+
+
+Can you help me out?
+
+
+Many thanks!
+
+
+
+
+A:
+<code>
+import pandas as pd
+
+
+df = pd.DataFrame({'col1':[2, 1, 3, 1, 0]})
+</code>
+result = ... # put solution in this variable
+BEGIN SOLUTION
+<code>","def g(df):
+    return df.groupby((df.index+(-df.size % 3)) // 3).mean()
+
+result = g(df.copy())","import pandas as pd
+import numpy as np
+import copy
+
+
+def generate_test_case(test_case_id):
+    def generate_ans(data):
+        df = data
+        return df.groupby((df.index + (-df.size % 3)) // 3).mean()
+
+    def define_test_input(test_case_id):
+        if test_case_id == 1:
+            df = pd.DataFrame({""col1"": [2, 1, 3, 1, 0]})
+        if test_case_id == 2:
+            df = pd.DataFrame({""col1"": [1, 9, 2, 6, 8]})
+        return df
+
+    test_input = define_test_input(test_case_id)
+    expected_result = generate_ans(copy.deepcopy(test_input))
+    return test_input, expected_result
+
+
+def exec_test(result, ans):
+    try:
+        pd.testing.assert_frame_equal(result, ans, check_dtype=False)
+        return 1
+    except:
+        return 0
+
+
+exec_context = r""""""
+import pandas as pd
+import numpy as np
+df = test_input
+[insert]
+""""""
+
+
+def test_execution(solution: str):
+    code = exec_context.replace(""[insert]"", solution)
+    for i in range(2):
+        test_input, expected_result = generate_test_case(i + 1)
+        test_env = {""test_input"": test_input}
+        exec(code, test_env)
+        assert exec_test(test_env[""result""], expected_result)","['Data Processing and Transformation', 'Code Structure and Modularity', 'Input and Output Handling', 'Documentation and Readability', 'Mathematical Computation']","Problem: I have a simple dataframe which I would like to bin for every 3 rows from back to front.
+
+It looks like this:
+
+    col1
+0      2
+1      1
+2      3
+3      1
+4      0
+and I would like to turn it into this:
+
+    col1
+0    1.5
+1    1.333
+I have already posted a similar question here but I have no Idea how to port the solution to my current use case.
+
+Can you help me out?
+
+Many thanks!
+
+
+
+A:
+<code>
+import pandas as pd
+
+
+df = pd.DataFrame({'col1':[2, 1, 3, 1, 0]})
+</code>
+result = ... # put solution in this variable
+BEGIN SOLUTION
+<code>","[{'type': 'Data Processing and Transformation', 'constraint': 'Bin the dataframe for every 3 rows from back to front.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Transform the input dataframe into a new dataframe with the specified binned values.', 'instruction_part': 'Extracted from instruction'}]","[{'type': 'Data Processing and Transformation', 'constraint': 'Bin the dataframe for every 3 rows from back to front.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Transform the input dataframe into a new dataframe with the specified binned values.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Ensure that the binned values are calculated as the mean of the specified rows.', 'instruction_part': 'Newly Generated'}, {'type': 'Code Structure and Modularity', 'constraint': 'Encapsulate the binning logic within a reusable function that accepts a dataframe as input.', 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': 'The function should return a new dataframe rather than modifying the original dataframe in place.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'Include docstrings in the function to explain its purpose, parameters, and return value.', 'instruction_part': 'Newly Generated'}, {'type': 'Mathematical Computation', 'constraint': 'Ensure that the function handles cases where the number of rows is not a multiple of 3 correctly.', 'instruction_part': 'Newly Generated'}, {'type': 'Mathematical Computation', 'constraint': 'Verify that the output dataframe has the correct number of rows based on the input size.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Data Processing and Transformation', 'constraint': 'Bin the dataframe for every 3 rows from back to front.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Transform the input dataframe into a new dataframe with the specified binned values.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Ensure that the binned values are calculated as the mean of the specified rows.', 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': 'The function should return a new dataframe rather than modifying the original dataframe in place.', 'instruction_part': 'Newly Generated'}, {'type': 'Mathematical Computation', 'constraint': 'Ensure that the function handles cases where the number of rows is not a multiple of 3 correctly.', 'instruction_part': 'Newly Generated'}, {'type': 'Mathematical Computation', 'constraint': 'Verify that the output dataframe has the correct number of rows based on the input size.', 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': 'Bin the dataframe for every 3 rows from back to front.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single, clear requirement: to bin the dataframe every 3 rows from back to front. It is highly relevant to the task of transforming the dataframe as described in the original instruction. Additionally, it is objective because it can be directly measured by the implementation of the binning process.'}, {'constraint_text': 'Transform the input dataframe into a new dataframe with the specified binned values.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it focuses solely on the transformation of the dataframe. It is relevant because it directly addresses the output requirement of the task. The objectivity is high since the transformation can be clearly defined and measured by the resulting dataframe.'}, {'constraint_text': 'Ensure that the binned values are calculated as the mean of the specified rows.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single requirement regarding the calculation of binned values. It is relevant because it directly relates to how the binned values should be computed. The objectivity is also high, as the mean calculation is a clear and measurable operation.'}, {'constraint_text': 'The function should return a new dataframe rather than modifying the original dataframe in place.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic as it clearly states a single requirement regarding the function's behavior. It is relevant because it addresses the expected output format of the function. The objectivity is high since it can be easily verified whether the function returns a new dataframe.""}, {'constraint_text': 'Ensure that the function handles cases where the number of rows is not a multiple of 3 correctly.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single requirement about handling specific input cases. It is relevant because it addresses potential edge cases that could arise during the execution of the function. The objectivity is high, as the handling of such cases can be clearly defined and tested.'}, {'constraint_text': 'Verify that the output dataframe has the correct number of rows based on the input size.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it focuses on a single requirement regarding the output size. It is relevant because it ensures that the output meets the expectations set by the input size. The objectivity is high, as the number of rows in the output dataframe can be easily counted and verified.'}], 'avg_atomicity': 5.0, 'avg_relevance': 5.0, 'avg_objectivity': 5.0, 'unified_quality_score': 5.0, 'overall_analysis': 'The overall quality of the constraint set is excellent, with all constraints scoring the maximum in atomicity, relevance, and objectivity. Each constraint is clear, directly related to the task, and can be objectively evaluated. This indicates a well-defined set of requirements for the programming task at hand, ensuring that the implementation will meet the specified needs effectively.'}",5.0,5.0,5.0,5.0,[]
+469,469,xlangai/DS-1000,"Problem:
+I have multi-index df as follows
+
+
+                        x  y
+date        id         
+3/1/1994 abc   100  7
+9/1/1994 abc   90  8
+3/1/1995 abc    80  9
+Where dates are stored as str.
+
+
+I want to parse date index using pd.to_datetime, and swap the two levels.
+The final output should be
+                x  y
+id  date            
+abc 1994-03-01  100  7
+    1994-09-01   90  8
+    1995-03-01   80  9
+ Any help would be appreciated.
+
+A:
+<code>
+import pandas as pd
+def f(df):
+    # return the solution in this function
+    # df = f(df)
+    ### BEGIN SOLUTION","df.index = df.index.from_tuples([(x[1], pd.to_datetime(x[0])) for x in df.index.values], names = [df.index.names[1], df.index.names[0]])
+
+    return df","import pandas as pd
+import numpy as np
+import copy
+import tokenize, io
+
+
+def generate_test_case(test_case_id):
+    def generate_ans(data):
+        df = data
+        df.index = df.index.from_tuples(
+            [(x[1], pd.to_datetime(x[0])) for x in df.index.values],
+            names=[df.index.names[1], df.index.names[0]],
+        )
+        return df
+
+    def define_test_input(test_case_id):
+        if test_case_id == 1:
+            index = pd.MultiIndex.from_tuples(
+                [(""3/1/1994"", ""abc""), (""9/1/1994"", ""abc""), (""3/1/1995"", ""abc"")],
+                names=(""date"", ""id""),
+            )
+            df = pd.DataFrame({""x"": [100, 90, 80], ""y"": [7, 8, 9]}, index=index)
+        return df
+
+    test_input = define_test_input(test_case_id)
+    expected_result = generate_ans(copy.deepcopy(test_input))
+    return test_input, expected_result
+
+
+def exec_test(result, ans):
+    try:
+        pd.testing.assert_frame_equal(result, ans, check_dtype=False)
+        return 1
+    except:
+        return 0
+
+
+exec_context = r""""""
+import pandas as pd
+import numpy as np
+def f(df):
+[insert]
+df = test_input
+result = f(df)
+""""""
+
+
+def test_execution(solution: str):
+    code = exec_context.replace(""[insert]"", solution)
+    for i in range(1):
+        test_input, expected_result = generate_test_case(i + 1)
+        test_env = {""test_input"": test_input}
+        exec(code, test_env)
+        assert exec_test(test_env[""result""], expected_result)
+
+
+def test_string(solution: str):
+    tokens = []
+    for token in tokenize.tokenize(io.BytesIO(solution.encode(""utf-8"")).readline):
+        tokens.append(token.string)
+    assert ""pd"" in tokens and ""to_datetime"" in tokens","['Code Structure and Modularity', 'Input and Output Handling', 'Error Handling and Robustness', 'Data Processing and Transformation', 'Library and API Usage', 'Documentation and Readability', 'Reproducibility and Consistency']","Problem:
+I have multi-index df as follows
+
+                        x  y
+date        id         
+3/1/1994 abc   100  7
+9/1/1994 abc   90  8
+3/1/1995 abc    80  9
+Where dates are stored as str.
+
+I want to parse date index using pd.to_datetime, and swap the two levels.
+The final output should be
+                x  y
+id  date            
+abc 1994-03-01  100  7
+    1994-09-01   90  8
+    1995-03-01   80  9
+ Any help would be appreciated.
+
+A:
+<code>
+import pandas as pd
+def f(df):
+    # return the solution in this function
+    # df = f(df)
+    ### BEGIN SOLUTION","[{'type': 'Data Processing and Transformation', 'constraint': 'Parse date index using pd.to_datetime.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Swap the two levels of the multi-index.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Ensure the final output has the specified format.', 'instruction_part': 'Extracted from instruction'}]","[{'type': 'Data Processing and Transformation', 'constraint': 'Parse date index using pd.to_datetime.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Swap the two levels of the multi-index.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Ensure the final output has the specified format.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': 'Implement error handling to manage invalid date formats in the index.', 'instruction_part': 'Newly Generated'}, {'type': 'Library and API Usage', 'constraint': 'Utilize pandas functions efficiently to minimize processing time.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'Include comments in the code to explain the purpose of each step.', 'instruction_part': 'Newly Generated'}, {'type': 'Reproducibility and Consistency', 'constraint': 'Ensure that the function can be reused with different DataFrames without modification.', 'instruction_part': 'Newly Generated'}, {'type': 'Code Structure and Modularity', 'constraint': 'Encapsulate the solution in a function that accepts a DataFrame as an argument.', 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': 'Ensure that the output DataFrame maintains the correct data types for each column.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Data Processing and Transformation', 'constraint': 'Parse date index using pd.to_datetime.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Swap the two levels of the multi-index.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'Ensure the final output has the specified format.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': 'Encapsulate the solution in a function that accepts a DataFrame as an argument.', 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': 'Parse date index using pd.to_datetime.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single action: parsing the date index. It is highly relevant to the task of transforming the DataFrame as described in the original instruction. Additionally, it is objective because the action can be clearly measured by whether the date index is successfully parsed.'}, {'constraint_text': 'Swap the two levels of the multi-index.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, focusing solely on the action of swapping the index levels. It is directly relevant to the task of reformatting the DataFrame as specified in the instruction. The action is also objective, as it can be verified by checking the structure of the resulting DataFrame.'}, {'constraint_text': 'Ensure the final output has the specified format.', 'atomicity_score': 4, 'relevance_score': 5, 'objectivity_score': 4, 'reasoning': ""This constraint is mostly atomic, but it could be seen as slightly less so because 'specified format' could imply multiple aspects (e.g., structure, data types). It is highly relevant as it directly relates to the expected output of the function. The objectivity score is slightly lower because 'specified format' could be interpreted in various ways without clear criteria.""}, {'constraint_text': 'Encapsulate the solution in a function that accepts a DataFrame as an argument.', 'atomicity_score': 5, 'relevance_score': 4, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single requirement: to encapsulate the solution in a function. It is relevant, but slightly less so than the others because it pertains more to code structure than the specific data transformation task. The objectivity score is high since the requirement can be clearly evaluated by checking if the solution is indeed encapsulated in a function.'}], 'avg_atomicity': 4.75, 'avg_relevance': 4.75, 'avg_objectivity': 4.5, 'unified_quality_score': 4.67, 'overall_analysis': ""The constraints provided are of high quality, with strong scores in atomicity, relevance, and objectivity. The constraints effectively guide the implementation of the required transformations on the DataFrame. The only area for improvement is in the clarity of the 'specified format' constraint, which could benefit from more precise definitions to enhance its atomicity and objectivity. Overall, this set of constraints is well-structured and directly aligned with the task at hand.""}",4.75,4.5,4.75,4.67,[]
+486,486,xlangai/DS-1000,"Problem:
+I have an example data as:
+datetime             col1    col2    col3
+2021-04-10 01:00:00    25.    50.     50
+2021-04-10 02:00:00.   25.    50.     50
+2021-04-10 03:00:00.   25.    100.    50
+2021-04-10 04:00:00    50.     50.    100
+2021-04-10 05:00:00.   100.    100.   100
+
+
+I want to create a new column called state, which returns col1 value if col2 and col3 values are  more than 50 otherwise returns the sum value of col1,column2 and column3.
+The expected output is as shown below:
+             datetime  col1  col2  col3  state
+0 2021-04-10 01:00:00    25    50    50    125
+1 2021-04-10 02:00:00    25    50    50    125
+2 2021-04-10 03:00:00    25   100    50    175
+3 2021-04-10 04:00:00    50    50   100    200
+4 2021-04-10 05:00:00   100   100   100    100
+
+
+A:
+<code>
+import pandas as pd
+
+
+df = pd.DataFrame({'datetime': ['2021-04-10 01:00:00', '2021-04-10 02:00:00', '2021-04-10 03:00:00', '2021-04-10 04:00:00', '2021-04-10 05:00:00'],
+                   'col1': [25, 25, 25, 50, 100],
+                   'col2': [50, 50, 100, 50, 100],
+                   'col3': [50, 50, 50, 100, 100]})
+
+
+df['datetime'] = pd.to_datetime(df['datetime'])
+</code>
+df = ... # put solution in this variable
+BEGIN SOLUTION
+<code>","import numpy as np
+def g(df):
+    df['state'] = np.where((df['col2'] > 50) & (df['col3'] > 50), df['col1'], df[['col1', 'col2', 'col3']].sum(axis=1))
+    return df
+
+df = g(df.copy())","import pandas as pd
+import numpy as np
+import copy
+
+
+def generate_test_case(test_case_id):
+    def generate_ans(data):
+        df = data
+        df[""state""] = np.where(
+            (df[""col2""] > 50) & (df[""col3""] > 50),
+            df[""col1""],
+            df[[""col1"", ""col2"", ""col3""]].sum(axis=1),
+        )
+        return df
+
+    def define_test_input(test_case_id):
+        if test_case_id == 1:
+            df = pd.DataFrame(
+                {
+                    ""datetime"": [
+                        ""2021-04-10 01:00:00"",
+                        ""2021-04-10 02:00:00"",
+                        ""2021-04-10 03:00:00"",
+                        ""2021-04-10 04:00:00"",
+                        ""2021-04-10 05:00:00"",
+                    ],
+                    ""col1"": [25, 25, 25, 50, 100],
+                    ""col2"": [50, 50, 100, 50, 100],
+                    ""col3"": [50, 50, 50, 100, 100],
+                }
+            )
+            df[""datetime""] = pd.to_datetime(df[""datetime""])
+        elif test_case_id == 2:
+            df = pd.DataFrame(
+                {
+                    ""datetime"": [
+                        ""2021-04-10 01:00:00"",
+                        ""2021-04-10 02:00:00"",
+                        ""2021-04-10 03:00:00"",
+                        ""2021-04-10 04:00:00"",
+                        ""2021-04-10 05:00:00"",
+                    ],
+                    ""col1"": [25, 10, 66, 50, 100],
+                    ""col2"": [50, 13, 100, 50, 100],
+                    ""col3"": [50, 16, 50, 100, 100],
+                }
+            )
+            df[""datetime""] = pd.to_datetime(df[""datetime""])
+        return df
+
+    test_input = define_test_input(test_case_id)
+    expected_result = generate_ans(copy.deepcopy(test_input))
+    return test_input, expected_result
+
+
+def exec_test(result, ans):
+    try:
+        pd.testing.assert_frame_equal(result, ans, check_dtype=False)
+        return 1
+    except:
+        return 0
+
+
+exec_context = r""""""
+import pandas as pd
+df = test_input
+[insert]
+result = df
+""""""
+
+
+def test_execution(solution: str):
+    code = exec_context.replace(""[insert]"", solution)
+    for i in range(2):
+        test_input, expected_result = generate_test_case(i + 1)
+        test_env = {""test_input"": test_input}
+        exec(code, test_env)
+        assert exec_test(test_env[""result""], expected_result)","['Code Structure and Modularity', 'Input and Output Handling', 'Data Processing and Transformation', 'Library and API Usage', 'Documentation and Readability', 'Reproducibility and Consistency']","Problem:
+I have an example data as:
+datetime             col1    col2    col3
+2021-04-10 01:00:00    25.    50.     50
+2021-04-10 02:00:00.   25.    50.     50
+2021-04-10 03:00:00.   25.    100.    50
+2021-04-10 04:00:00    50.     50.    100
+2021-04-10 05:00:00.   100.    100.   100
+
+The expected output is as shown below:
+             datetime  col1  col2  col3  state
+0 2021-04-10 01:00:00    25    50    50    125
+1 2021-04-10 02:00:00    25    50    50    125
+2 2021-04-10 03:00:00    25   100    50    175
+3 2021-04-10 04:00:00    50    50   100    200
+4 2021-04-10 05:00:00   100   100   100    100
+
+A:
+<code>
+import pandas as pd
+
+
+df = pd.DataFrame({'datetime': ['2021-04-10 01:00:00', '2021-04-10 02:00:00', '2021-04-10 03:00:00', '2021-04-10 04:00:00', '2021-04-10 05:00:00'],
+                   'col1': [25, 25, 25, 50, 100],
+                   'col2': [50, 50, 100, 50, 100],
+                   'col3': [50, 50, 50, 100, 100]}))
+
+df['datetime'] = pd.to_datetime(df['datetime']);
+</code>
+df = ... # put solution in this variable","[{'type': 'Data Processing and Transformation', 'constraint': 'Create a new column called state.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Return col1 value if col2 and col3 values are more than 50.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Otherwise return the sum value of col1, col2, and col3.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The expected output must match the provided example.', 'instruction_part': 'Extracted from instruction'}]","[{'type': 'Data Processing and Transformation', 'constraint': 'Create a new column called state.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Return col1 value if col2 and col3 values are more than 50.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Otherwise return the sum value of col1, col2, and col3.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The expected output must match the provided example.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Code Structure and Modularity', 'constraint': 'Ensure the function g is reusable and can handle different DataFrame inputs.', 'instruction_part': 'Newly Generated'}, {'type': 'Library and API Usage', 'constraint': ""Utilize numpy's vectorized operations for performance efficiency."", 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'Include docstrings for the function g to explain its purpose and parameters.', 'instruction_part': 'Newly Generated'}, {'type': 'Reproducibility and Consistency', 'constraint': 'Ensure that the DataFrame retains its original structure after the transformation.', 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': 'Handle potential missing values in col1, col2, and col3 before performing calculations.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Data Processing and Transformation', 'constraint': 'Create a new column called state.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Return col1 value if col2 and col3 values are more than 50.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'Otherwise return the sum value of col1, col2, and col3.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The expected output must match the provided example.', 'instruction_part': 'Extracted from instruction'}]","{'constraint_evaluations': [{'constraint_text': 'Create a new column called state.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic as it specifies a single action: creating a new column. It is highly relevant to the task since the instruction explicitly requires the creation of a new column named 'state'. Additionally, it is objective because the action can be clearly measured by checking if the column exists in the DataFrame.""}, {'constraint_text': 'Return col1 value if col2 and col3 values are more than 50.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic as it describes a specific condition and action without combining multiple directives. It is relevant because it directly relates to the logic required for determining the value of the 'state' column. The condition can be objectively evaluated by checking the values of 'col2' and 'col3'.""}, {'constraint_text': 'Otherwise return the sum value of col1, col2, and col3.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic as it clearly states a single action to be taken when the previous condition is not met. It is relevant to the task since it describes the alternative logic for populating the 'state' column. The summation can be objectively verified by performing the calculation on the specified columns.""}, {'constraint_text': 'The expected output must match the provided example.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it sets a clear expectation for the output format. It is relevant because it ensures that the output aligns with the requirements of the task. The matching of the output can be objectively assessed by comparing the generated DataFrame to the expected output.'}], 'avg_atomicity': 5.0, 'avg_relevance': 5.0, 'avg_objectivity': 5.0, 'unified_quality_score': 5.0, 'overall_analysis': 'The set of constraints is of excellent quality, with all constraints scoring the maximum in atomicity, relevance, and objectivity. Each constraint is clear, directly related to the task, and can be objectively evaluated. There are no weaknesses identified in this set, indicating a well-defined and structured approach to the problem.'}",5.0,5.0,5.0,5.0,[]
+498,498,xlangai/DS-1000,"Problem:
+My sample df has four columns with NaN values. The goal is to concatenate all the rows while excluding the NaN values. 
+import pandas as pd
+import numpy as np
+df = pd.DataFrame({'keywords_0':[""a"", np.nan, ""c""], 
+                'keywords_1':[""d"", ""e"", np.nan],
+                'keywords_2':[np.nan, np.nan, ""b""],
+                'keywords_3':[""f"", np.nan, ""g""]})
+  keywords_0 keywords_1 keywords_2 keywords_3
+0          a          d        NaN          f
+1        NaN          e        NaN        NaN
+2          c        NaN          b          g
+
+
+Want to accomplish the following:
+  keywords_0 keywords_1 keywords_2 keywords_3 keywords_all
+0          a          d        NaN          f        a,d,f
+1        NaN          e        NaN        NaN            e
+2          c        NaN          b          g        c,b,g
+
+
+Pseudo code:
+cols = [df.keywords_0, df.keywords_1, df.keywords_2, df.keywords_3]
+df[""keywords_all""] = df[""keywords_all""].apply(lambda cols: "","".join(cols), axis=1)
+
+
+I know I can use "","".join() to get the exact result, but I am unsure how to pass the column names into the function.
+
+
+A:
+<code>
+import pandas as pd
+import numpy as np
+
+
+df = pd.DataFrame({'keywords_0':[""a"", np.nan, ""c""], 
+                'keywords_1':[""d"", ""e"", np.nan],
+                'keywords_2':[np.nan, np.nan, ""b""],
+                'keywords_3':[""f"", np.nan, ""g""]})
+</code>
+df = ... # put solution in this variable
+BEGIN SOLUTION
+<code>","import numpy as np
+def g(df):
+    df[""keywords_all""] = df.apply(lambda x: ','.join(x.dropna()), axis=1)
+    return df
+
+df = g(df.copy())","import pandas as pd
+import numpy as np
+import copy
+
+
+def generate_test_case(test_case_id):
+    def generate_ans(data):
+        df = data
+        df[""keywords_all""] = df.apply(lambda x: "","".join(x.dropna()), axis=1)
+        return df
+
+    def define_test_input(test_case_id):
+        if test_case_id == 1:
+            df = pd.DataFrame(
+                {
+                    ""keywords_0"": [""a"", np.nan, ""c""],
+                    ""keywords_1"": [""d"", ""e"", np.nan],
+                    ""keywords_2"": [np.nan, np.nan, ""b""],
+                    ""keywords_3"": [""f"", np.nan, ""g""],
+                }
+            )
+        if test_case_id == 2:
+            df = pd.DataFrame(
+                {
+                    ""keywords_0"": [""a"", np.nan, ""c""],
+                    ""keywords_1"": [""b"", ""g"", np.nan],
+                    ""keywords_2"": [np.nan, np.nan, ""j""],
+                    ""keywords_3"": [""d"", np.nan, ""b""],
+                }
+            )
+        return df
+
+    test_input = define_test_input(test_case_id)
+    expected_result = generate_ans(copy.deepcopy(test_input))
+    return test_input, expected_result
+
+
+def exec_test(result, ans):
+    try:
+        pd.testing.assert_frame_equal(result, ans, check_dtype=False)
+        return 1
+    except:
+        return 0
+
+
+exec_context = r""""""
+import pandas as pd
+import numpy as np
+df = test_input
+[insert]
+result = df
+""""""
+
+
+def test_execution(solution: str):
+    code = exec_context.replace(""[insert]"", solution)
+    for i in range(2):
+        test_input, expected_result = generate_test_case(i + 1)
+        test_env = {""test_input"": test_input}
+        exec(code, test_env)
+        assert exec_test(test_env[""result""], expected_result)","['Code Structure and Modularity', 'Input and Output Handling', 'Error Handling and Robustness', 'Data Processing and Transformation', 'Library and API Usage', 'Documentation and Readability', 'Reproducibility and Consistency']",[],[],"[{'type': 'Data Processing and Transformation', 'constraint': ""The function must concatenate non-NaN values from specified columns into a new column named 'keywords_all'."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function should accept a DataFrame as input and return a modified DataFrame with the new column added.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Library and API Usage', 'constraint': ""Utilize the pandas library's apply method to process each row of the DataFrame efficiently."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': ""The function should handle cases where all values in a row are NaN by ensuring 'keywords_all' is an empty string in such cases."", 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'Include docstrings in the function to explain its purpose, parameters, and return value clearly.', 'instruction_part': 'Newly Generated'}, {'type': 'Code Structure and Modularity', 'constraint': 'Ensure the function is modular and can be reused with different DataFrames without modification.', 'instruction_part': 'Newly Generated'}, {'type': 'Reproducibility and Consistency', 'constraint': 'The function should produce consistent results across multiple runs with the same input DataFrame.', 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': ""The function must exclude NaN values from the concatenation process when creating the 'keywords_all' column."", 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': ""The output DataFrame must retain the original structure and data types of the input DataFrame, aside from the added 'keywords_all' column."", 'instruction_part': 'Newly Generated'}]","[{'type': 'Data Processing and Transformation', 'constraint': ""The function must concatenate non-NaN values from specified columns into a new column named 'keywords_all'."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function should accept a DataFrame as input and return a modified DataFrame with the new column added.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Library and API Usage', 'constraint': ""Utilize the pandas library's apply method to process each row of the DataFrame efficiently."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': ""The function should handle cases where all values in a row are NaN by ensuring 'keywords_all' is an empty string in such cases."", 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': ""The function must exclude NaN values from the concatenation process when creating the 'keywords_all' column."", 'instruction_part': 'Newly Generated'}, {'type': 'Input and Output Handling', 'constraint': ""The output DataFrame must retain the original structure and data types of the input DataFrame, aside from the added 'keywords_all' column."", 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': ""The function must concatenate non-NaN values from specified columns into a new column named 'keywords_all'."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single requirement: concatenating non-NaN values into a new column. It is highly relevant to the task of transforming the DataFrame as described in the original instruction. The criteria for success are clear and measurable, making it objective.'}, {'constraint_text': 'The function should accept a DataFrame as input and return a modified DataFrame with the new column added.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic, focusing solely on the input and output requirements of the function. It is relevant as it directly relates to the function's purpose of modifying a DataFrame. The criteria are clear and can be objectively evaluated.""}, {'constraint_text': ""Utilize the pandas library's apply method to process each row of the DataFrame efficiently."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies the use of a particular method for processing rows. It is relevant because it directly pertains to how the function should operate. The requirement is objective, as it can be verified by checking the implementation.'}, {'constraint_text': ""The function should handle cases where all values in a row are NaN by ensuring 'keywords_all' is an empty string in such cases."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, addressing a specific scenario that the function must handle. It is relevant to the task as it ensures the function behaves correctly under all conditions. The requirement is objective, as it can be tested and verified.'}, {'constraint_text': ""The function must exclude NaN values from the concatenation process when creating the 'keywords_all' column."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, focusing on a specific requirement regarding the handling of NaN values. It is relevant to the task as it directly impacts the output of the function. The criteria are objective, as they can be measured through testing.'}, {'constraint_text': ""The output DataFrame must retain the original structure and data types of the input DataFrame, aside from the added 'keywords_all' column."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, specifying a single requirement about the output structure. It is relevant as it ensures the integrity of the DataFrame is maintained. The requirement is objective, as it can be verified by comparing the input and output DataFrames.'}], 'avg_atomicity': 5.0, 'avg_relevance': 5.0, 'avg_objectivity': 5.0, 'unified_quality_score': 5.0, 'overall_analysis': 'The constraints provided are of excellent quality, with all scoring the maximum in atomicity, relevance, and objectivity. Each constraint is clear, specific, and directly related to the task of transforming the DataFrame as described in the original instruction. There are no weaknesses identified in this set, making it a strong foundation for implementing the required functionality.'}",5.0,5.0,5.0,5.0,[]
+499,499,xlangai/DS-1000,"Problem:
+My sample df has four columns with NaN values. The goal is to concatenate all the rows while excluding the NaN values. 
+import pandas as pd
+import numpy as np
+df = pd.DataFrame({'keywords_0':[""a"", np.nan, ""c""], 
+                'keywords_1':[""d"", ""e"", np.nan],
+                'keywords_2':[np.nan, np.nan, ""b""],
+                'keywords_3':[""f"", np.nan, ""g""]})
+  keywords_0 keywords_1 keywords_2 keywords_3
+0          a          d        NaN          f
+1        NaN          e        NaN        NaN
+2          c        NaN          b          g
+
+
+Want to accomplish the following:
+  keywords_0 keywords_1 keywords_2 keywords_3 keywords_all
+0          a          d        NaN          f        a-d-f
+1        NaN          e        NaN        NaN            e
+2          c        NaN          b          g        c-b-g
+
+
+Pseudo code:
+cols = [df.keywords_0, df.keywords_1, df.keywords_2, df.keywords_3]
+df[""keywords_all""] = df[""keywords_all""].apply(lambda cols: ""-"".join(cols), axis=1)
+
+
+I know I can use ""-"".join() to get the exact result, but I am unsure how to pass the column names into the function.
+
+
+A:
+<code>
+import pandas as pd
+import numpy as np
+
+
+df = pd.DataFrame({'keywords_0':[""a"", np.nan, ""c""], 
+                'keywords_1':[""d"", ""e"", np.nan],
+                'keywords_2':[np.nan, np.nan, ""b""],
+                'keywords_3':[""f"", np.nan, ""g""]})
+</code>
+df = ... # put solution in this variable
+BEGIN SOLUTION
+<code>","import numpy as np
+def g(df):
+    df[""keywords_all""] = df.apply(lambda x: '-'.join(x.dropna()), axis=1)
+    return df
+
+df = g(df.copy())","import pandas as pd
+import numpy as np
+import copy
+
+
+def generate_test_case(test_case_id):
+    def generate_ans(data):
+        df = data
+        df[""keywords_all""] = df.apply(lambda x: ""-"".join(x.dropna()), axis=1)
+        return df
+
+    def define_test_input(test_case_id):
+        if test_case_id == 1:
+            df = pd.DataFrame(
+                {
+                    ""keywords_0"": [""a"", np.nan, ""c""],
+                    ""keywords_1"": [""d"", ""e"", np.nan],
+                    ""keywords_2"": [np.nan, np.nan, ""b""],
+                    ""keywords_3"": [""f"", np.nan, ""g""],
+                }
+            )
+        if test_case_id == 2:
+            df = pd.DataFrame(
+                {
+                    ""keywords_0"": [""a"", np.nan, ""c""],
+                    ""keywords_1"": [""b"", ""g"", np.nan],
+                    ""keywords_2"": [np.nan, np.nan, ""j""],
+                    ""keywords_3"": [""d"", np.nan, ""b""],
+                }
+            )
+        return df
+
+    test_input = define_test_input(test_case_id)
+    expected_result = generate_ans(copy.deepcopy(test_input))
+    return test_input, expected_result
+
+
+def exec_test(result, ans):
+    try:
+        pd.testing.assert_frame_equal(result, ans, check_dtype=False)
+        return 1
+    except:
+        return 0
+
+
+exec_context = r""""""
+import pandas as pd
+import numpy as np
+df = test_input
+[insert]
+result = df
+""""""
+
+
+def test_execution(solution: str):
+    code = exec_context.replace(""[insert]"", solution)
+    for i in range(2):
+        test_input, expected_result = generate_test_case(i + 1)
+        test_env = {""test_input"": test_input}
+        exec(code, test_env)
+        assert exec_test(test_env[""result""], expected_result)","['Code Structure and Modularity', 'Input and Output Handling', 'Error Handling and Robustness', 'Data Processing and Transformation', 'Library and API Usage', 'Documentation and Readability', 'Reproducibility and Consistency']",[],[],"[{'type': 'Data Processing and Transformation', 'constraint': ""The solution must concatenate non-NaN values from specified columns into a new column named 'keywords_all'."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""The function must utilize the DataFrame's apply method to process each row for concatenation."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function must accept a DataFrame as input and return a modified DataFrame with the new column.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': ""The function must handle cases where all values in a row are NaN by returning an empty string for 'keywords_all'."", 'instruction_part': 'Newly Generated'}, {'type': 'Library and API Usage', 'constraint': 'The solution must use the pandas library for DataFrame manipulation and must not rely on any external libraries.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'The code must include comments explaining the purpose of the function and the logic behind the concatenation process.', 'instruction_part': 'Newly Generated'}, {'type': 'Reproducibility and Consistency', 'constraint': 'The function must be tested with various DataFrame configurations, including edge cases with all NaN values, to ensure consistent behavior.', 'instruction_part': 'Newly Generated'}, {'type': 'Code Structure and Modularity', 'constraint': ""The function must be defined in a way that allows for easy reuse and modification, adhering to the DRY (Don't Repeat Yourself) principle."", 'instruction_part': 'Newly Generated'}, {'type': 'Error Handling and Robustness', 'constraint': 'The function must raise a ValueError if the input is not a DataFrame.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Data Processing and Transformation', 'constraint': ""The solution must concatenate non-NaN values from specified columns into a new column named 'keywords_all'."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""The function must utilize the DataFrame's apply method to process each row for concatenation."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The function must accept a DataFrame as input and return a modified DataFrame with the new column.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Error Handling and Robustness', 'constraint': ""The function must handle cases where all values in a row are NaN by returning an empty string for 'keywords_all'."", 'instruction_part': 'Newly Generated'}, {'type': 'Library and API Usage', 'constraint': 'The solution must use the pandas library for DataFrame manipulation and must not rely on any external libraries.', 'instruction_part': 'Newly Generated'}, {'type': 'Error Handling and Robustness', 'constraint': 'The function must raise a ValueError if the input is not a DataFrame.', 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': ""The solution must concatenate non-NaN values from specified columns into a new column named 'keywords_all'."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single requirement: concatenating non-NaN values into a new column. It is highly relevant to the task of transforming the DataFrame as described in the original instruction. The criteria for success are clear and measurable, making it objective.'}, {'constraint_text': ""The function must utilize the DataFrame's apply method to process each row for concatenation."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, focusing solely on the requirement to use the apply method. It is relevant as it directly relates to how the concatenation should be performed. The use of the apply method is a clear and objective requirement.'}, {'constraint_text': 'The function must accept a DataFrame as input and return a modified DataFrame with the new column.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, specifying the input and output types without ambiguity. It is relevant to the task as it defines the expected behavior of the function. The criteria are objective and measurable.'}, {'constraint_text': ""The function must handle cases where all values in a row are NaN by returning an empty string for 'keywords_all'."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it addresses a specific scenario without combining multiple requirements. It is relevant because it ensures the function behaves correctly in edge cases. The requirement is clear and can be objectively evaluated.'}, {'constraint_text': 'The solution must use the pandas library for DataFrame manipulation and must not rely on any external libraries.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, focusing solely on the requirement to use pandas. It is relevant as it ensures the solution adheres to the specified library constraints. The requirement is objective and can be easily verified.'}, {'constraint_text': 'The function must raise a ValueError if the input is not a DataFrame.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic, specifying a single error handling requirement. It is relevant as it ensures robustness in the function's input handling. The criteria for raising an error are clear and objective.""}], 'avg_atomicity': 5.0, 'avg_relevance': 5.0, 'avg_objectivity': 5.0, 'unified_quality_score': 5.0, 'overall_analysis': 'The overall quality of the constraint set is excellent, with all constraints scoring the maximum in atomicity, relevance, and objectivity. Each constraint is clear, specific, and directly aligned with the task requirements, ensuring that the implementation will be robust and effective. There are no weaknesses identified in this set, making it a strong foundation for the programming task.'}",5.0,5.0,5.0,5.0,[]
+557,557,xlangai/DS-1000,"Problem:
+I'm looking to map the value in a dict to one column in a DataFrame where the key in the dict is equal to a second column in that DataFrame
+For example:
+If my dict is:
+dict = {'abc':'1/2/2003', 'def':'1/5/2017', 'ghi':'4/10/2013'}
+
+
+and my DataFrame is:
+      Member    Group      Date
+ 0     xyz       A         np.Nan
+ 1     uvw       B         np.Nan
+ 2     abc       A         np.Nan
+ 3     def       B         np.Nan
+ 4     ghi       B         np.Nan
+
+
+For values not in dict, set their Data 17/8/1926. So I want to get the following:
+      Member    Group      Date
+ 0     xyz       A         17/8/1926
+ 1     uvw       B         17/8/1926
+ 2     abc       A         1/2/2003
+ 3     def       B         1/5/2017
+ 4     ghi       B         4/10/2013
+
+
+Note:  The dict doesn't have all the values under ""Member"" in the df.  I don't want those values to be converted to np.Nan if I map.  So I think I have to do a fillna(df['Member']) to keep them?
+
+
+Unlike Remap values in pandas column with a dict, preserve NaNs which maps the values in the dict to replace a column containing the a value equivalent to the key in the dict. This is about adding the dict value to ANOTHER column in a DataFrame based on the key value.
+
+
+A:
+<code>
+import pandas as pd
+import numpy as np
+
+dict = {'abc':'1/2/2003', 'def':'1/5/2017', 'ghi':'4/10/2013'}
+df = pd.DataFrame({'Member':['xyz', 'uvw', 'abc', 'def', 'ghi'], 'Group':['A', 'B', 'A', 'B', 'B'], 'Date':[np.nan, np.nan, np.nan, np.nan, np.nan]})
+</code>
+df = ... # put solution in this variable
+BEGIN SOLUTION
+<code>","def g(dict, df):
+    df[""Date""] = df[""Member""].apply(lambda x: dict.get(x)).fillna(np.NAN)
+    for i in range(len(df)):
+        if df.loc[i, 'Member'] not in dict.keys():
+            df.loc[i, 'Date'] = '17/8/1926'
+    return df
+
+df = g(dict.copy(),df.copy())","import pandas as pd
+import numpy as np
+import copy
+
+
+def generate_test_case(test_case_id):
+    def generate_ans(data):
+        data = data
+        dict, df = data
+        df[""Date""] = df[""Member""].apply(lambda x: dict.get(x)).fillna(np.NAN)
+        for i in range(len(df)):
+            if df.loc[i, ""Member""] not in dict.keys():
+                df.loc[i, ""Date""] = ""17/8/1926""
+        return df
+
+    def define_test_input(test_case_id):
+        if test_case_id == 1:
+            dict = {""abc"": ""1/2/2003"", ""def"": ""1/5/2017"", ""ghi"": ""4/10/2013""}
+            df = pd.DataFrame(
+                {
+                    ""Member"": [""xyz"", ""uvw"", ""abc"", ""def"", ""ghi""],
+                    ""Group"": [""A"", ""B"", ""A"", ""B"", ""B""],
+                    ""Date"": [np.nan, np.nan, np.nan, np.nan, np.nan],
+                }
+            )
+        if test_case_id == 2:
+            dict = {""abc"": ""1/2/2013"", ""def"": ""1/5/2027"", ""ghi"": ""4/10/2023""}
+            df = pd.DataFrame(
+                {
+                    ""Member"": [""xyz"", ""uvw"", ""abc"", ""def"", ""ghi""],
+                    ""Group"": [""A"", ""B"", ""A"", ""B"", ""B""],
+                    ""Date"": [np.nan, np.nan, np.nan, np.nan, np.nan],
+                }
+            )
+        return dict, df
+
+    test_input = define_test_input(test_case_id)
+    expected_result = generate_ans(copy.deepcopy(test_input))
+    return test_input, expected_result
+
+
+def exec_test(result, ans):
+    try:
+        pd.testing.assert_frame_equal(result, ans, check_dtype=False)
+        return 1
+    except:
+        return 0
+
+
+exec_context = r""""""
+import pandas as pd
+import numpy as np
+dict, df = test_input
+[insert]
+result = df
+""""""
+
+
+def test_execution(solution: str):
+    code = exec_context.replace(""[insert]"", solution)
+    for i in range(2):
+        test_input, expected_result = generate_test_case(i + 1)
+        test_env = {""test_input"": test_input}
+        exec(code, test_env)
+        assert exec_test(test_env[""result""], expected_result)","['Code Structure and Modularity', 'Input and Output Handling', 'Error Handling and Robustness', 'Data Processing and Transformation', 'Library and API Usage', 'Documentation and Readability', 'Reproducibility and Consistency']","Problem:
+I'm looking to map the value in a dict to one column in a DataFrame where the key in the dict is equal to a second column in that DataFrame.
+For example:
+If my dict is:
+dict = {'abc':'1/2/2003', 'def':'1/5/2017', 'ghi':'4/10/2013'}
+
+and my DataFrame is:
+      Member    Group      Date
+ 0     xyz       A         np.Nan
+ 1     uvw       B         np.Nan
+ 2     abc       A         np.Nan
+ 3     def       B         np.Nan
+ 4     ghi       B         np.Nan
+
+For values not in dict, set their Date to 17/8/1926. So I want to get the following:
+      Member    Group      Date
+ 0     xyz       A         17/8/1926
+ 1     uvw       B         17/8/1926
+ 2     abc       A         1/2/2003
+ 3     def       B         1/5/2017
+ 4     ghi       B         4/10/2013
+
+Note:  The dict doesn't have all the values under ""Member"" in the df.  I don't want those values to be converted to np.Nan if I map.  So I think I have to do a fillna(df['Member']) to keep them?
+
+Unlike Remap values in pandas column with a dict, preserve NaNs which maps the values in the dict to replace a column containing the a value equivalent to the key in the dict. This is about adding the dict value to ANOTHER column in a DataFrame based on the key value.","[{'type': 'Data Processing and Transformation', 'constraint': 'For values not in dict, set their Date to 17/8/1926.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""The dict doesn't have all the values under 'Member' in the df."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""I don't want those values to be converted to np.Nan if I map."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""I think I have to do a fillna(df['Member']) to keep them."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'This is about adding the dict value to ANOTHER column in a DataFrame based on the key value.', 'instruction_part': 'Extracted from instruction'}]","[{'type': 'Data Processing and Transformation', 'constraint': 'For values not in dict, set their Date to 17/8/1926.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""The dict doesn't have all the values under 'Member' in the df."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""I don't want those values to be converted to np.Nan if I map."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""I think I have to do a fillna(df['Member']) to keep them."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'This is about adding the dict value to ANOTHER column in a DataFrame based on the key value.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""Ensure that the mapping from the dict to the DataFrame is done without altering existing NaN values in the 'Date' column."", 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': ""The solution must handle cases where the 'Member' column contains values not present in the dict without raising errors."", 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': 'The function should be reusable and accept any dictionary and DataFrame with the same structure.', 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': 'The implementation should be efficient, minimizing the number of iterations over the DataFrame.', 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': 'Document the function with clear comments explaining the purpose of each step in the mapping process.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Data Processing and Transformation', 'constraint': 'For values not in dict, set their Date to 17/8/1926.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""The dict doesn't have all the values under 'Member' in the df."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""I don't want those values to be converted to np.Nan if I map."", 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': 'This is about adding the dict value to ANOTHER column in a DataFrame based on the key value.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Data Processing and Transformation', 'constraint': ""Ensure that the mapping from the dict to the DataFrame is done without altering existing NaN values in the 'Date' column."", 'instruction_part': 'Newly Generated'}, {'type': 'Data Processing and Transformation', 'constraint': ""The solution must handle cases where the 'Member' column contains values not present in the dict without raising errors."", 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': 'For values not in dict, set their Date to 17/8/1926.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it expresses a single requirement: setting the Date for values not found in the dictionary. It is highly relevant to the task of mapping values from the dictionary to the DataFrame and directly addresses the expected output. The condition is also objective, as it can be clearly evaluated by checking the values in the DataFrame.'}, {'constraint_text': ""The dict doesn't have all the values under 'Member' in the df."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic as it states a single fact about the relationship between the dictionary and the DataFrame. It is relevant because it highlights a key aspect of the mapping process, ensuring that the function accounts for missing values. The statement is objective, as it can be verified by comparing the keys of the dictionary with the 'Member' column in the DataFrame.""}, {'constraint_text': ""I don't want those values to be converted to np.Nan if I map."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it clearly specifies a single requirement regarding the handling of values during the mapping process. It is relevant to the task since it directly impacts how the DataFrame is modified. The constraint is objective, as it can be evaluated by checking the resulting DataFrame for NaN values.'}, {'constraint_text': 'This is about adding the dict value to ANOTHER column in a DataFrame based on the key value.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic as it focuses on a specific action: adding values from the dictionary to a different column in the DataFrame. It is relevant because it describes the core operation of the task. The constraint is objective, as it can be assessed by examining the DataFrame's structure and content after the operation.""}, {'constraint_text': ""Ensure that the mapping from the dict to the DataFrame is done without altering existing NaN values in the 'Date' column."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it specifies a single requirement regarding the preservation of NaN values. It is relevant to the task since it addresses a specific behavior that must be maintained during the mapping process. The constraint is objective, as it can be verified by checking the DataFrame for NaN values before and after the operation.'}, {'constraint_text': ""The solution must handle cases where the 'Member' column contains values not present in the dict without raising errors."", 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic as it expresses a single requirement regarding error handling. It is relevant because it ensures that the function operates smoothly even when encountering unexpected values. The constraint is objective, as it can be evaluated by testing the function with various inputs and checking for error messages.'}], 'avg_atomicity': 5.0, 'avg_relevance': 5.0, 'avg_objectivity': 5.0, 'unified_quality_score': 5.0, 'overall_analysis': 'The overall quality of the constraint set is excellent, with all constraints scoring the maximum in atomicity, relevance, and objectivity. Each constraint is clear, focused, and directly related to the task at hand, ensuring that the implementation will meet the specified requirements effectively. There are no weaknesses identified in this set, as all constraints are well-defined and measurable.'}",5.0,5.0,5.0,5.0,[]
+1295,1295,Multilingual-Multimodal-NLP/McEval-Instruct,"Write a Python program to calculate the area of the curved surface and the volume of a cylinder given its height and radius. The program should define a function `calculate_cylinder_properties` that takes two arguments, `height` and `radius`, and returns a tuple containing the volume and curved surface area of the cylinder.
+
+The volume `V` of a cylinder can be calculated using the formula:
+\[ V = \pi \times radius^2 \times height \]
+
+The curved surface area `A` of a cylinder (excluding the top and bottom) can be calculated using the formula:
+\[ A = 2 \times \pi \times radius \times height \]
+
+Use the value of \(\pi\) as `3.14159` for the calculations.","```python
+import math
+
+def calculate_cylinder_properties(height, radius):
+    """"""
+    Calculate the volume and curved surface area of a cylinder.
+    
+    Parameters:
+    height (float): The height of the cylinder.
+    radius (float): The radius of the cylinder.
+    
+    Returns:
+    tuple: A tuple containing the volume and curved surface area of the cylinder.
+    """"""
+    pi = math.pi
+    volume = pi * radius ** 2 * height
+    curved_surface_area = 2 * pi * radius * height
+    return volume, curved_surface_area
+
+# Test cases to verify the solution correctness
+if __name__ == ""__main__"":
+    # Test case 1
+    height1 = 10
+    radius1 = 5
+    volume1, curved_surface_area1 = calculate_cylinder_properties(height1, radius1)
+    print(f""Test Case 1 - Height: {height1}, Radius: {radius1}"")
+    print(f""Volume: {volume1:.2f}, Curved Surface Area: {curved_surface_area1:.2f}\n"")
+
+    # Test case 2
+    height2 = 7.5
+    radius2 = 3.2
+    volume2, curved_surface_area2 = calculate_cylinder_properties(height2, radius2)
+    print(f""Test Case 2 - Height: {height2}, Radius: {radius2}"")
+    print(f""Volume: {volume2:.2f}, Curved Surface Area: {curved_surface_area2:.2f}\n"")
+
+    # Test case 3
+    height3 = 15.3
+    radius3 = 6.8
+    volume3, curved_surface_area3 = calculate_cylinder_properties(height3, radius3)
+    print(f""Test Case 3 - Height: {height3}, Radius: {radius3}"")
+    print(f""Volume: {volume3:.2f}, Curved Surface Area: {curved_surface_area3:.2f}"")
+```
+
+This code snippet defines a function that calculates the volume and curved surface area of a cylinder and provides test cases to demonstrate its correctness. The function uses the mathematical constant \(\pi\) from the `math` module for accurate calculations.",,"['Code Structure and Modularity', 'Input and Output Handling', 'Error Handling and Robustness', 'Mathematical Computation', 'Testing and Debugging', 'Documentation and Readability']",[],[],"[{'type': 'Code Structure and Modularity', 'constraint': 'The function `calculate_cylinder_properties` must be defined to take exactly two parameters: `height` and `radius`, and return a tuple containing the volume and curved surface area.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Mathematical Computation', 'constraint': 'The volume of the cylinder must be calculated using the formula V = π × radius² × height, where π is defined as 3.14159.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Mathematical Computation', 'constraint': 'The curved surface area of the cylinder must be calculated using the formula A = 2 × π × radius × height, where π is defined as 3.14159.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The program must handle floating-point inputs for both `height` and `radius` without raising exceptions.', 'instruction_part': 'Newly Generated'}, {'type': 'Error Handling and Robustness', 'constraint': 'The function must validate that `height` and `radius` are both positive numbers before performing calculations, raising a ValueError if not.', 'instruction_part': 'Newly Generated'}, {'type': 'Testing and Debugging', 'constraint': 'At least three test cases must be provided to verify the correctness of the function, covering a range of values including edge cases.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'The function must include a docstring that clearly describes its parameters, return values, and the purpose of the function.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Documentation and Readability', 'constraint': 'Variable names in the function must be descriptive and follow Python naming conventions (e.g., `curved_surface_area` instead of `csa`).', 'instruction_part': 'Newly Generated'}, {'type': 'Testing and Debugging', 'constraint': 'The output of the test cases must be formatted to two decimal places for both volume and curved surface area.', 'instruction_part': 'Newly Generated'}]","[{'type': 'Code Structure and Modularity', 'constraint': 'The function `calculate_cylinder_properties` must be defined to take exactly two parameters: `height` and `radius`, and return a tuple containing the volume and curved surface area.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Mathematical Computation', 'constraint': 'The volume of the cylinder must be calculated using the formula V = π × radius² × height, where π is defined as 3.14159.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Mathematical Computation', 'constraint': 'The curved surface area of the cylinder must be calculated using the formula A = 2 × π × radius × height, where π is defined as 3.14159.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Input and Output Handling', 'constraint': 'The program must handle floating-point inputs for both `height` and `radius` without raising exceptions.', 'instruction_part': 'Newly Generated'}, {'type': 'Error Handling and Robustness', 'constraint': 'The function must validate that `height` and `radius` are both positive numbers before performing calculations, raising a ValueError if not.', 'instruction_part': 'Newly Generated'}, {'type': 'Testing and Debugging', 'constraint': 'At least three test cases must be provided to verify the correctness of the function, covering a range of values including edge cases.', 'instruction_part': 'Newly Generated'}, {'type': 'Documentation and Readability', 'constraint': 'The function must include a docstring that clearly describes its parameters, return values, and the purpose of the function.', 'instruction_part': 'Extracted from instruction'}, {'type': 'Documentation and Readability', 'constraint': 'Variable names in the function must be descriptive and follow Python naming conventions (e.g., `curved_surface_area` instead of `csa`).', 'instruction_part': 'Newly Generated'}]","{'constraint_evaluations': [{'constraint_text': 'The function `calculate_cylinder_properties` must be defined to take exactly two parameters: `height` and `radius`, and return a tuple containing the volume and curved surface area.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic as it specifies a single requirement regarding the function's parameters and return type. It is highly relevant to the task of calculating cylinder properties and can be objectively evaluated based on the function's signature.""}, {'constraint_text': 'The volume of the cylinder must be calculated using the formula V = π × radius² × height, where π is defined as 3.14159.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, focusing solely on the calculation of volume. It is directly relevant to the task and can be objectively verified by checking the implementation of the volume calculation.'}, {'constraint_text': 'The curved surface area of the cylinder must be calculated using the formula A = 2 × π × radius × height, where π is defined as 3.14159.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'Similar to the previous constraint, this one is atomic and specifies a single requirement for calculating the curved surface area. It is relevant to the task and can be objectively assessed.'}, {'constraint_text': 'The program must handle floating-point inputs for both `height` and `radius` without raising exceptions.', 'atomicity_score': 5, 'relevance_score': 4, 'objectivity_score': 4, 'reasoning': ""This constraint is atomic as it addresses a specific requirement regarding input handling. It is relevant but slightly less so than the previous constraints, as it pertains to robustness rather than core functionality. Objectivity is moderate since 'handling without raising exceptions' can be somewhat subjective depending on implementation.""}, {'constraint_text': 'The function must validate that `height` and `radius` are both positive numbers before performing calculations, raising a ValueError if not.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, focusing on input validation. It is highly relevant to ensuring the function operates correctly and can be objectively evaluated by checking for the presence of validation logic.'}, {'constraint_text': 'At least three test cases must be provided to verify the correctness of the function, covering a range of values including edge cases.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': ""This constraint is atomic as it specifies a single requirement regarding testing. It is directly relevant to ensuring the function's correctness and can be objectively assessed by reviewing the test cases.""}, {'constraint_text': 'The function must include a docstring that clearly describes its parameters, return values, and the purpose of the function.', 'atomicity_score': 5, 'relevance_score': 5, 'objectivity_score': 5, 'reasoning': 'This constraint is atomic, focusing on documentation. It is relevant to the task as it enhances code readability and maintainability, and it can be objectively evaluated by checking for the presence and clarity of the docstring.'}, {'constraint_text': 'Variable names in the function must be descriptive and follow Python naming conventions (e.g., `curved_surface_area` instead of `csa`).', 'atomicity_score': 5, 'relevance_score': 4, 'objectivity_score': 4, 'reasoning': ""This constraint is atomic as it specifies a single requirement regarding variable naming. It is relevant to code readability but slightly less so than functional constraints. Objectivity is moderate since 'descriptive' can be somewhat subjective.""}], 'avg_atomicity': 5.0, 'avg_relevance': 4.875, 'avg_objectivity': 4.625, 'unified_quality_score': 4.833333333333333, 'overall_analysis': 'The constraints provided are of high quality, with all but one scoring a perfect 5 in atomicity, relevance, and objectivity. The constraints effectively cover the core requirements of the task, including function definition, mathematical calculations, input validation, and documentation. The only minor weaknesses lie in the constraints related to input handling and variable naming, which could benefit from clearer definitions to enhance objectivity. Overall, this set of constraints is well-structured and aligns closely with the original instruction.'}",4.875,4.625,5.0,4.833333333333333,[]

@@ -1,0 +1,6 @@
+Dataset,Num Examples,Avg Instr Length,Avg Code Length,Has Test Cases (%)
+ajibawa-2023/Python-Code-23k-ShareGPT,22608,90.44,218.12,0.0
+xlangai/DS-1000,1000,137.02,13.87,100.0
+bigcode/bigcodebench,1140,99.29,43.98,100.0
+Multilingual-Multimodal-NLP/McEval-Instruct,999,174.93,291.06,0.0
+nuprl/CanItEdit,105,162.2,166.22,0.0

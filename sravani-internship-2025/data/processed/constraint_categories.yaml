@@ -1,0 +1,114 @@
+constraint_categories_v1:
+- name: Financial Constraints
+  description: Constraints related to financial calculations, fees, and surcharges.
+- name: Data Handling
+  description: Constraints regarding the processing, validation, and manipulation
+    of data structures like DataFrames and arrays.
+- name: Error Handling
+  description: Constraints focused on managing errors and exceptions gracefully within
+    the code.
+- name: Input Validation
+  description: Constraints that ensure inputs meet specific criteria before processing.
+- name: Output Requirements
+  description: Constraints that dictate the format and structure of outputs, including
+    return types and data formats.
+- name: Authentication and Security
+  description: Constraints related to authentication protocols, secure handling of
+    credentials, and encryption.
+- name: Testing and Documentation
+  description: Constraints that require comprehensive testing, including assertions
+    and documentation for functions and methods.
+- name: Code Structure and Style
+  description: Constraints that enforce coding standards, including naming conventions
+    and modular design.
+- name: Compatibility
+  description: Constraints ensuring compatibility across different versions of Python
+    and libraries.
+- name: Performance Optimization
+  description: Constraints that focus on the efficiency of algorithms and data processing
+    techniques.
+- name: Visualization Constraints
+  description: Constraints related to the creation and customization of plots and
+    visual representations of data.
+- name: Functional Requirements
+  description: Constraints that specify the expected functionality and behavior of
+    methods and classes.
+- name: Statistical Validations
+  description: Constraints that require adherence to statistical assumptions and validations
+    during data analysis.
+- name: Communication Protocols
+  description: Constraints that dictate how messages are sent and received, including
+    email and messaging systems.
+- name: Structural Integrity
+  description: Constraints that maintain the integrity of data structures and prevent
+    unintended mutations.
+- name: User Interaction
+  description: Constraints that govern how users interact with the application, including
+    input methods and feedback.
+- name: Dependency Management
+  description: Constraints that limit the use of external libraries or enforce specific
+    library usage.
+- name: Complexity Management
+  description: Constraints that manage the complexity of solutions to ensure clarity
+    and maintainability.
+- name: Logical Flow
+  description: Constraints that ensure the logical progression of code execution and
+    data processing.
+- name: Resource Management
+  description: Constraints that manage resource usage, including memory and processing
+    power.
+
+constraint_categories_v2:
+  simple_categories:
+  - name: variable_scope
+    description: Constraints related to the use of variable scopes, such as global
+      or local variables.
+  - name: function_usage
+    description: Constraints governing the use of functions, including naming and
+      call limits.
+  - name: control_structure
+    description: Constraints on control structures like loops and conditionals.
+  - name: naming_conventions
+    description: Constraints on naming conventions for variables, functions, classes,
+      and interfaces.
+  - name: type_constraints
+    description: Constraints specifying expected data types for variables and function
+      parameters.
+  - name: documentation
+    description: Constraints requiring documentation practices such as docstrings
+      for functions and classes.
+  - name: error_handling
+    description: General constraints on how errors should be handled within the code.
+  - name: output_format
+    description: Constraints on the expected format of outputs, including return types
+      and structures.
+  - name: performance
+    description: Constraints related to the efficiency and performance of the code,
+      such as avoiding unnecessary computations.
+  complex_categories:
+  - name: structural_constraints
+    description: Constraints that dictate the structure of the code, such as the organization
+      of files, classes, and packages.
+  - name: algorithmic_constraints
+    description: Constraints that are specific to the algorithms being implemented,
+      including complexity and optimization requirements.
+  - name: interface_requirements
+    description: Constraints related to the implementation of interfaces, including
+      method signatures and expected behaviors.
+  - name: data_handling
+    description: Constraints on how data should be processed, including input validation
+      and data transformation.
+  - name: security_constraints
+    description: Constraints ensuring secure coding practices, such as proper handling
+      of sensitive information and authentication protocols.
+  - name: testing_constraints
+    description: Constraints that govern the testing practices, including coverage
+      requirements and specific test cases.
+  - name: compatibility_constraints
+    description: Constraints ensuring compatibility with different versions of programming
+      languages or libraries.
+  - name: user_interaction
+    description: Constraints related to how user inputs and interactions are handled
+      within the application.
+
+
