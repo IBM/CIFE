@@ -25,12 +25,6 @@ class VLLMClient:
         sampling_params = SamplingParams(**sampling_kwargs)
         outputs = self.llm.chat(messages, sampling_params, use_tqdm=True)
         final_outputs = [out.outputs[0].text for out in outputs if out.outputs]
-        with open("vllm_outputs.txt", "w") as f:
-            for output in final_outputs:
-                f.write("Output started...................................................\n")
-                f.write(output + "\n")
-                f.write("output ended.....................................................\n")
-        print("Outputs saved to vllm_outputs.txt")
         return final_outputs
 
 # -------- HuggingFace Client --------

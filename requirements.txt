@@ -1,0 +1,6 @@
+openai==2.1.0
+pandas==2.3.3
+python-dotenv==1.1.1
+ratelimit==2.2.1
+tqdm==4.67.1
+vllm==0.11.0
